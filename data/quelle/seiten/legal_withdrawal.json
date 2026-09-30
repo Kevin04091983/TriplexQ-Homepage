@@ -1,0 +1,48 @@
+{
+ "pfad": "/l/withdrawal",
+ "titel": "Widerrufsrecht - TRIPLEX-Q-Webshop",
+ "text": "Widerrufsbelehrung\n Widerrufsrecht \n Sie haben das Recht, binnen vierzehn Tagen ohne Angabe von Gründen diesen Vertrag zu widerrufen. Die Widerrufsfrist beträgt vierzehn Tage ab dem Tag an dem Sie oder ein von Ihnen benannter Dritter, der nicht der Beförderer ist, die Waren in Besitz genommen haben bzw. hat. Um Ihr Widerrufsrecht auszuüben, müssen Sie uns (Präzisionswerkzeuge Schmidt e.K. , Ackerstraße 12, 98455 Zella-Mehlis, Telefonnummer: 03682/483662; Telefaxnummer: 03682/466978, E-Mail-Adresse: sonder@wkz-schmidt.de) mittels einer eindeutigen Erklärung (z.B. ein mit der Post versandter Brief, Telefax oder E-Mail) über Ihren Entschluss, diesen Vertrag zu widerrufen, informieren. Machen Sie von dieser Möglichkeit Gebrauch, so werden wir Ihnen unverzüglich (z.B. per E-Mail) eine Bestätigung über den Eingang eines solchen Widerrufs übermitteln. Zur Wahrung der Widerrufsfrist reicht es aus, dass Sie die Mitteilung über die Ausübung des Widerrufsrechts vor Ablauf der Widerrufsfrist absenden. Folgen des Widerrufs wenn Sie diesen Vertrag widerrufen, haben wir Ihnen alle Zahlungen, die wir von Ihnen erhalten haben, einschließlich der Lieferkosten (mit Ausnahme der zusätzlichen Kosten, die sich daraus ergeben, dass Sie eine andere Art der Lieferung als die von uns angebotene, günstige Standardlieferung gewählt haben), unverzüglich und spätestens binnen vierzehn Tagen ab dem Tag zurückzuzahlen, an dem die Mitteilung über Ihren Widerruf dieses Vertrags bei uns eingegangen ist. Für diese Rückzahlung verwenden wir dasselbe Zahlungsmittel, das Sie bei der ursprünglichen Transaktion eingesetzt haben, es sei denn, mit Ihnen wurde ausdrücklich etwas anderes vereinbart; in keinem Fall werden Ihnen wegen dieser Rückzahlung Entgelte berechnet.",
+ "bilder": [
+  "https://www.triplex-q.com/storage/images/1%20(2).png?hash=e37ee11204376bf648ac78d447bda0fb1891eca7&shop=87065853",
+  "https://www.triplex-q.com/storage/images/Logo_PWS_2020.png?hash=d153b211b7c503a66ac251f3344555b9b15305a0&shop=87065853"
+ ],
+ "videos": [],
+ "pages": {},
+ "legal": {
+  "withdrawal": {
+   "titleTag": "Widerrufsrecht",
+   "settings": {},
+   "isVisible": true,
+   "guid": null,
+   "slug": "withdrawal",
+   "href": "/l/withdrawal",
+   "updatedAt": "2025-03-24T11:23:43.000Z",
+   "ep6pathMD5": null,
+   "shopId": "976a39ba-f997-4575-b1b1-e0c32c4e57d8",
+   "navigation": "legal",
+   "metaDescription": "",
+   "title": "Widerrufsrecht",
+   "content": {
+    "id": "8a842f6a-ddbc-41a7-adaa-f8e480f70f9b",
+    "pageId": "11b83c20-8ca4-4623-8aca-4a8f911ffcdb",
+    "themeId": "@all",
+    "blocks": [],
+    "elements": [
+     {
+      "_id": "legal-content",
+      "type": "epages.text",
+      "data": {
+       "content": "<h1>Widerrufsbelehrung</h1><p> </p><p><strong>Widerrufsrecht</strong></p><p> </p><p>Sie haben das Recht, binnen vierzehn Tagen ohne Angabe von Gründen diesen Vertrag zu widerrufen. Die Widerrufsfrist beträgt vierzehn Tage ab dem Tag an dem Sie oder ein von Ihnen benannter Dritter, der nicht der Beförderer ist, die Waren in Besitz genommen haben bzw. hat. Um Ihr Widerrufsrecht auszuüben, müssen Sie uns (Präzisionswerkzeuge Schmidt e.K. , Ackerstraße 12, 98455 Zella-Mehlis, Telefonnummer: 03682/483662; Telefaxnummer: 03682/466978, E-Mail-Adresse: sonder@wkz-schmidt.de) mittels einer eindeutigen Erklärung (z.B. ein mit der Post versandter Brief, Telefax oder E-Mail) über Ihren Entschluss, diesen Vertrag zu widerrufen, informieren.  Machen Sie von dieser Möglichkeit Gebrauch, so werden wir Ihnen unverzüglich (z.B. per E-Mail) eine Bestätigung über den Eingang eines solchen Widerrufs übermitteln. Zur Wahrung der Widerrufsfrist reicht es aus, dass Sie die Mitteilung über die Ausübung des Widerrufsrechts vor Ablauf der Widerrufsfrist absenden. Folgen des Widerrufs wenn Sie diesen Vertrag widerrufen, haben wir Ihnen alle Zahlungen, die wir von Ihnen erhalten haben, einschließlich der Lieferkosten (mit Ausnahme der zusätzlichen Kosten, die sich daraus ergeben, dass Sie eine andere Art der Lieferung als die von uns angebotene, günstige Standardlieferung gewählt haben), unverzüglich und spätestens binnen vierzehn Tagen ab dem Tag zurückzuzahlen, an dem die Mitteilung über Ihren Widerruf dieses Vertrags bei uns eingegangen ist. Für diese Rückzahlung verwenden wir dasselbe Zahlungsmittel, das Sie bei der ursprünglichen Transaktion eingesetzt haben, es sei denn, mit Ihnen wurde ausdrücklich etwas anderes vereinbart; in keinem Fall werden Ihnen wegen dieser Rückzahlung Entgelte berechnet. </p><p> </p>"
+      }
+     }
+    ]
+   },
+   "lft": 12,
+   "type": "legal",
+   "id": "11b83c20-8ca4-4623-8aca-4a8f911ffcdb",
+   "createdAt": "2019-07-23T14:11:28.000Z",
+   "basePageId": null,
+   "rgt": 13
+  }
+ }
+}

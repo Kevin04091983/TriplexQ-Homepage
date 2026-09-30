@@ -1,0 +1,509 @@
+{
+ "pfad": "/i/referenzkunden",
+ "titel": "Referenzkunden - TRIPLEX-Q-Webshop",
+ "text": "T. Zimmer Maschinenbau & CNC-Technik\n Feinmechanik - Sägetechnik \n In der Beckuhl 12\n 46569 Hünxe\n Fritzler Zerspanungstechnik GmbH\n Weißerlenstr. 1 B\n 79108 Freiburg\n Zanutta GmbH\n mechanische Fertigung\n Gewerbestrasse 7\n D- 88287 Grünkraut- Gullen\n SAW Technologie GmbH\n Redcarstr. 6a\n D-53842 Troisdorf\n E-MILL CNC Technik GmbH\n Mechanische Präzisionswerkstatt\n Aadorferstrasse 2\n 9547 Wittenwil\n Schweiz\n MHSmotionGmbH \n Zum Rohland 13 \n 59872 Meschede-Enste \n ROTATEC Zerspanungstechnik GmbH\n Eichelstraße 12\n 88285 Bodnegg\n Limmer Frästechnik\n Oskar-von-Miller-Ring 18\n 85464 Finsing\n Bonsack Präzisionstechnik GmbH\n Willi - Betz - Str. 6-8, \n D-98596 Brotterode-Trusetal\n Nötzold Maschinenbau GmbH & Co. KG\n Hohensteiner Straße 77\n D-09212 Limbach-Oberfrohna\n CUTMETALL Recycling Tools Germany GmbH \n Am Eichgraben 8\n 98673 Eisfeld | GERMANY \n W I N D E L B A N D GMBH\n Maschinen-Stahl-Metallbau\n Tönniesweg 11\n 37186 Fredelsloh\n NC-Tronic\n Volker Knigge\n Im Renndamm 7-9, \n 31535 Neustadt\n SPG Metallverarbeitung GmbH\n Industriestraße 20\n 96524 Föritztal OT Neuhaus-Schierschnitz\n Wild CNC Technik\n Am Seebach 5\n 74182 Obersulm",
+ "bilder": [
+  "https://www.triplex-q.com/storage/images/1%20(2).png?hash=e37ee11204376bf648ac78d447bda0fb1891eca7&shop=87065853",
+  "https://www.triplex-q.com/storage/images/Bild2.jpg?hash=085f82a41224bc830cb51f1d1847fa41470a8082&shop=87065853",
+  "https://www.triplex-q.com/storage/images/Bild4.png?hash=261fc04e326e7cfbb87f57c8927b3ea695aff756&shop=87065853",
+  "https://www.triplex-q.com/storage/images/Bild6.png?hash=eb790179e4971fad574a19ac559ce49c7c14f064&shop=87065853",
+  "https://www.triplex-q.com/storage/images/Bonsack.png?hash=a2a9c4a8425d3a7db6a6c31086a4a504a070e236&shop=87065853",
+  "https://www.triplex-q.com/storage/images/CM-Slogan-Black.png?hash=be1881daaf5d7bc31200ccf2232e2281659e5e54&shop=87065853",
+  "https://www.triplex-q.com/storage/images/LOGO%20MOTION%20NEU.png?hash=491979316eb9309238c49adcd17e57d45fdff42d&shop=87065853",
+  "https://www.triplex-q.com/storage/images/Logo_PWS_2020.png?hash=d153b211b7c503a66ac251f3344555b9b15305a0&shop=87065853",
+  "https://www.triplex-q.com/storage/images/N%C3%B6tzold.jpg?hash=e603c9d857f9779433b37e8153ac06f3346a35b2&shop=87065853",
+  "https://www.triplex-q.com/storage/images/NC-tronic_Logo.png?hash=d71a0f4bc6a511ff261d77b3d1ae0806023e6592&shop=87065853",
+  "https://www.triplex-q.com/storage/images/SPG+LOGO+FREI.png?hash=22a4b230707e71b4c21c755e7be49cddf2ad2d8d&shop=87065853",
+  "https://www.triplex-q.com/storage/images/Schild_Halle_2000x800mm_6mmBesch.jpg?hash=cf7a5ba2d9a02d4e3d79c21c7a176da2314b3b12&shop=87065853",
+  "https://www.triplex-q.com/storage/images/Zanutta%20logo%20klein.jpg?hash=48b7f7b8406577891c0ab027ed46952fe2e76557&shop=87065853",
+  "https://www.triplex-q.com/storage/images/customcolor_logo_customcolor_background.png?hash=7bbec78baa34d3f161d00f9acee042582be6617f&shop=87065853",
+  "https://www.triplex-q.com/storage/images/saw-logo-dunkel.png?hash=57773dc42b2dce1ddce4b941f8e34ff6badd647c&shop=87065853",
+  "https://www.triplex-q.com/storage/images/tobi.jpg?hash=e56629e8e5fed2051fcd42037b761798b290fa0b&shop=87065853",
+  "https://www.triplex-q.com/storage/images/wild.jpg?hash=3a5c5fad5946fbd7e5f12841d9d4366c8314ea2f&shop=87065853"
+ ],
+ "videos": [],
+ "pages": {
+  "referenzkunden": {
+   "titleTag": "",
+   "settings": {},
+   "slugs": [
+    {
+     "slug": "referenzkunden",
+     "locale": "de_DE"
+    }
+   ],
+   "isVisible": true,
+   "guid": null,
+   "slug": "referenzkunden",
+   "href": "/i/referenzkunden",
+   "updatedAt": "2023-10-05T15:48:03.000Z",
+   "ep6pathMD5": null,
+   "shopId": "976a39ba-f997-4575-b1b1-e0c32c4e57d8",
+   "navigation": "main",
+   "metaDescription": "",
+   "title": "Referenzkunden",
+   "content": {
+    "id": "1949c34f-74cb-435a-b63d-fa8d097d84cf",
+    "pageId": "29014077-d95d-45be-ba7b-d2051dd0a86d",
+    "themeId": "@all",
+    "createdAt": "2023-10-05T12:23:08.000Z",
+    "updatedAt": "2023-10-19T10:00:20.000Z",
+    "blocks": [
+     {
+      "_id": "63411745-7e87-4453-b4b3-5b537ec25340",
+      "type": "image-with-text",
+      "data": {
+       "columns": [
+        {
+         "image": {
+          "type": "epages.image",
+          "data": {
+           "buttonColorIndex": 1,
+           "src": "/storage/images/tobi.jpg?hash=e56629e8e5fed2051fcd42037b761798b290fa0b",
+           "width": 3436,
+           "height": 687,
+           "alt": "",
+           "opentab": false,
+           "text": "",
+           "buttonenabled": false,
+           "headline": "",
+           "link": "http://www.zimmer-maschinenbau.de",
+           "overlayOpacity": 40,
+           "textColorIndex": 1,
+           "backgroundColorIndex": 0,
+           "buttontext": ""
+          }
+         },
+         "text": {
+          "type": "epages.text",
+          "data": {
+           "content": "<p>T. Zimmer Maschinenbau &amp; CNC-Technik</p><p>Feinmechanik - Sägetechnik            </p><p>In der Beckuhl 12</p><p>46569 Hünxe</p><p></p>"
+          }
+         }
+        },
+        {
+         "image": {
+          "type": "epages.image",
+          "data": {
+           "buttonColorIndex": 1,
+           "src": "/storage/images/customcolor_logo_customcolor_background.png?hash=7bbec78baa34d3f161d00f9acee042582be6617f",
+           "width": 3125,
+           "height": 1875,
+           "alt": "",
+           "opentab": false,
+           "text": "",
+           "buttonenabled": false,
+           "headline": "",
+           "link": "http://www.fritzler-zerspanungstechnik.de",
+           "overlayOpacity": 40,
+           "textColorIndex": 1,
+           "backgroundColorIndex": 0,
+           "buttontext": ""
+          }
+         },
+         "text": {
+          "type": "epages.text",
+          "data": {
+           "content": "<p>Fritzler Zerspanungstechnik GmbH</p><p>Weißerlenstr. 1 B</p><p>79108 Freiburg</p>"
+          }
+         }
+        },
+        {
+         "image": {
+          "type": "epages.image",
+          "data": {
+           "buttonColorIndex": 1,
+           "src": "/storage/images/Zanutta%20logo%20klein.jpg?hash=48b7f7b8406577891c0ab027ed46952fe2e76557",
+           "width": 326,
+           "height": 356,
+           "alt": "",
+           "opentab": false,
+           "text": "",
+           "buttonenabled": false,
+           "headline": "",
+           "link": "http://www.zanutta-gmbh.de",
+           "overlayOpacity": 40,
+           "textColorIndex": 1,
+           "backgroundColorIndex": 0,
+           "buttontext": ""
+          }
+         },
+         "text": {
+          "type": "epages.text",
+          "data": {
+           "content": "<p>Zanutta GmbH</p><p>mechanische Fertigung</p><p> Gewerbestrasse 7</p><p>D- 88287 Grünkraut- Gullen</p><p></p>"
+          }
+         }
+        }
+       ]
+      }
+     },
+     {
+      "_id": "b7ce9783-3ead-4925-af6e-48bf90bd18ca",
+      "type": "image-with-text",
+      "data": {
+       "columns": [
+        {
+         "image": {
+          "type": "epages.image",
+          "data": {
+           "buttonColorIndex": 1,
+           "src": "/storage/images/saw-logo-dunkel.png?hash=57773dc42b2dce1ddce4b941f8e34ff6badd647c",
+           "width": 2704,
+           "height": 1580,
+           "alt": "",
+           "opentab": false,
+           "text": "",
+           "buttonenabled": false,
+           "headline": "",
+           "link": "http://saw-technologie.de",
+           "overlayOpacity": 40,
+           "textColorIndex": 1,
+           "backgroundColorIndex": 0,
+           "buttontext": ""
+          }
+         },
+         "text": {
+          "type": "epages.text",
+          "data": {
+           "content": "<p>SAW Technologie GmbH</p><p>Redcarstr. 6a</p><p>D-53842 Troisdorf</p><p></p>"
+          }
+         }
+        },
+        {
+         "image": {
+          "type": "epages.image",
+          "data": {
+           "buttonColorIndex": 1,
+           "src": "/storage/images/Bild2.jpg?hash=085f82a41224bc830cb51f1d1847fa41470a8082",
+           "width": 496,
+           "height": 158,
+           "alt": "",
+           "opentab": false,
+           "text": "",
+           "buttonenabled": false,
+           "headline": "",
+           "link": "www.emill.ch",
+           "overlayOpacity": 40,
+           "textColorIndex": 1,
+           "backgroundColorIndex": 0,
+           "buttontext": ""
+          }
+         },
+         "text": {
+          "type": "epages.text",
+          "data": {
+           "content": "<p>E-MILL CNC Technik GmbH</p><p>Mechanische Präzisionswerkstatt</p><p>Aadorferstrasse 2</p><p>9547 Wittenwil</p><p>Schweiz</p>"
+          }
+         }
+        },
+        {
+         "image": {
+          "type": "epages.image",
+          "data": {
+           "buttonColorIndex": 1,
+           "src": "/storage/images/LOGO%20MOTION%20NEU.png?hash=491979316eb9309238c49adcd17e57d45fdff42d",
+           "width": 911,
+           "height": 443,
+           "alt": "",
+           "opentab": false,
+           "text": "",
+           "buttonenabled": false,
+           "headline": "",
+           "link": "http://www.mhsmotion.de",
+           "overlayOpacity": 40,
+           "textColorIndex": 1,
+           "backgroundColorIndex": 0,
+           "buttontext": ""
+          }
+         },
+         "text": {
+          "type": "epages.text",
+          "data": {
+           "content": "<p>MHSmotionGmbH                                                </p><p>Zum Rohland 13 </p><p>                                                       59872 Meschede-Enste                                        </p><p></p>"
+          }
+         }
+        }
+       ]
+      }
+     },
+     {
+      "_id": "245cd6b9-8ec7-4c2d-892b-0b65c2932046",
+      "type": "image-with-text",
+      "data": {
+       "columns": [
+        {
+         "image": {
+          "type": "epages.image",
+          "data": {
+           "buttonColorIndex": 1,
+           "src": "/storage/images/Schild_Halle_2000x800mm_6mmBesch.jpg?hash=cf7a5ba2d9a02d4e3d79c21c7a176da2314b3b12",
+           "width": 7604,
+           "height": 3069,
+           "alt": "",
+           "opentab": false,
+           "text": "",
+           "buttonenabled": false,
+           "headline": "",
+           "link": "http://www.rotatec-gmbh.de",
+           "overlayOpacity": 40,
+           "textColorIndex": 1,
+           "backgroundColorIndex": 0,
+           "buttontext": ""
+          }
+         },
+         "text": {
+          "type": "epages.text",
+          "data": {
+           "content": "<p>ROTATEC Zerspanungstechnik GmbH</p><p>Eichelstraße 12</p><p>88285 Bodnegg</p><p></p>"
+          }
+         }
+        },
+        {
+         "image": {
+          "type": "epages.image",
+          "data": {
+           "buttonColorIndex": 1,
+           "src": "/storage/images/Bild4.png?hash=261fc04e326e7cfbb87f57c8927b3ea695aff756",
+           "width": 227,
+           "height": 72,
+           "alt": "",
+           "opentab": false,
+           "text": "",
+           "buttonenabled": false,
+           "headline": "",
+           "link": "http://www.fraestechnik-limmer.de/",
+           "overlayOpacity": 40,
+           "textColorIndex": 1,
+           "backgroundColorIndex": 0,
+           "buttontext": ""
+          }
+         },
+         "text": {
+          "type": "epages.text",
+          "data": {
+           "content": "<p>Limmer Frästechnik</p><p>Oskar-von-Miller-Ring 18</p><p>85464 Finsing</p>"
+          }
+         }
+        },
+        {
+         "image": {
+          "type": "epages.image",
+          "data": {
+           "buttonColorIndex": 1,
+           "src": "/storage/images/Bonsack.png?hash=a2a9c4a8425d3a7db6a6c31086a4a504a070e236",
+           "width": 278,
+           "height": 124,
+           "alt": "",
+           "opentab": false,
+           "text": "",
+           "buttonenabled": false,
+           "headline": "",
+           "link": "http://www.bonsack.de",
+           "overlayOpacity": 40,
+           "textColorIndex": 1,
+           "backgroundColorIndex": 0,
+           "buttontext": ""
+          }
+         },
+         "text": {
+          "type": "epages.text",
+          "data": {
+           "content": "<p>Bonsack Präzisionstechnik GmbH</p><p>Willi - Betz - Str. 6-8, </p><p>D-98596 Brotterode-Trusetal</p><p></p>"
+          }
+         }
+        }
+       ]
+      }
+     },
+     {
+      "_id": "a726a3e8-923d-43ef-b82f-2fd650745a6f",
+      "type": "image-with-text",
+      "data": {
+       "columns": [
+        {
+         "image": {
+          "type": "epages.image",
+          "data": {
+           "buttonColorIndex": 1,
+           "src": "/storage/images/N%C3%B6tzold.jpg?hash=e603c9d857f9779433b37e8153ac06f3346a35b2",
+           "width": 549,
+           "height": 136,
+           "alt": "",
+           "opentab": false,
+           "text": "",
+           "buttonenabled": false,
+           "headline": "",
+           "link": "http://www.noetzold-maschinenbau.de",
+           "overlayOpacity": 40,
+           "textColorIndex": 1,
+           "backgroundColorIndex": 0,
+           "buttontext": ""
+          }
+         },
+         "text": {
+          "type": "epages.text",
+          "data": {
+           "content": "<p>Nötzold Maschinenbau GmbH &amp; Co. KG</p><p>Hohensteiner Straße 77</p><p>D-09212 Limbach-Oberfrohna</p>"
+          }
+         }
+        },
+        {
+         "image": {
+          "type": "epages.image",
+          "data": {
+           "buttonColorIndex": 1,
+           "src": "/storage/images/CM-Slogan-Black.png?hash=be1881daaf5d7bc31200ccf2232e2281659e5e54",
+           "width": 2592,
+           "height": 860,
+           "alt": "",
+           "opentab": false,
+           "text": "",
+           "buttonenabled": false,
+           "headline": "",
+           "link": "http://www.recyclingtoolsgermany.de",
+           "overlayOpacity": 40,
+           "textColorIndex": 1,
+           "backgroundColorIndex": 0,
+           "buttontext": ""
+          }
+         },
+         "text": {
+          "type": "epages.text",
+          "data": {
+           "content": "<p>CUTMETALL Recycling Tools Germany GmbH </p><p>Am Eichgraben 8</p><p>98673 Eisfeld | GERMANY </p><p></p>"
+          }
+         }
+        },
+        {
+         "image": {
+          "type": "epages.image",
+          "data": {
+           "buttonColorIndex": 1,
+           "src": "/storage/images/Bild6.png?hash=eb790179e4971fad574a19ac559ce49c7c14f064",
+           "width": 557,
+           "height": 59,
+           "alt": "",
+           "opentab": false,
+           "text": "",
+           "buttonenabled": false,
+           "headline": "",
+           "link": "http://windelband-gmbh.de/",
+           "overlayOpacity": 40,
+           "textColorIndex": 1,
+           "backgroundColorIndex": 0,
+           "buttontext": ""
+          }
+         },
+         "text": {
+          "type": "epages.text",
+          "data": {
+           "content": "<p></p><p>W I N D E L B A N D  GMBH</p><p>Maschinen-Stahl-Metallbau</p><p>Tönniesweg 11</p><p>37186 Fredelsloh</p>"
+          }
+         }
+        }
+       ]
+      }
+     },
+     {
+      "_id": "7528391b-b884-4478-85ec-d2c8f289ea32",
+      "type": "image-with-text",
+      "data": {
+       "columns": [
+        {
+         "image": {
+          "type": "epages.image",
+          "data": {
+           "buttonColorIndex": 1,
+           "src": "/storage/images/NC-tronic_Logo.png?hash=d71a0f4bc6a511ff261d77b3d1ae0806023e6592",
+           "width": 2000,
+           "height": 893,
+           "alt": "",
+           "opentab": false,
+           "text": "",
+           "buttonenabled": false,
+           "headline": "",
+           "link": "http://www.nc-tronic.de/",
+           "overlayOpacity": 40,
+           "textColorIndex": 1,
+           "backgroundColorIndex": 0,
+           "buttontext": ""
+          }
+         },
+         "text": {
+          "type": "epages.text",
+          "data": {
+           "content": "<p>NC-Tronic</p><p>Volker Knigge</p><p>Im Renndamm 7-9, </p><p>31535 Neustadt</p><p></p>"
+          }
+         }
+        },
+        {
+         "image": {
+          "type": "epages.image",
+          "data": {
+           "buttonColorIndex": 1,
+           "src": "/storage/images/SPG+LOGO+FREI.png?hash=22a4b230707e71b4c21c755e7be49cddf2ad2d8d",
+           "width": 1500,
+           "height": 388,
+           "alt": "",
+           "opentab": false,
+           "text": "",
+           "buttonenabled": false,
+           "headline": "",
+           "link": "http://www.spg-metallverarbeitung.com",
+           "overlayOpacity": 40,
+           "textColorIndex": 1,
+           "backgroundColorIndex": 0,
+           "buttontext": ""
+          }
+         },
+         "text": {
+          "type": "epages.text",
+          "data": {
+           "content": "<p>SPG Metallverarbeitung GmbH</p><p>Industriestraße 20</p><p>96524 Föritztal OT Neuhaus-Schierschnitz</p><p></p>"
+          }
+         }
+        },
+        {
+         "image": {
+          "type": "epages.image",
+          "data": {
+           "buttonColorIndex": 1,
+           "src": "/storage/images/wild.jpg?hash=3a5c5fad5946fbd7e5f12841d9d4366c8314ea2f",
+           "width": 201,
+           "height": 124,
+           "alt": "",
+           "opentab": false,
+           "text": "",
+           "buttonenabled": false,
+           "headline": "",
+           "link": "",
+           "overlayOpacity": 40,
+           "textColorIndex": 1,
+           "backgroundColorIndex": 0,
+           "buttontext": ""
+          }
+         },
+         "text": {
+          "type": "epages.text",
+          "data": {
+           "content": "<p>Wild CNC Technik</p><p>Am Seebach 5</p><p>74182 Obersulm</p><p></p>"
+          }
+         }
+        }
+       ]
+      }
+     }
+    ],
+    "elements": []
+   },
+   "lft": 2,
+   "type": "blank",
+   "id": "29014077-d95d-45be-ba7b-d2051dd0a86d",
+   "createdAt": "2023-10-05T12:23:08.000Z",
+   "basePageId": null,
+   "rgt": 3
+  }
+ },
+ "legal": {}
+}

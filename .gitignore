@@ -1,0 +1,15 @@
+# Python-Umgebung und Zwischenstände
+.venv/
+__pycache__/
+*.pyc
+data/crawl.log
+
+# Upload-Paket (wird aus website/ erzeugt)
+*.zip
+
+# NIE hochladen: Kundendaten aus dem alten Shop und Test-Zugänge
+data/altshop-export/
+TEST-ZUGANG-lokal.txt
+
+# Echte Zugangsdaten (Datenbank, Admin) – Vorlage: website/api/einstellungen.beispiel.php
+website/api/einstellungen.php

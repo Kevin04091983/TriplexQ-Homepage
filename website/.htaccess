@@ -1,0 +1,27 @@
+ErrorDocument 404 /404.html
+AddType image/webp .webp
+Options -Indexes
+# immer verschlüsselt ausliefern (Kundenkonto!)
+RewriteEngine On
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# Datenbankschema nicht öffentlich abrufbar
+<FilesMatch "\.(sql|md|txt)$">
+  Require all denied
+</FilesMatch>
+<Files "robots.txt">
+  Require all granted
+</Files>
+# HTML immer frisch prüfen; CSS/JS tragen eine Versionskennung (?v=...) und dürfen lange bleiben
+<IfModule mod_headers.c>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType text/css "access plus 1 week"
+  ExpiresByType application/javascript "access plus 1 day"
+</IfModule>

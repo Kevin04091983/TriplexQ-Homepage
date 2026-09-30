@@ -1,0 +1,48 @@
+{
+ "pfad": "/l/shipping",
+ "titel": "Zahlung &amp; Versand - TRIPLEX-Q-Webshop",
+ "text": "Versandinformationen \n Lieferung Der Transport von Paketen erfolgt als versichertes Paket per DHL. Sendungen an Postfächer sind nicht möglich.\n Selbstabholung Sie haben die Möglichkeit die Ware selbst abzuholen. Bei der Versandart Selbstabholung erhalten Sie eine Nachricht per E-Mail, sobald die Ware abholbereit ist. Die Abholung hat zu unseren Geschäftszeiten in 98544 Zella-Mehlis / Ackerstraße 12 zu erfolgen.\n Kosten Innerhalb von Deutschland wird eine Verpackungs- und Versandkostenpauschale von 7,90 EUR / Auftrag erhoben. \n Versand ins Ausland auf Anfrage.\n Zahlungsinformationen \n Kunden mit Konto: \n Rechnung\n Neukunden mit Konto: \n Rechnung\n Gastbestellungen ohne Konto: \n Rechnung",
+ "bilder": [
+  "https://www.triplex-q.com/storage/images/1%20(2).png?hash=e37ee11204376bf648ac78d447bda0fb1891eca7&shop=87065853",
+  "https://www.triplex-q.com/storage/images/Logo_PWS_2020.png?hash=d153b211b7c503a66ac251f3344555b9b15305a0&shop=87065853"
+ ],
+ "videos": [],
+ "pages": {},
+ "legal": {
+  "shipping": {
+   "titleTag": "Zahlung & Versand",
+   "settings": {},
+   "isVisible": true,
+   "guid": null,
+   "slug": "shipping",
+   "href": "/l/shipping",
+   "updatedAt": "2025-03-24T11:23:43.000Z",
+   "ep6pathMD5": null,
+   "shopId": "976a39ba-f997-4575-b1b1-e0c32c4e57d8",
+   "navigation": "legal",
+   "metaDescription": "",
+   "title": "Zahlung & Versand",
+   "content": {
+    "id": "c37fce8b-dc24-4347-8a46-ecd1b3181df3",
+    "pageId": "be58f4ef-ce01-4362-beb9-6f7eb9068279",
+    "themeId": "@all",
+    "blocks": [],
+    "elements": [
+     {
+      "_id": "legal-content",
+      "type": "epages.text",
+      "data": {
+       "content": "<h1><strong>Versandinformationen</strong></h1><p></p><p><strong>Lieferung</strong> Der Transport von Paketen erfolgt als versichertes Paket per DHL. Sendungen an Postfächer sind nicht möglich.</p><p><strong>Selbstabholung </strong>Sie haben die Möglichkeit die Ware selbst abzuholen. Bei der Versandart Selbstabholung erhalten Sie eine Nachricht per E-Mail, sobald die Ware abholbereit ist. Die Abholung hat zu unseren Geschäftszeiten in 98544 Zella-Mehlis / Ackerstraße 12 zu erfolgen.</p><p><strong>Kosten</strong> Innerhalb von Deutschland wird eine Verpackungs- und Versandkostenpauschale von 7,90 EUR / Auftrag erhoben. </p><p>Versand ins Ausland auf Anfrage.</p><p></p><p><strong>Zahlungsinformationen</strong></p><p></p><p><strong>Kunden mit Konto:</strong></p><ul><li><div>Rechnung</div></li></ul><p><strong>Neukunden mit Konto:</strong></p><ul><li><div>Rechnung</div></li></ul><p><strong>Gastbestellungen ohne Konto:</strong></p><ul><li><div>Rechnung</div></li></ul><p></p><p></p>"
+      }
+     }
+    ]
+   },
+   "lft": 8,
+   "type": "legal",
+   "id": "be58f4ef-ce01-4362-beb9-6f7eb9068279",
+   "createdAt": "2019-07-23T14:11:28.000Z",
+   "basePageId": null,
+   "rgt": 9
+  }
+ }
+}

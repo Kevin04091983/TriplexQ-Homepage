@@ -1,0 +1,285 @@
+{
+ "home": {
+  "id": "5D2BC617-3F36-395B-B6DE-0A0C6D0A795E",
+  "produkte": []
+ },
+ "hss-e-maschinengewindebohrer": {
+  "id": "6718B69B-04EE-6F26-6BF7-0A0C6D12A2AB",
+  "produkte": []
+ },
+ "hss-pm-hochleistungsgewindebohrer": {
+  "id": "5D6CFBFA-F7AC-ECED-1A27-0A0C6D0CAE18",
+  "produkte": []
+ },
+ "partnerwerkzeuge": {
+  "id": "638DD81F-786F-62A9-A5FC-0A0C6D123D13",
+  "produkte": []
+ },
+ "partnerwerkzeuge/wsh-tools": {
+  "id": "638DD982-F80E-6A7F-484C-0A0C6D12EC1D",
+  "produkte": []
+ },
+ "partnerwerkzeuge/wsh-tools/kegelsenker": {
+  "id": "638DD9C5-64A2-EA47-9D57-0A0C6D127042",
+  "produkte": []
+ },
+ "partnerwerkzeuge/wsh-tools/maschinengewindebohrer": {
+  "id": "638DD9D5-E395-1D82-86C4-0A0C6D0C1E25",
+  "produkte": []
+ },
+ "partnerwerkzeuge/wsh-tools/spiralbohrer": {
+  "id": "638F1DF5-65D6-0FCE-718D-0A0C6D0C7C96",
+  "produkte": []
+ },
+ "triplex-deb-90": {
+  "id": "5EB4E5F9-C0B7-73EB-3877-0A0C6D122F81",
+  "produkte": []
+ },
+ "triplex-q-aluminiumfraeser-hpc-tpc": {
+  "id": "63186204-8DBF-001D-A0F7-0A0C6D0C315E",
+  "produkte": [
+   "66FB98B9-B211-035B-ADA7-0A0C6D12DF3C",
+   "6704C64F-928B-12EE-C518-0A0C6D0C3EAF",
+   "6407116C-DC01-C6CB-7B96-0A0C6D1273E8",
+   "6407188A-7913-4023-49E7-0A0C6D0C5884",
+   "640706DA-6789-5E00-6953-0A0C6D0CE687",
+   "6409CBAF-DF09-55AA-9827-0A0C6D12E8BA"
+  ]
+ },
+ "triplex-q-bnc2-blue": {
+  "id": "60A60F6E-F6A7-1CE7-A8A6-0A0C6D0C10FF",
+  "produkte": [
+   "64197D95-7A4F-E835-EFAC-0A0C6D0C2E1C"
+  ]
+ },
+ "triplex-q-hpc-fraeser": {
+  "id": "63887DBF-8AE5-8941-C664-0A0C6D0C07E8",
+  "produkte": []
+ },
+ "triplex-q-hpc-fraeser/triplex-q-aluminiumfraeser-hpc": {
+  "id": "63887F22-891C-BEE6-C819-0A0C6D122B46",
+  "produkte": [
+   "66FB98B9-B211-035B-ADA7-0A0C6D12DF3C",
+   "6704C64F-928B-12EE-C518-0A0C6D0C3EAF",
+   "6407116C-DC01-C6CB-7B96-0A0C6D1273E8",
+   "6407188A-7913-4023-49E7-0A0C6D0C5884",
+   "640706DA-6789-5E00-6953-0A0C6D0CE687",
+   "6409CBAF-DF09-55AA-9827-0A0C6D12E8BA"
+  ]
+ },
+ "triplex-q-hpc-fraeser/triplex-q-ewms-black-multi-hpc-tpc": {
+  "id": "6576F8A4-01BD-BAF9-045E-0A0C6D0CBEF6",
+  "produkte": []
+ },
+ "triplex-q-hpc-fraeser/triplex-q-hyperplus-hpc": {
+  "id": "65D70876-6163-0803-ADC0-0A0C6D0C665C",
+  "produkte": [
+   "641C4229-47EF-7625-1BBD-0A0C6D12B868"
+  ]
+ },
+ "triplex-q-hpc-fraeser/triplex-q-inox-red-hpc": {
+  "id": "63887F10-FACC-03B7-CE46-0A0C6D0CAA6B",
+  "produkte": [
+   "5D37FFED-B9FF-5094-3389-0A0C6D0D90AA",
+   "64130041-28FE-8F4B-F45C-0A0C6D0CAAC2"
+  ]
+ },
+ "triplex-q-hpc-fraeser/triplex-q-steel-blue-hpc": {
+  "id": "63887EDE-8F1F-CE47-9FED-0A0C6D12A9EF",
+  "produkte": [
+   "64130A49-4DB1-33FA-6D2F-0A0C6D12CA2D",
+   "5D37F6E0-F00F-EFCE-A75D-0A0C6D12EC8B",
+   "641040D6-41D1-E539-4BEA-0A0C6D0C0C8B",
+   "643FB790-8362-79A0-A625-0A0C6D0CB57F"
+  ]
+ },
+ "triplex-q-hpc-fraeser/triplex-q-steel-blue-hpc-1xd": {
+  "id": "63887F16-74AF-2801-96CE-0A0C6D0CAA38",
+  "produkte": [
+   "64130A49-4DB1-33FA-6D2F-0A0C6D12CA2D"
+  ]
+ },
+ "triplex-q-inox-red-er-hpc": {
+  "id": "631881A5-4BA1-F3A9-23D5-0A0C6D12F161",
+  "produkte": []
+ },
+ "triplex-q-inox-red-hpc": {
+  "id": "5D2BC61C-376C-A3E5-5C5B-0A0C6D0A790B",
+  "produkte": [
+   "5D37FFED-B9FF-5094-3389-0A0C6D0D90AA",
+   "64130041-28FE-8F4B-F45C-0A0C6D0CAAC2"
+  ]
+ },
+ "triplex-q-nature-green-hpc": {
+  "id": "5D380181-8294-7986-6120-0A0C6D0F6707",
+  "produkte": []
+ },
+ "triplex-q-schrupp-fraeser": {
+  "id": "63888947-814A-B5D1-4A49-0A0C6D126E4E",
+  "produkte": [
+   "67063969-008D-2D26-105F-0A0C6D0C37D0",
+   "5D382B25-ED27-965A-BF99-0A0C6D0FCE4C",
+   "64132210-621C-2A98-491C-0A0C6D0CA830"
+  ]
+ },
+ "triplex-q-special": {
+  "id": "5D39429A-40E1-6C9A-E554-0A0C6D11FF9C",
+  "produkte": []
+ },
+ "triplex-q-sr-blue": {
+  "id": "5D380E99-2DC8-B858-D673-0A0C6D0B3424",
+  "produkte": [
+   "5D382B25-ED27-965A-BF99-0A0C6D0FCE4C",
+   "64132210-621C-2A98-491C-0A0C6D0CA830"
+  ]
+ },
+ "triplex-q-standardfraeser": {
+  "id": "670799B6-9F86-1408-6AB9-0A0C6D0C4A78",
+  "produkte": [
+   "6707998E-2ADC-75AF-A11D-0A0C6D12746A",
+   "6707A90D-B570-8908-C44D-0A0C6D0CF628"
+  ]
+ },
+ "triplex-q-steel-blue-hpc": {
+  "id": "5D37FBB8-4C51-769B-4F9F-0A0C6D117C3D",
+  "produkte": [
+   "5D37F6E0-F00F-EFCE-A75D-0A0C6D12EC8B",
+   "641040D6-41D1-E539-4BEA-0A0C6D0C0C8B",
+   "643FB790-8362-79A0-A625-0A0C6D0CB57F"
+  ]
+ },
+ "triplex-q-steel-blue-hpc/hpc-fraeser": {
+  "id": "62500FB4-424E-3C8A-3CCA-0A0C6D0CF4E9",
+  "produkte": []
+ },
+ "triplex-q-steel-blue-mz": {
+  "id": "63186C2D-6065-5020-D0C7-0A0C6D0CA2B0",
+  "produkte": [
+   "631872EE-230C-0A7D-EE32-0A0C6D0CB848",
+   "63187317-94B7-24D2-BC68-0A0C6D12B759",
+   "63187342-23F4-E24D-0161-0A0C6D12228F",
+   "6318737C-E99F-E34F-0351-0A0C6D12228F",
+   "63187253-06F0-E053-97B8-0A0C6D12223B",
+   "631872BA-3226-0B1B-B4FF-0A0C6D0C65DB"
+  ]
+ },
+ "triplex-q-tpc-3xd": {
+  "id": "5D7B5C56-828A-30EA-1078-0A0C6D0C688B",
+  "produkte": [
+   "6419873B-97B0-1E13-E23A-0A0C6D0CC16F"
+  ]
+ },
+ "triplex-q-tpc-blue": {
+  "id": "5D380ED7-35F1-3C8C-0597-0A0C6D0B44BB",
+  "produkte": []
+ },
+ "triplex-q-tpc-fraeser": {
+  "id": "63888775-93EA-B761-3C5B-0A0C6D121ADA",
+  "produkte": [
+   "66FB98B9-B211-035B-ADA7-0A0C6D12DF3C",
+   "6704C64F-928B-12EE-C518-0A0C6D0C3EAF",
+   "6419873B-97B0-1E13-E23A-0A0C6D0CC16F"
+  ]
+ },
+ "triplex-q-vhm-hochleistungsbohrer": {
+  "id": "63E4BDD0-9110-688E-4E5D-0A0C6D12552B",
+  "produkte": []
+ },
+ "triplex-q-vhm-hochleistungsbohrer/triplex-q-vhm-hochleistungsbohrer-3xd-o-1-00-mm-20": {
+  "id": "63E4E265-EE49-1958-9BC1-0A0C6D12E621",
+  "produkte": [
+   "63DB84F5-BB56-0060-CF93-0A0C6D0CF723",
+   "63E243B5-01B9-EDDB-B12A-0A0C6D0C4B51",
+   "63E4CF7C-B832-888A-6F7C-0A0C6D0CBC14",
+   "63DB9839-18CE-86DB-4D37-0A0C6D123B59",
+   "63DBA8CE-60C0-DE0F-05C8-0A0C6D0CD2BF",
+   "63D8FEEF-C7B8-F89A-556F-0A0C6D0C5487",
+   "63E23480-E9D7-728B-A6CF-0A0C6D0C1A06"
+  ]
+ },
+ "triplex-q-vhm-hochleistungsbohrer/triplex-q-vhm-hochleistungsbohrer-mit-ik-12xd-o-3": {
+  "id": "63FDEAC7-F55D-B315-5872-0A0C6D0C48F0",
+  "produkte": [
+   "63FDE779-5EB0-4B1D-F046-0A0C6D12D558",
+   "63FDD6FC-E27C-B0B7-F308-0A0C6D12D554",
+   "63FDDEFF-E5F8-8AB8-3A44-0A0C6D12EE8B",
+   "63FDE3C9-44F6-31CF-06C1-0A0C6D12DC0E"
+  ]
+ },
+ "triplex-q-vhm-hochleistungsbohrer/triplex-q-vhm-hochleistungsbohrer-mit-ik-3xd-o-2-00": {
+  "id": "63EB8729-FD00-92A7-3F64-0A0C6D1208B5",
+  "produkte": [
+   "63EDF606-51B4-652D-2188-0A0C6D120C9A",
+   "63EE0030-8ACE-292B-2836-0A0C6D12D3B5",
+   "63EB4DE0-F77E-5CC3-A918-0A0C6D12C283",
+   "63EB617C-6162-FEA2-F6EE-0A0C6D124467",
+   "63EB6BD6-F6ED-C296-218F-0A0C6D0C9091",
+   "63EB79F4-C1B7-8672-38EE-0A0C6D0CE613"
+  ]
+ },
+ "triplex-q-vhm-hochleistungsbohrer/triplex-q-vhm-hochleistungsbohrer-mit-ik-5xd-o-2-00": {
+  "id": "63EE28FE-48FE-0DC7-A1DE-0A0C6D128BA2",
+  "produkte": [
+   "63F4B294-0C62-D864-F5B5-0A0C6D124390",
+   "63F72EBA-3DD2-4222-32A1-0A0C6D0C377B",
+   "63F73B6B-0547-5A73-EA39-0A0C6D0CEEF0",
+   "63EE0D5E-E7F6-2D00-635C-0A0C6D121240",
+   "63EE1BC2-1C07-8652-7BCB-0A0C6D0CAC97",
+   "63F48E52-B216-A3C0-379D-0A0C6D0C35EC",
+   "63F49B2D-2079-704F-DDB4-0A0C6D123D93"
+  ]
+ },
+ "triplex-q-vhm-hochleistungsbohrer/triplex-q-vhm-hochleistungsbohrer-mit-ik-7xd-o-2-80": {
+  "id": "63F7532E-6FBE-EA7E-2284-0A0C6D12E411",
+  "produkte": [
+   "63FDCB3E-E585-0AA7-B269-0A0C6D0CF988",
+   "63FDD326-3A76-D4E0-B9C4-0A0C6D120AED",
+   "63F73F75-D08E-6A16-5B22-0A0C6D0C69B6",
+   "63F7496E-15F6-C229-E179-0A0C6D0C90F3",
+   "63F75497-0E65-D668-2679-0A0C6D127B03"
+  ]
+ },
+ "triplex-q-vhm-hochleistungsbohrer/triplex-q-vhm-hochleistungsbohrer-mit-ik-inox-3xd-o": {
+  "id": "64008821-C520-81DE-FC93-0A0C6D0CAF0A",
+  "produkte": []
+ },
+ "triplex-q-vhm-mehrzahnfraeser-schlichtfraeser": {
+  "id": "63888F0A-104C-BDFA-44CF-0A0C6D1211D0",
+  "produkte": [
+   "631872EE-230C-0A7D-EE32-0A0C6D0CB848",
+   "63187317-94B7-24D2-BC68-0A0C6D12B759",
+   "63187342-23F4-E24D-0161-0A0C6D12228F",
+   "6318737C-E99F-E34F-0351-0A0C6D12228F",
+   "63187253-06F0-E053-97B8-0A0C6D12223B",
+   "631872BA-3226-0B1B-B4FF-0A0C6D0C65DB"
+  ]
+ },
+ "triplex-q-vhm-nc-entgrater": {
+  "id": "63888D9D-9E05-1768-A30D-0A0C6D125F0B",
+  "produkte": []
+ },
+ "triplex-q-vhm-viertelkreisfraeser": {
+  "id": "670505F8-2D20-38D7-DA23-0A0C6D12A9D4",
+  "produkte": [
+   "670508ED-5618-4A63-A843-0A0C6D0C30FE"
+  ]
+ },
+ "triplex-q-vhm-vollradiusfraeser": {
+  "id": "63888ADE-8465-5E5C-E1C8-0A0C6D0CDA47",
+  "produkte": [
+   "64197D95-7A4F-E835-EFAC-0A0C6D0C2E1C"
+  ]
+ },
+ "vhm-eckradiusfraeser-mit-hpc-geometrie": {
+  "id": "63888BCF-1F4D-660A-8E9E-0A0C6D124133",
+  "produkte": []
+ },
+ "vhm-sonderwerkzeuge": {
+  "id": "5D3947C3-C8D9-716B-B8DD-0A0C6D0D5AC8",
+  "produkte": []
+ },
+ "wendeplatten": {
+  "id": "680116FD-CAE0-DA13-2CEF-0A0C6D0C3F1B",
+  "produkte": []
+ }
+}

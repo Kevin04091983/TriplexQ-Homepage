@@ -1,0 +1,69 @@
+{
+ "pfad": "/i/kontakt",
+ "titel": "Kontakt - TRIPLEX-Q-Webshop",
+ "text": "Name * E-Mail-Adresse * \n Nachricht * 0 von 2000 Zeichen Ich habe die Datenschutzerklärung zur Kenntnis genommen. * Wenn Sie dieses Feld sehen, lassen Sie es leer. Abschicken",
+ "bilder": [
+  "https://www.triplex-q.com/storage/images/1%20(2).png?hash=e37ee11204376bf648ac78d447bda0fb1891eca7&shop=87065853",
+  "https://www.triplex-q.com/storage/images/Logo_PWS_2020.png?hash=d153b211b7c503a66ac251f3344555b9b15305a0&shop=87065853"
+ ],
+ "videos": [],
+ "pages": {
+  "kontakt": {
+   "titleTag": "",
+   "settings": {},
+   "slugs": [
+    {
+     "slug": "kontakt",
+     "locale": "de_DE"
+    }
+   ],
+   "isVisible": true,
+   "guid": null,
+   "slug": "kontakt",
+   "href": "/i/kontakt",
+   "updatedAt": "2023-10-05T14:19:21.000Z",
+   "ep6pathMD5": null,
+   "shopId": "976a39ba-f997-4575-b1b1-e0c32c4e57d8",
+   "navigation": "main",
+   "metaDescription": "",
+   "title": "Kontakt",
+   "content": {
+    "id": "1e691395-20fb-47d9-818c-f21dbaa3c888",
+    "pageId": "04f73014-70eb-44ef-acb5-bdbd61b0bfa7",
+    "themeId": "@all",
+    "createdAt": "2020-03-12T14:26:04.000Z",
+    "updatedAt": "2022-11-29T11:10:27.000Z",
+    "blocks": [
+     {
+      "_id": "3321432f-75e4-4b6c-948a-5486aefe052d",
+      "type": "headline-block",
+      "data": {
+       "headline": {
+        "type": "epages.text",
+        "data": {
+         "content": "<p></p>"
+        }
+       },
+       "columns": [
+        {
+         "type": "epages.contactform",
+         "data": {
+          "showPrivacyCheckbox": true
+         }
+        }
+       ]
+      }
+     }
+    ],
+    "elements": []
+   },
+   "lft": 6,
+   "type": "blank",
+   "id": "04f73014-70eb-44ef-acb5-bdbd61b0bfa7",
+   "createdAt": "2020-03-12T14:26:04.000Z",
+   "basePageId": null,
+   "rgt": 7
+  }
+ },
+ "legal": {}
+}

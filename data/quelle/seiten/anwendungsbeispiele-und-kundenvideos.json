@@ -1,0 +1,166 @@
+{
+ "pfad": "/i/anwendungsbeispiele-und-kundenvideos",
+ "titel": "Anwendungsbeispiele und Kundenvideos - TRIPLEX-Q-Webshop",
+ "text": "TRIPLEX-Q steel blue TPC 3xD - D16mm\n TRIPLEX-Q steel blue TPC 3xD\n Durchmesser 16mm\n Material: 1.2738 (40CrMnNiMo 8-6-4)\n Vc = 161 m/min\n Vf = 3500 mm/min\n ap = 48 mm\n ae = 0,8 mm\n TRIPLEX-Q steel blue TPC 3xD - D12mm\n TRIPLEX-Q steel blue TPC 3xD D12\n Material: 1.2316 (X38CrMo16)\n Vc 205 m/min\n fz 0,11 mm\n ap 34mm\n ae 0,5 mm\n TRIPLEX-Q steel blue TPC 3xD - D16mm\n TRIPLEX-Q steel blue TPC 3xD D16\n Material: 1.2316 (X38CrMo16)\n Vc 205 m/min\n fz 0,15 mm\n ap 45mm\n ae 0,8 mm\n TRIPLEX-Q steel blue TPC 3xD - D16mm\n TRIPLEX-Q steel blue TPC 3xD D16\n Material: 1.4057 (X17CrNi16-2)\n Vc 191 m/min\n fz 0,21 mm\n ap 47 mm\n ae 0,7 mm",
+ "bilder": [
+  "https://www.triplex-q.com/storage/images/1%20(2).png?hash=e37ee11204376bf648ac78d447bda0fb1891eca7&shop=87065853",
+  "https://www.triplex-q.com/storage/images/Logo_PWS_2020.png?hash=d153b211b7c503a66ac251f3344555b9b15305a0&shop=87065853"
+ ],
+ "videos": [
+  "https://www.youtube.com/embed/CAjL0qteVgo",
+  "https://www.youtube.com/embed/RNCa_3UyBUs",
+  "https://www.youtube.com/embed/StSrYQWxSkI",
+  "https://www.youtube.com/embed/nQzHfyyHnFA",
+  "https://youtu.be/CAjL0qteVgo",
+  "https://youtu.be/RNCa_3UyBUs",
+  "https://youtu.be/StSrYQWxSkI",
+  "https://youtu.be/nQzHfyyHnFA"
+ ],
+ "pages": {
+  "anwendungsbeispiele-und-kundenvideos": {
+   "titleTag": "",
+   "settings": {},
+   "slugs": [
+    {
+     "slug": "anwendungsbeispiele-und-kundenvideos",
+     "locale": "de_DE"
+    }
+   ],
+   "isVisible": true,
+   "guid": null,
+   "slug": "anwendungsbeispiele-und-kundenvideos",
+   "href": "/i/anwendungsbeispiele-und-kundenvideos",
+   "updatedAt": "2024-08-20T06:30:59.000Z",
+   "ep6pathMD5": null,
+   "shopId": "976a39ba-f997-4575-b1b1-e0c32c4e57d8",
+   "navigation": "main",
+   "metaDescription": "",
+   "title": "Anwendungsbeispiele und Kundenvideos",
+   "content": {
+    "id": "61eda759-f236-4f95-80e5-798ce380e3e8",
+    "pageId": "f9a3d270-3ad1-4488-bf61-416838bd953a",
+    "themeId": "@all",
+    "createdAt": "2020-11-02T11:17:51.000Z",
+    "updatedAt": "2024-08-20T06:50:34.000Z",
+    "blocks": [
+     {
+      "_id": "3536b195-4bde-41e8-a954-27b8d578adbd",
+      "type": "multi-column",
+      "data": {
+       "headline": {
+        "type": "epages.text",
+        "data": {
+         "content": "<h2>TRIPLEX-Q steel blue TPC 3xD - D16mm</h2>",
+         "isHeadline": true
+        }
+       },
+       "columns": [
+        {
+         "type": "epages.video",
+         "data": {
+          "src": "https://youtu.be/nQzHfyyHnFA"
+         }
+        },
+        {
+         "type": "epages.text",
+         "data": {
+          "content": "<p>TRIPLEX-Q steel blue TPC 3xD</p><p>Durchmesser 16mm</p><p>Material: 1.2738 (40CrMnNiMo 8-6-4)</p><p>Vc = 161 m/min</p><p>Vf = 3500 mm/min</p><p>ap = 48 mm</p><p>ae = 0,8 mm</p><p></p>"
+         }
+        }
+       ]
+      }
+     },
+     {
+      "_id": "16637812-6b52-4727-b2d0-0710fdebecd5",
+      "type": "multi-column",
+      "data": {
+       "columns": [
+        {
+         "type": "epages.video",
+         "data": {
+          "src": "https://youtu.be/RNCa_3UyBUs"
+         }
+        },
+        {
+         "type": "epages.text",
+         "data": {
+          "content": "<p>TRIPLEX-Q steel blue TPC 3xD D12</p><p>Material: 1.2316 (X38CrMo16)</p><p>Vc 205 m/min</p><p>fz 0,11 mm</p><p>ap 34mm</p><p>ae 0,5 mm</p>"
+         }
+        }
+       ],
+       "headline": {
+        "type": "epages.text",
+        "data": {
+         "content": "<h2>TRIPLEX-Q steel blue TPC 3xD - D12mm</h2>",
+         "isHeadline": true
+        }
+       }
+      }
+     },
+     {
+      "_id": "69578270-8f88-413a-b689-79d802581444",
+      "type": "multi-column",
+      "data": {
+       "columns": [
+        {
+         "type": "epages.video",
+         "data": {
+          "src": "https://youtu.be/CAjL0qteVgo"
+         }
+        },
+        {
+         "type": "epages.text",
+         "data": {
+          "content": "<p>TRIPLEX-Q steel blue TPC 3xD D16</p><p>Material: 1.2316 (X38CrMo16)</p><p>Vc 205 m/min</p><p>fz 0,15 mm</p><p>ap 45mm</p><p>ae 0,8 mm</p>"
+         }
+        }
+       ],
+       "headline": {
+        "type": "epages.text",
+        "data": {
+         "content": "<h2>TRIPLEX-Q steel blue TPC 3xD - D16mm</h2>",
+         "isHeadline": true
+        }
+       }
+      }
+     },
+     {
+      "_id": "3d34f7b6-48cd-4f81-89c7-4e6ab0b0fb4e",
+      "type": "multi-column",
+      "data": {
+       "columns": [
+        {
+         "type": "epages.video",
+         "data": {
+          "src": "https://youtu.be/StSrYQWxSkI"
+         }
+        },
+        {
+         "type": "epages.text",
+         "data": {
+          "content": "<p>TRIPLEX-Q steel blue TPC 3xD D16</p><p>Material: 1.4057 (X17CrNi16-2)</p><p>Vc  191 m/min</p><p>fz  0,21 mm</p><p>ap  47 mm</p><p>ae  0,7 mm</p>"
+         }
+        }
+       ],
+       "headline": {
+        "type": "epages.text",
+        "data": {
+         "content": "<h2>TRIPLEX-Q steel blue TPC 3xD - D16mm</h2>",
+         "isHeadline": true
+        }
+       }
+      }
+     }
+    ],
+    "elements": []
+   },
+   "lft": 12,
+   "type": "blank",
+   "id": "f9a3d270-3ad1-4488-bf61-416838bd953a",
+   "createdAt": "2020-11-02T11:17:51.000Z",
+   "basePageId": null,
+   "rgt": 13
+  }
+ },
+ "legal": {}
+}

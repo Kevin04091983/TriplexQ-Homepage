@@ -1,0 +1,48 @@
+{
+ "pfad": "/l/contact",
+ "titel": "Impressum - TRIPLEX-Q-Webshop",
+ "text": "Impressum \n Verantwortlich für den Inhalt dieser Seite und Domain-Inhaber:\n Präzisionswerkzeuge Schmidt e.K. Inh. Alexandra SimonAckerstraße 12D-98544 Zella-Mehlis\n Inhaberin: Alexandra Simon\n Prokurist: Hans Jürgen Schmidt\n Telefon: +49 (0) 36 82 / 48 36 62\n Fax:+49 (0) 36 82 / 46 69 78\n E-Mail: info@wkz-schmidt.de \n Web: https://triplex-schmidt.de/ \n Handelsregister: \n Amtsgericht Jena HRA 500 761\n USt-IdNr.: DE 303472567",
+ "bilder": [
+  "https://www.triplex-q.com/storage/images/1%20(2).png?hash=e37ee11204376bf648ac78d447bda0fb1891eca7&shop=87065853",
+  "https://www.triplex-q.com/storage/images/Logo_PWS_2020.png?hash=d153b211b7c503a66ac251f3344555b9b15305a0&shop=87065853"
+ ],
+ "videos": [],
+ "pages": {},
+ "legal": {
+  "contact": {
+   "titleTag": "Impressum",
+   "settings": {},
+   "isVisible": true,
+   "guid": null,
+   "slug": "contact",
+   "href": "/l/contact",
+   "updatedAt": "2025-03-24T11:23:43.000Z",
+   "ep6pathMD5": null,
+   "shopId": "976a39ba-f997-4575-b1b1-e0c32c4e57d8",
+   "navigation": "legal",
+   "metaDescription": "",
+   "title": "Impressum",
+   "content": {
+    "id": "c4002d64-a88f-4bc9-a8c2-69c027cbc7ed",
+    "pageId": "092ebcae-7fca-4f8f-b445-52034e9ede6f",
+    "themeId": "@all",
+    "blocks": [],
+    "elements": [
+     {
+      "_id": "legal-content",
+      "type": "epages.text",
+      "data": {
+       "content": "<h2>Impressum </h2><p>Verantwortlich für den Inhalt dieser Seite und Domain-Inhaber:</p><p><strong>Präzisionswerkzeuge Schmidt e.K. </strong>Inh. Alexandra SimonAckerstraße 12D-98544 Zella-Mehlis</p><p>Inhaberin: Alexandra Simon</p><p>Prokurist: Hans Jürgen Schmidt</p><p>Telefon: +49 (0) 36 82 / 48 36 62</p><p>Fax:+49 (0) 36 82 / 46 69 78</p><p>E-Mail: <a href=\"mailto:info@wkz-schmidt.de\" target=\"_blank\" rel=\"noopener noreferrer\">info@wkz-schmidt.de</a></p><p>Web: <a href=\"https://triplex-schmidt.de/\" target=\"_blank\" rel=\"noopener noreferrer\">https://triplex-schmidt.de/</a></p><p>Handelsregister: </p><p>Amtsgericht Jena HRA 500 761</p><p>USt-IdNr.: DE 303472567</p><p></p><p></p>"
+      }
+     }
+    ]
+   },
+   "lft": 2,
+   "type": "legal",
+   "id": "092ebcae-7fca-4f8f-b445-52034e9ede6f",
+   "createdAt": "2019-07-23T14:11:28.000Z",
+   "basePageId": null,
+   "rgt": 3
+  }
+ }
+}
