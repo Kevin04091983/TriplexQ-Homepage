@@ -1,0 +1,9 @@
+# Zeilenenden einheitlich, damit Windows und Mac sauber zusammenarbeiten
+* text=auto eol=lf
+*.bat text eol=crlf
+*.webp binary
+*.png binary
+*.jpg binary
+*.pdf binary
+*.woff2 binary
+*.zip binary
