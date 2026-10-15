@@ -259,6 +259,47 @@
     else knopf.addEventListener("click", () => videoLaden(knopf, true), { once: true });
   });
 
+  /* ------------------------------------------------ WhatsApp-Chat "Vertriebsteam" */
+  const wa = $("[data-wa]");
+  if (wa) {
+    const fenster = $(".wa-fenster", wa);
+    const knopf = $("[data-wa-knopf]", wa);
+    const feld = $("#wa-text", wa);
+    const zeit = $("[data-wa-zeit]", wa);
+    const offen = (an, fokus) => {
+      fenster.hidden = !an;
+      wa.classList.toggle("offen", an);
+      knopf.setAttribute("aria-expanded", an);
+      if (an && zeit) zeit.textContent = new Date().toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" });
+      if (an && fokus) feld.focus();
+    };
+    knopf.addEventListener("click", () => offen(fenster.hidden, true));
+    $("[data-wa-zu]", wa).addEventListener("click", () => { offen(false); knopf.focus(); });
+    document.addEventListener("keydown", (ev) => { if (ev.key === "Escape" && !fenster.hidden) { offen(false); knopf.focus(); } });
+    $("[data-wa-form]", wa).addEventListener("submit", (ev) => {
+      ev.preventDefault();
+      // Auf Produktseiten das Werkzeug gleich mitschicken
+      const h1 = $(".produkt h1") || $("h1");
+      const bezug = document.body.querySelector(".produkt") && h1 ? "\n\n(Frage zu: " + h1.textContent.trim() + ")" : "";
+      const text = (feld.value.trim() || "Hallo TRIPLEX-Q Vertriebsteam, ich habe eine Frage.") + bezug;
+      window.open("https://wa.me/" + wa.dataset.waNummer + "?text=" + encodeURIComponent(text), "_blank", "noopener");
+    });
+    feld.addEventListener("keydown", (ev) => {
+      if (ev.key === "Enter" && !ev.shiftKey) { ev.preventDefault(); $("[data-wa-form]", wa).requestSubmit(); }
+    });
+    // Link mit "#whatsapp" (z. B. aus einer Mail oder von Instagram) öffnet den Chat sofort
+    if (location.hash === "#whatsapp") offen(true, false);
+    // Wie im alten Shop: am Computer einmal pro Besuch nach ein paar Sekunden von selbst aufklappen (nicht am Handy)
+    try {
+      if (window.matchMedia("(min-width: 1024px)").matches && !sessionStorage.getItem("tq-wa-gezeigt")) {
+        setTimeout(() => {
+          if (fenster.hidden && !document.querySelector(".dialog:not([hidden]), .lightbox:not([hidden])")) offen(true, false);
+          try { sessionStorage.setItem("tq-wa-gezeigt", "1"); } catch (e) { /* privat-Modus */ }
+        }, 8000);
+      }
+    } catch (e) { /* kein sessionStorage */ }
+  }
+
   /* ------------------------------------------------ Lightbox */
   const box = $("[data-lightbox-box]");
   if (box) {

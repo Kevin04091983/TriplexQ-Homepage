@@ -812,3 +812,50 @@ p { margin: 0 0 1em; }
 .fuss-unten nav { gap: 8px 20px; }
 .cookie-knoepfe { display: flex; gap: 12px; flex-wrap: wrap; margin: 22px 0 8px; }
 .cookie-knoepfe .btn[aria-pressed="true"] { box-shadow: 0 0 0 3px var(--rot); }
+
+/* ------------------------------------------------ WhatsApp-Chat "Vertriebsteam" (wie im alten Shop) */
+.topbar .topbar-wa .ic { color: #25d366; }
+.wa { position: fixed; left: 20px; bottom: 20px; z-index: 80; display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
+.wa-knopf { position: relative; width: 60px; height: 60px; border: 0; border-radius: 50%; cursor: pointer; color: #fff;
+  background: #25d366; box-shadow: 0 10px 28px -6px rgb(18 140 70 / .6); display: grid; place-items: center; transition: transform .25s var(--ease); }
+.wa-knopf:hover { transform: scale(1.06); }
+.wa-knopf .ic { width: 32px; height: 32px; grid-area: 1 / 1; transition: opacity .2s, transform .25s var(--ease); }
+.wa-knopf .ic:last-child { opacity: 0; transform: rotate(-90deg); width: 26px; height: 26px; }
+.wa.offen .wa-knopf { background: #1a9e4e; }
+.wa.offen .wa-knopf .ic:first-child { opacity: 0; transform: rotate(90deg); }
+.wa.offen .wa-knopf .ic:last-child { opacity: 1; transform: none; }
+.wa-knopf::after { content: ""; position: absolute; inset: 0; border-radius: 50%; box-shadow: 0 0 0 0 rgb(37 211 102 / .55); animation: wa-puls 2.6s infinite; }
+.wa.offen .wa-knopf::after { animation: none; }
+@keyframes wa-puls { 70% { box-shadow: 0 0 0 16px rgb(37 211 102 / 0); } 100% { box-shadow: 0 0 0 0 rgb(37 211 102 / 0); } }
+.wa-fenster { width: min(360px, calc(100vw - 40px)); background: #fff; border-radius: 18px; overflow: hidden; box-shadow: var(--schatten-l);
+  transform-origin: bottom left; animation: wa-auf .3s var(--ease); }
+.wa-fenster[hidden] { display: none; }
+@keyframes wa-auf { from { opacity: 0; transform: translateY(12px) scale(.96); } }
+.wa-kopf { display: flex; align-items: center; gap: 12px; padding: 16px 14px 16px 18px; background: #1fae54; color: #fff; }
+.wa-kopf div { flex: 1; display: grid; line-height: 1.25; }
+.wa-kopf strong { font-size: 1.05rem; }
+.wa-kopf small { opacity: .85; font-size: .78rem; }
+.wa-bild { width: 42px; height: 42px; border-radius: 50%; background: var(--navy); display: grid; place-items: center; flex: none; }
+.wa-bild img { width: 24px; height: auto; }
+.wa-zu { background: none; border: 0; color: #fff; cursor: pointer; padding: 6px; border-radius: 50%; display: grid; }
+.wa-zu:hover { background: rgb(255 255 255 / .15); }
+.wa-zu .ic { width: 20px; height: 20px; }
+.wa-verlauf { padding: 18px; background: #efeae2; min-height: 120px; }
+.wa-blase { position: relative; margin: 0; max-width: 88%; padding: 10px 14px 18px; background: #fff; border-radius: 0 12px 12px 12px;
+  color: #111b21; font-size: .95rem; line-height: 1.4; box-shadow: 0 1px 1px rgb(0 0 0 / .08); }
+.wa-blase time { position: absolute; right: 10px; bottom: 4px; font-size: .7rem; color: #667781; }
+.wa-eingabe { display: grid; gap: 10px; padding: 14px 16px 6px; }
+.wa-eingabe textarea { width: 100%; resize: none; font: inherit; font-size: .95rem; padding: 10px 12px; border: 1.5px solid var(--grau-2); border-radius: 12px; }
+.wa-eingabe textarea:focus { outline: none; border-color: #25d366; box-shadow: 0 0 0 3px rgb(37 211 102 / .2); }
+.wa-start { display: flex; align-items: center; justify-content: center; gap: 8px; border: 0; border-radius: 10px; padding: 12px; cursor: pointer;
+  background: #25d366; color: #fff; font: 700 .95rem/1 var(--sans, inherit); letter-spacing: .03em; text-transform: uppercase; }
+.wa-start:hover { background: #1fae54; }
+.wa-start .ic { width: 20px; height: 20px; }
+.wa-info { margin: 0; padding: 4px 16px 14px; font-size: .72rem; color: var(--text-2); line-height: 1.4; }
+.wa-info a { color: inherit; }
+@media (max-width: 700px) {
+  .topbar-wa { display: none !important; }
+  .wa { left: 14px; bottom: 14px; }
+  .wa-knopf { width: 54px; height: 54px; }
+}
+@media (prefers-reduced-motion: reduce) { .wa-knopf::after, .wa-fenster { animation: none; } }
