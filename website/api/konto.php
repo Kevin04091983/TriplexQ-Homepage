@@ -206,7 +206,7 @@ switch ($aktion) {
         if (!$k) {
             json_aus(['ok' => false, 'meldung' => 'Bitte zuerst anmelden.'], 401);
         }
-        $s = db()->prepare('SELECT id, nummer, erstellt, netto, versand, mwst, gesamt, status, versandart, rabatt_prozent FROM bestellungen WHERE kunde_id = ? ORDER BY id DESC LIMIT 50');
+        $s = db()->prepare('SELECT id, nummer, erstellt, netto, versand, mwst, gesamt, status, versandart, rabatt_prozent FROM bestellungen WHERE kunde_id = ? ORDER BY erstellt DESC, id DESC LIMIT 50');
         $s->execute([$k['id']]);
         $bestellungen = $s->fetchAll();
         if ($bestellungen) {

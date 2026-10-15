@@ -490,6 +490,12 @@ function bestellungen_xml_uebernehmen(string $pfad, bool $nurPruefen): array
                     $menge, $n($li->UnitPrice), $gesamt];
                 $waren += $gesamt;
             }
+            foreach ($o->LineItems->LineItemSalesDiscount as $d) {   // Gutschein / Aktionsrabatt
+                if ($n($d->TotalPrice) != 0.0) {
+                    $positionen[] = ['GUTSCHEIN', 'Gutschein ' . $t($d->Id), '', 1, $n($d->TotalPrice), $n($d->TotalPrice)];
+                    $waren += $n($d->TotalPrice);
+                }
+            }
             foreach ($o->LineItems->LineItemDiscount as $d) {
                 if ($n($d->TotalPrice) != 0.0) {
                     $positionen[] = ['RABATT', 'Rabatt', '', 1, $n($d->TotalPrice), $n($d->TotalPrice)];

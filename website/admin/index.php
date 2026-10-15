@@ -158,7 +158,7 @@ if ($angemeldet && ($_GET['export'] ?? '') !== '') {
     } else {
         fputcsv($aus, ['Nummer', 'Datum', 'Kunde', 'E-Mail', 'Artikel-Nr', 'Bezeichnung', 'Ausfuehrung', 'Menge', 'Einzelpreis', 'Gesamtpreis', 'Status'], ';', '"', '');
         $sql = 'SELECT b.nummer, b.erstellt, b.email, b.anschrift, b.status, p.sku, p.bezeichnung, p.auswahl, p.menge, p.einzelpreis, p.gesamtpreis
-                FROM bestellungen b JOIN positionen p ON p.bestellung_id = b.id ORDER BY b.id DESC, p.id';
+                FROM bestellungen b JOIN positionen p ON p.bestellung_id = b.id ORDER BY b.erstellt DESC, b.id DESC, p.id';
         foreach (db()->query($sql) as $z) {
             fputcsv($aus, [$z['nummer'], $z['erstellt'], str_replace("\n", ' / ', $z['anschrift']), $z['email'], $z['sku'],
                 $z['bezeichnung'], $z['auswahl'], $z['menge'], $z['einzelpreis'], $z['gesamtpreis'], $z['status']], ';', '"', '');
@@ -383,7 +383,7 @@ try {
         </table>
         <?php
     } else {
-        $bestellungen = db()->query('SELECT * FROM bestellungen ORDER BY id DESC LIMIT 200')->fetchAll();
+        $bestellungen = db()->query('SELECT * FROM bestellungen ORDER BY erstellt DESC, id DESC LIMIT 200')->fetchAll();
         $positionen = [];
         if ($bestellungen) {
             $ids = implode(',', array_map(static fn($b) => (int) $b['id'], $bestellungen));
