@@ -314,6 +314,8 @@ ICONS = {
     "person": '<circle cx="12" cy="8" r="3.6"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/>',
     "logout": '<path d="M15 4.5H6.5a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2H15M18 12H10m5-3.5 3.5 3.5-3.5 3.5"/>',
     "prozent": '<path d="M19 5 5 19"/><circle cx="7.5" cy="7.5" r="2.5"/><circle cx="16.5" cy="16.5" r="2.5"/>',
+    "warnung": '<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/>',
+    "hand": '<path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/>',
 }
 
 
@@ -675,6 +677,23 @@ def startseite(produkte):
   <div class="laufband" aria-hidden="true"><div class="laufband-in">
     {"".join(f"<span>{t}</span>" for t in ["steel blue HPC", "inox red HPC", "HyperPlus HPC", "ALU-X DLC", "TPC-SAW-3xD", "SR Black IK", "BNC2 Vollradius", "VHM-Bohrer 12xD", "Sonderwerkzeuge", "Nachschleifservice", "Beschichtungsservice"] * 2)}
   </div></div>
+</section>
+
+<section class="preishinweis" aria-labelledby="preishinweis-titel">
+  <div class="wrap">
+    <div class="preishinweis-karte">
+      <div class="preishinweis-kopf">
+        <span class="preishinweis-symbol">{icon("warnung")}</span>
+        <h2 id="preishinweis-titel">Wichtiger Hinweis <span>zu unseren Preisen</span></h2>
+      </div>
+      <div class="preishinweis-text">
+        <p>Aufgrund aktueller Rohstoff- und Materialpreisentwicklungen befinden sich unsere Preisangaben derzeit in Überarbeitung.</p>
+        <p><strong>Die auf dieser Website angezeigten Preise sind daher aktuell nicht verbindlich.</strong></p>
+        <p>Bei einer Bestellung kann der tatsächliche Preis abweichen. Selbstverständlich informieren wir Sie vor der Auftragsbestätigung über den gültigen Preis.</p>
+        <p class="preishinweis-dank">{icon("hand")} Vielen Dank für Ihr Verständnis.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section class="vorteile">

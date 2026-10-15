@@ -228,6 +228,29 @@ p { margin: 0 0 1em; }
 .vorteil h3 { font-size: 1.3rem; font-style: italic; text-transform: uppercase; margin-bottom: .35em; }
 .vorteil p { color: var(--text-2); font-size: .94rem; margin: 0; }
 
+/* Wichtiger Hinweis zu den Preisen (Startseite) */
+.preishinweis { position: relative; z-index: 2; background: var(--grau-1); padding: clamp(28px, 4vw, 48px) 0; }
+.preishinweis-karte { display: grid; grid-template-columns: minmax(260px, 380px) 1fr; background: #fff; border-radius: var(--r-l);
+  box-shadow: var(--schatten); overflow: hidden; border: 1px solid var(--grau-2); }
+.preishinweis-kopf { display: flex; align-items: center; gap: 18px; padding: 28px 30px; color: #fff;
+  background: linear-gradient(115deg, var(--rot) 0 34%, var(--navy-3) 34.2%, var(--blau) 100%); }
+.preishinweis-symbol { flex: none; display: grid; place-items: center; width: 64px; height: 64px; border-radius: 16px;
+  background: rgb(255 255 255 / .14); box-shadow: inset 0 0 0 2px rgb(255 255 255 / .55); }
+.preishinweis-symbol .ic { width: 38px; height: 38px; stroke-width: 2.2; }
+.preishinweis-kopf h2 { margin: 0; color: #fff; font-size: clamp(1.5rem, 2.4vw, 2rem); line-height: 1.1; }
+.preishinweis-kopf h2 span { display: block; font-style: normal; font-weight: 500; text-transform: none; font-size: .62em; margin-top: 6px; opacity: .92; }
+.preishinweis-text { padding: 26px 32px; color: var(--text-2); }
+.preishinweis-text p { margin: 0 0 .6em; }
+.preishinweis-text strong { color: var(--navy); }
+.preishinweis-dank { display: flex; align-items: center; gap: 10px; margin: 1em 0 0 !important; padding-top: .9em;
+  border-top: 1px solid var(--grau-2); color: var(--blau); font-weight: 700; }
+.preishinweis-dank .ic { width: 28px; height: 28px; }
+@media (max-width: 860px) {
+  .preishinweis-karte { grid-template-columns: 1fr; }
+  .preishinweis-kopf { padding: 22px 20px; background: linear-gradient(115deg, var(--rot) 0 22%, var(--navy-3) 22.2%, var(--blau) 100%); }
+  .preishinweis-text { padding: 20px; }
+}
+
 /* ---------------------------------------------------------------- Abschnitte */
 .abschnitt { padding: clamp(64px, 9vw, 120px) 0; position: relative; }
 .abschnitt-grau { background: var(--grau-0); }
