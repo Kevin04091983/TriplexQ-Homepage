@@ -37,7 +37,8 @@ FIRMA = {
     "whatsapp_link": "491608592745",
     "mail": "kontakt@triplex-q.de",
     "order": "order@wkz-schmidt.de",
-    "instagram": "https://www.instagram.com/triplex_q_tools",
+    "instagram": "https://www.instagram.com/triplex_q_tools/",
+    "instagram_name": "@triplex_q_tools",
     "facebook": "https://www.facebook.com/praezisionswerkzeugeschmidt/",
     "shopvote": "https://www.shopvote.de/bewertung_triplex_q_com_23060.html",
 }
@@ -384,7 +385,8 @@ def kopf(b, aktiv, linien_mit_produkten):
 <div class="topbar">
   <div class="wrap topbar-in">
     <span>{icon("truck")} Versicherter Versand · Kauf auf Rechnung</span>
-    <span class="topbar-r"><a class="topbar-wa" href="https://wa.me/{FIRMA['whatsapp_link']}" rel="noopener" target="_blank" aria-label="WhatsApp {FIRMA['whatsapp']}">{wa_icon()} {FIRMA['whatsapp']}</a>
+    <span class="topbar-r"><a class="topbar-ig" href="{FIRMA['instagram']}" rel="noopener" target="_blank" aria-label="TRIPLEX-Q auf Instagram">{icon("insta")} {FIRMA['instagram_name']}</a>
+    <a class="topbar-wa" href="https://wa.me/{FIRMA['whatsapp_link']}" rel="noopener" target="_blank" aria-label="WhatsApp {FIRMA['whatsapp']}">{wa_icon()} {FIRMA['whatsapp']}</a>
     <a href="tel:{FIRMA['tel_link']}">{icon("phone")} {FIRMA['tel']}</a>
     <a href="mailto:{FIRMA['mail']}">{icon("mail")} {FIRMA['mail']}</a></span>
   </div>
@@ -826,6 +828,22 @@ def startseite(produkte):
   <div class="wrap">
     <div class="bewertungen" data-karussell>{bewertungen}</div>
     <p class="mitte"><a class="textlink" href="{FIRMA['shopvote']}" target="_blank" rel="noopener">Alle Bewertungen auf ShopVote {icon("arrow")}</a></p>
+  </div>
+</section>
+
+<section class="abschnitt instagram-band" id="instagram">
+  <div class="wrap instagram-in">
+    <div class="instagram-text" data-reveal>
+      <p class="eyebrow">Instagram</p>
+      <h2>Folgen Sie TRIPLEX-Q auf Instagram</h2>
+      <p>Neue Werkzeuge, Einblicke in die Fertigung und Bearbeitungen unserer Kunden – zuerst auf
+      <strong>{FIRMA['instagram_name']}</strong>.</p>
+      <a class="btn btn-insta" href="{FIRMA['instagram']}" target="_blank" rel="noopener">{icon("insta")} Auf Instagram folgen</a>
+    </div>
+    <a class="instagram-kacheln" href="{FIRMA['instagram']}" target="_blank" rel="noopener" aria-label="Zu TRIPLEX-Q auf Instagram ({FIRMA['instagram_name']})">
+      {"".join(f'<img src="assets/img/galerie/{b}-klein.webp" alt="" loading="lazy" width="400" height="400">' for b in ["img-20220205-180305-908", "incollage-20220206-172510756", "incollage-20220206-180014685", "incollage-20220218-143056252"])}
+      <span class="instagram-marke">{icon("insta")}</span>
+    </a>
   </div>
 </section>
 

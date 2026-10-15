@@ -859,3 +859,26 @@ p { margin: 0 0 1em; }
   .wa-knopf { width: 54px; height: 54px; }
 }
 @media (prefers-reduced-motion: reduce) { .wa-knopf::after, .wa-fenster { animation: none; } }
+
+/* ------------------------------------------------ Instagram */
+.topbar .topbar-ig .ic { color: #f77fb0; }
+.instagram-band { background: var(--grau-1); }
+.instagram-in { display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(28px, 5vw, 64px); align-items: center; }
+.instagram-text p:not(.eyebrow) { color: var(--text-2); max-width: 46ch; }
+.instagram-text .eyebrow { color: #c13584; }
+.instagram-text .eyebrow::before { background: linear-gradient(90deg, #feda75, #d62976, #962fbf); }
+.btn-insta { --bg: #d62976; background: linear-gradient(45deg, #feda75 0%, #fa7e1e 22%, #d62976 50%, #962fbf 78%, #4f5bd5 100%);
+  box-shadow: 0 10px 30px -8px rgb(214 41 118 / .5); margin-top: 8px; }
+.btn-insta:hover { filter: brightness(1.06); }
+.btn-insta .ic { width: 20px; height: 20px; }
+.instagram-kacheln { position: relative; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; border-radius: var(--r-l); width: min(100%, 440px); justify-self: end; }
+@media (max-width: 860px) { .instagram-kacheln { justify-self: start; } }
+.instagram-kacheln img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 14px; transition: transform .35s var(--ease), filter .35s; }
+.instagram-kacheln:hover img { filter: saturate(1.15); }
+.instagram-kacheln img:hover { transform: scale(1.03); }
+.instagram-marke { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 72px; height: 72px; border-radius: 22px;
+  display: grid; place-items: center; color: #fff; box-shadow: 0 14px 34px -8px rgb(150 47 191 / .6);
+  background: linear-gradient(45deg, #feda75 0%, #fa7e1e 22%, #d62976 50%, #962fbf 78%, #4f5bd5 100%); }
+.instagram-marke .ic { width: 38px; height: 38px; }
+@media (max-width: 860px) { .instagram-in { grid-template-columns: 1fr; } }
+@media (max-width: 1080px) { .topbar-ig { display: none !important; } }
