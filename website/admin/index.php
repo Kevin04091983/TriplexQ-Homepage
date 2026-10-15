@@ -32,6 +32,19 @@ if (($_POST['tun'] ?? '') === 'anmelden') {
     $kennung = 'admin|' . ($_SERVER['REMOTE_ADDR'] ?? '?');
     if (gesperrt_wegen_versuchen($kennung)) {
         $fehler = 'Zu viele Fehlversuche. Bitte in 15 Minuten erneut versuchen.';
+    } elseif (str_contains($eingabe = trim((string) ($_POST['benutzer'] ?? '')), '@')
+        && ($k = (static function (string $mail): ?array {
+            $s = db()->prepare('SELECT * FROM kunden WHERE email = ? AND gesperrt = 0 AND passwort_neu_noetig = 0');
+            $s->execute([mb_strtolower($mail)]);
+            return $s->fetch() ?: null;
+        })($eingabe))
+        && ist_admin_kunde($k) && password_verify((string) ($_POST['passwort'] ?? ''), (string) $k['passwort_hash'])) {
+        // Anmeldung mit dem Admin-Kundenkonto (E-Mail + Passwort wie auf der Kontoseite)
+        session_regenerate_id(true);
+        admin_sitzung($k);
+        $_SESSION['csrf_admin'] = bin2hex(random_bytes(16));
+        header('Location: ?');
+        exit;
     } elseif (hash_equals(ADMIN_BENUTZER, (string) ($_POST['benutzer'] ?? '')) && password_verify((string) ($_POST['passwort'] ?? ''), ADMIN_HASH)) {
         session_regenerate_id(true);
         $_SESSION['admin'] = true;
@@ -41,7 +54,7 @@ if (($_POST['tun'] ?? '') === 'anmelden') {
     } else {
         versuch_merken($kennung);
         usleep(400000);
-        $fehler = 'Benutzername oder Passwort stimmt nicht.';
+        $fehler = 'E-Mail/Benutzername oder Passwort stimmt nicht.';
     }
 }
 if (isset($_GET['abmelden'])) {
@@ -226,7 +239,8 @@ $seite = $_GET['seite'] ?? 'bestellungen';
     <?php if ($fehler): ?><p class="fehler"><?= h($fehler) ?></p><?php endif; ?>
     <form method="post">
       <input type="hidden" name="tun" value="anmelden">
-      <label>Benutzername<input name="benutzer" autocomplete="username" required autofocus></label>
+      <p class="pos">Mit Ihrer Admin-E-Mail-Adresse und Ihrem Passwort anmelden (wie auf der Kontoseite).</p>
+      <label>E-Mail oder Benutzername<input name="benutzer" autocomplete="username" required autofocus></label>
       <label>Passwort<input name="passwort" type="password" autocomplete="current-password" required></label>
       <button type="submit">Anmelden</button>
     </form>
