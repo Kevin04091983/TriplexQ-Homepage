@@ -3,7 +3,11 @@
   python tools/hochladen.py --test --nur-paket     Ordner upload/ + ZIP erzeugen (zum Hochladen mit FileZilla/Cyberduck)
   python tools/hochladen.py --test --erstmals      Testfassung hochladen, inkl. Einrichtungs-Assistent
   python tools/hochladen.py --test                 Testfassung (triplex-q.de, für Google unsichtbar) hochladen
-  python tools/hochladen.py --live                 Livefassung (www.triplex-q.com) hochladen
+  python tools/hochladen.py --live                 Livefassung (www.triplex-q.com) hochladen – in BEIDE Pakete:
+                                                   Webshop-Paket (triplex-q.com) und Hosting Plus (triplex-q.de leitet dann um)
+  python tools/hochladen.py --test --nach live     Testfassung ins Webshop-Paket (Umschalten vorbereiten)
+
+Ziele in tools/strato.json: "test" = Paket Hosting Plus (triplex-q.de), "live" = Paket Webshop Now Pro (triplex-q.com).
 
 Hochgeladen wird mit einem SSH-Schlüssel (~/.ssh/triplexq_strato) – ohne Passwort. Server, Benutzer und
 Zielordner stehen in tools/strato.json (keine Geheimnisse). Nie hochgeladen wird api/einstellungen.php:
@@ -53,13 +57,13 @@ def sftp_programm():
     sys.exit("sftp nicht gefunden (OpenSSH installieren).")
 
 
-def hochladen(ordner):
-    k = json.loads(KONFIG.read_text(encoding="utf-8"))
+def hochladen(ziel_name):
+    k = json.loads(KONFIG.read_text(encoding="utf-8"))[ziel_name]
     if not k.get("benutzer"):
         sys.exit("In tools/strato.json fehlt der SFTP-Benutzer (steht im Strato-Kundenbereich unter SFTP/SSH).")
     if not SCHLUESSEL.exists():
         sys.exit(f"SSH-Schlüssel fehlt: {SCHLUESSEL}  ->  ssh-keygen -t ed25519 -f {SCHLUESSEL} -C triplexq-upload")
-    ziel = k[ordner].rstrip("/")
+    ziel = k["ordner"].rstrip("/")
     zeilen = [f"-mkdir {ziel}"]
     for d in sorted(p for p in UPLOAD.rglob("*") if p.is_dir()):
         zeilen.append(f'-mkdir "{ziel}/{d.relative_to(UPLOAD).as_posix()}"')
@@ -70,7 +74,7 @@ def hochladen(ordner):
         b.write("\n".join(zeilen) + "\n")
     befehl = [sftp_programm(), "-i", str(SCHLUESSEL), "-o", "IdentitiesOnly=yes", "-o", "BatchMode=yes",
               "-o", "StrictHostKeyChecking=accept-new", "-b", b.name, f"{k['benutzer']}@{k['host']}"]
-    print(f"Lade hoch nach {k['host']}:{ziel} …")
+    print(f"Lade hoch nach {k['host']}:{ziel}  ({k.get('hinweis', ziel_name)}) …")
     erg = subprocess.run(befehl, capture_output=True, text=True)
     Path(b.name).unlink(missing_ok=True)
     if erg.returncode != 0:
@@ -86,8 +90,14 @@ def main():
     bau = [sys.executable, str(WURZEL / "tools" / "build_site.py")] + (["--test"] if test else [])
     subprocess.run(bau, check=True)
     paket("--erstmals" in sys.argv)
-    if "--nur-paket" not in sys.argv:
-        hochladen("ordner")
+    if "--nur-paket" in sys.argv:
+        return
+    if "--nach" in sys.argv:
+        ziele = [sys.argv[sys.argv.index("--nach") + 1]]
+    else:
+        ziele = ["test"] if test else ["live", "test"]
+    for z in ziele:
+        hochladen(z)
 
 
 if __name__ == "__main__":

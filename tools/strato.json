@@ -1,5 +1,14 @@
 {
-  "host": "5688186.ssh.w1.strato.hosting",
-  "benutzer": "stu364298217",
-  "ordner": "triplex-q"
+  "test": {
+    "host": "5688186.ssh.w1.strato.hosting",
+    "benutzer": "stu364298217",
+    "ordner": "triplex-q",
+    "hinweis": "Paket Hosting Plus – triplex-q.de (Testadresse)"
+  },
+  "live": {
+    "host": "510039565.ssh.w1.strato.hosting",
+    "benutzer": "stu495963247",
+    "ordner": "triplex-q",
+    "hinweis": "Paket Webshop Now Pro – www.triplex-q.com"
+  }
 }
