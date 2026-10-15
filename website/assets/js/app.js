@@ -300,6 +300,57 @@
     } catch (e) { /* kein sessionStorage */ }
   }
 
+  /* ------------------------------------------------ Instagram-Reels: erst beim Klick von Instagram laden */
+  const reels = $("[data-reels]");
+  if (reels) {
+    const pfeile = $$("[data-reels-pfeil]");
+    const pfeileSetzen = () => {
+      const ende = reels.scrollWidth - reels.clientWidth - 4;
+      pfeile.forEach((p) => { p.disabled = p.dataset.reelsPfeil === "-1" ? reels.scrollLeft <= 4 : reels.scrollLeft >= ende; });
+    };
+    pfeile.forEach((p) => p.addEventListener("click", () => {
+      reels.scrollBy({ left: Number(p.dataset.reelsPfeil) * reels.clientWidth * 0.8 });
+    }));
+    reels.addEventListener("scroll", pfeileSetzen, { passive: true });
+    window.addEventListener("resize", pfeileSetzen);
+    pfeileSetzen();
+
+    let dialog, ausloeser;
+    const schliessen = () => {
+      if (!dialog || dialog.hidden) return;
+      dialog.hidden = true;
+      $("iframe", dialog).src = "about:blank";          // Video stoppen
+      document.body.style.overflow = "";
+      if (ausloeser) ausloeser.focus();
+    };
+    reels.addEventListener("click", (ev) => {
+      const knopf = ev.target.closest("[data-reel]");
+      if (!knopf) return;
+      ausloeser = knopf;
+      const code = knopf.dataset.reel;
+      if (!dialog) {
+        dialog = document.createElement("div");
+        dialog.className = "reel-dialog";
+        dialog.setAttribute("role", "dialog");
+        dialog.setAttribute("aria-modal", "true");
+        dialog.setAttribute("aria-label", "Instagram-Video");
+        dialog.innerHTML = '<div class="reel-box"><button class="reel-zu" type="button" aria-label="Video schließen">' +
+          '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>' +
+          '<iframe title="Instagram-Video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>' +
+          '<a target="_blank" rel="noopener">Auf Instagram öffnen ↗</a></div>';
+        document.body.appendChild(dialog);
+        $(".reel-zu", dialog).addEventListener("click", schliessen);
+        dialog.addEventListener("click", (e) => { if (e.target === dialog) schliessen(); });
+        document.addEventListener("keydown", (e) => { if (e.key === "Escape") schliessen(); });
+      }
+      $("iframe", dialog).src = "https://www.instagram.com/reel/" + encodeURIComponent(code) + "/embed/";
+      $("a", dialog).href = "https://www.instagram.com/reel/" + encodeURIComponent(code) + "/";
+      dialog.hidden = false;
+      document.body.style.overflow = "hidden";
+      $(".reel-zu", dialog).focus();
+    });
+  }
+
   /* ------------------------------------------------ Lightbox */
   const box = $("[data-lightbox-box]");
   if (box) {

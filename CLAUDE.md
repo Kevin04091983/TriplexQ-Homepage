@@ -16,6 +16,7 @@ Kommunikation mit Kevin auf Deutsch; nach jeder fertigen Änderung einen anklick
 - `tools/hochladen.py` – baut, packt (`upload/`, nie `api/einstellungen.php`) und lädt per SFTP mit Schlüssel
   `~/.ssh/triplexq_strato` hoch; Ziel in `tools/strato.json`. `--test`/`--live`, `--erstmals` (mit Assistent), `--nur-paket`.
 - `website/einrichtung/` – Einrichtungs-Assistent: Kevin trägt DB-Zugang + Admin-Passwort selbst ein; sperrt sich danach.
+- `tools/instagram_reels.py` – Instagram-Reels (@triplex_q_tools) für die Startseite: Vorschaubilder auf den eigenen Server, Liste REELS im Skript ergänzen.
 - `tools/vorschau_server.py` – lokale Vorschau ohne Zwischenspeicher (Port 8095), ohne PHP.
 - Design: `website/assets/css/style.css`. Farben aus dem Logo: #003B9F, #E40001, Navy #06163F.
 

@@ -638,6 +638,27 @@ SPECIAL = ["Anzahl der Schneiden (Z)", "Schneidenlänge", "Halsfreischliff", "Ec
            "Schaftausführung HA / HB / HE", "Drallwinkel", "Chipbreaker", "Beschichtung"]
 
 
+def reels_html():
+    """Instagram-Reels (Vorschaubilder liegen auf dem eigenen Server, siehe tools/instagram_reels.py)."""
+    datei = WURZEL / "data" / "instagram.json"
+    if not datei.exists():
+        return ""
+    monate = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"]
+    teile = []
+    for r in json.loads(datei.read_text(encoding="utf-8")):
+        j, m, t = (int(x) for x in r["datum"].split("-"))
+        datum = f"{t}. {monate[m - 1]} {j}"
+        text = r["text"] or "Video auf Instagram"
+        kurz = text if len(text) <= 70 else text[:68].rsplit(" ", 1)[0] + " …"
+        teile.append(f"""
+      <li><button class="reel" type="button" data-reel="{e(r['code'])}" aria-label="Instagram-Video vom {datum} abspielen: {e(kurz)}">
+        <img src="assets/img/instagram/{e(r['code'])}.webp" alt="" loading="lazy" width="{r['breite']}" height="{r['hoehe']}">
+        <span class="reel-play">{icon("play")}</span>
+        <span class="reel-text"><small>{datum}</small>{e(kurz)}</span>
+      </button></li>""")
+    return "".join(teile)
+
+
 def videokarte(v, b=""):
     vid, titel, material, daten = v
     werte = "".join(f"<div><dt>{k}</dt><dd>{w}</dd></div>" for k, w in daten)
@@ -832,19 +853,22 @@ def startseite(produkte):
 </section>
 
 <section class="abschnitt instagram-band" id="instagram">
-  <div class="wrap instagram-in">
-    <div class="instagram-text" data-reveal>
-      <p class="eyebrow">Instagram</p>
-      <h2>Folgen Sie TRIPLEX-Q auf Instagram</h2>
-      <p>Neue Werkzeuge, Einblicke in die Fertigung und Bearbeitungen unserer Kunden – zuerst auf
-      <strong>{FIRMA['instagram_name']}</strong>.</p>
+  <div class="wrap">
+    <div class="abschnitt-kopf zeile" data-reveal>
+      <div><p class="eyebrow">Instagram · {FIRMA['instagram_name']}</p>
+      <h2>TRIPLEX-Q in Aktion</h2>
+      <p>Videos aus Fertigung und Bearbeitung – direkt von unserem Instagram-Kanal.</p></div>
       <a class="btn btn-insta" href="{FIRMA['instagram']}" target="_blank" rel="noopener">{icon("insta")} Auf Instagram folgen</a>
     </div>
-    <a class="instagram-kacheln" href="{FIRMA['instagram']}" target="_blank" rel="noopener" aria-label="Zu TRIPLEX-Q auf Instagram ({FIRMA['instagram_name']})">
-      {"".join(f'<img src="assets/img/galerie/{b}-klein.webp" alt="" loading="lazy" width="400" height="400">' for b in ["img-20220205-180305-908", "incollage-20220206-172510756", "incollage-20220206-180014685", "incollage-20220218-143056252"])}
-      <span class="instagram-marke">{icon("insta")}</span>
-    </a>
   </div>
+  <div class="reels-rahmen">
+    <button class="reels-pfeil links" type="button" data-reels-pfeil="-1" aria-label="Zurück blättern">{icon("chevron")}</button>
+    <ul class="reels" data-reels>{reels_html()}
+    </ul>
+    <button class="reels-pfeil rechts" type="button" data-reels-pfeil="1" aria-label="Weiter blättern">{icon("chevron")}</button>
+  </div>
+  <p class="wrap reels-hinweis">Beim Abspielen wird das Video von Instagram (Meta) geladen. Es gelten die
+  <a href="https://privacycenter.instagram.com/policy" target="_blank" rel="noopener">Datenschutzhinweise von Instagram</a>.</p>
 </section>
 
 {kontakt_block()}
