@@ -245,6 +245,11 @@ p { margin: 0 0 1em; }
 .preishinweis-dank { display: flex; align-items: center; gap: 10px; margin: 1em 0 0 !important; padding-top: .9em;
   border-top: 1px solid var(--grau-2); color: var(--blau); font-weight: 700; }
 .preishinweis-dank .ic { width: 28px; height: 28px; }
+.preishinweis-kurz { display: flex; gap: 10px; align-items: flex-start; padding: 12px 14px; border-radius: var(--r-s);
+  background: #fdeaea; border-left: 4px solid var(--rot); color: var(--navy); font-size: .86rem; line-height: 1.45; }
+.preishinweis-kurz .ic { flex: none; width: 22px; height: 22px; color: var(--rot); stroke-width: 2.2; margin-top: 1px; }
+.preishinweis-kurz p { margin: 0; }
+.preishinweis-kurz strong { color: var(--rot-dunkel); }
 @media (max-width: 860px) {
   .preishinweis-karte { grid-template-columns: 1fr; }
   .preishinweis-kopf { padding: 22px 20px; background: linear-gradient(115deg, var(--rot) 0 22%, var(--navy-3) 22.2%, var(--blau) 100%); }

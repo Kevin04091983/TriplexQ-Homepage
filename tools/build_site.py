@@ -1305,6 +1305,11 @@ def warenkorbseite():
         <div class="gesamt"><dt>Gesamtbetrag</dt><dd data-gesamt>0,00 €</dd></div>
       </dl>
       <p class="klein-text" data-ausland-hinweis hidden>Versand ins Ausland auf Anfrage – wir nennen Ihnen die Versandkosten mit der Bestellbestätigung.</p>
+      <div class="preishinweis-kurz" role="note">
+        {icon("warnung")}
+        <p><strong>Wichtiger Hinweis zu unseren Preisen:</strong> Die angezeigten Preise sind aktuell nicht verbindlich.
+        Der tatsächliche Preis kann abweichen – wir informieren Sie vor der Auftragsbestätigung über den gültigen Preis.</p>
+      </div>
       <button class="btn btn-rot breit" type="button" data-bestellen>Zahlungspflichtig bestellen {icon("arrow")}</button>
       <p class="formular-status" data-status></p>
       <ul class="produkt-usps">
