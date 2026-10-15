@@ -203,6 +203,10 @@ $seite = $_GET['seite'] ?? 'bestellungen';
   .pos { color:#4a5876; font-size:.88rem; }
   .r { text-align:right; white-space:nowrap; }
   .werkzeug { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+  .blaettern { display:flex; gap:6px; flex-wrap:wrap; align-items:center; margin:12px 0; }
+  .blaettern a, .blaettern strong { min-width:34px; padding:6px 10px; border-radius:8px; text-align:center; text-decoration:none; }
+  .blaettern a { background:#fff; border:1px solid #dde4f0; color:#003b9f; }
+  .blaettern strong { background:#06163f; color:#fff; }
   .sammel { position:sticky; top:0; z-index:5; box-shadow:0 6px 18px rgba(6,22,63,.08); }
   .konditionen { display:grid; grid-template-columns:1fr 90px; gap:8px 10px; align-items:end; min-width:300px; }
   .konditionen label { display:grid; gap:3px; font-size:.78rem; font-weight:600; color:#4a5876; }
@@ -383,7 +387,39 @@ try {
         </table>
         <?php
     } else {
-        $bestellungen = db()->query('SELECT * FROM bestellungen ORDER BY erstellt DESC, id DESC LIMIT 200')->fetchAll();
+        // Suche + Herkunft + Blättern (50 je Seite), neueste zuerst
+        $suche = trim((string) ($_GET['q'] ?? ''));
+        $herkunft = in_array($_GET['herkunft'] ?? '', ['shop', 'altshop'], true) ? $_GET['herkunft'] : '';
+        $wo = [];
+        $werte = [];
+        if ($suche !== '') {
+            $wo[] = '(nummer LIKE ? OR email LIKE ? OR anschrift LIKE ? OR bemerkung LIKE ?'
+                . ' OR id IN (SELECT bestellung_id FROM positionen WHERE sku LIKE ? OR bezeichnung LIKE ?))';
+            array_push($werte, ...array_fill(0, 6, '%' . $suche . '%'));
+        }
+        if ($herkunft !== '') {
+            $wo[] = 'quelle = ?';
+            $werte[] = $herkunft;
+        }
+        $bed = $wo ? 'WHERE ' . implode(' AND ', $wo) : '';
+        $z = db()->prepare("SELECT COUNT(*) FROM bestellungen $bed");
+        $z->execute($werte);
+        $gesamtAnzahl = (int) $z->fetchColumn();
+        $proSeite = 50;
+        $seiten = max(1, (int) ceil($gesamtAnzahl / $proSeite));
+        $nr = min($seiten, max(1, (int) ($_GET['nr'] ?? 1)));
+        $s = db()->prepare("SELECT * FROM bestellungen $bed ORDER BY erstellt DESC, id DESC LIMIT $proSeite OFFSET " . (($nr - 1) * $proSeite));
+        $s->execute($werte);
+        $bestellungen = $s->fetchAll();
+        $link = static fn(int $n) => '?' . http_build_query(['seite' => 'bestellungen', 'q' => $suche, 'herkunft' => $herkunft, 'nr' => $n]);
+        $blaettern = '';
+        if ($seiten > 1) {
+            $blaettern = '<nav class="blaettern">' . ($nr > 1 ? '<a href="' . h($link($nr - 1)) . '">‹ neuere</a>' : '');
+            for ($i = 1; $i <= $seiten; $i++) {
+                $blaettern .= $i === $nr ? '<strong>' . $i . '</strong>' : '<a href="' . h($link($i)) . '">' . $i . '</a>';
+            }
+            $blaettern .= ($nr < $seiten ? '<a href="' . h($link($nr + 1)) . '">ältere ›</a>' : '') . '</nav>';
+        }
         $positionen = [];
         if ($bestellungen) {
             $ids = implode(',', array_map(static fn($b) => (int) $b['id'], $bestellungen));
@@ -392,7 +428,20 @@ try {
             }
         }
         ?>
-        <h1>Bestellungen (<?= count($bestellungen) ?>) <a href="?export=bestellungen" style="font-size:.9rem">als CSV herunterladen</a></h1>
+        <h1>Bestellungen (<?= $gesamtAnzahl ?>) <a href="?export=bestellungen" style="font-size:.9rem">als CSV herunterladen</a></h1>
+        <form method="get" class="karte werkzeug">
+          <input type="hidden" name="seite" value="bestellungen">
+          <input name="q" value="<?= h($suche) ?>" placeholder="Suche: Nummer, Kunde, E-Mail, Ort, Artikelnr." size="38">
+          <select name="herkunft">
+            <option value="">Alle Bestellungen</option>
+            <option value="shop" <?= $herkunft === 'shop' ? 'selected' : '' ?>>nur neuer Shop</option>
+            <option value="altshop" <?= $herkunft === 'altshop' ? 'selected' : '' ?>>nur alter Shop (ALT-…)</option>
+          </select>
+          <button type="submit">Suchen</button>
+          <?php if ($suche !== '' || $herkunft !== ''): ?><a href="?seite=bestellungen">zurücksetzen</a><?php endif; ?>
+          <span class="pos">Seite <?= $nr ?> von <?= $seiten ?> · neueste zuerst</span>
+        </form>
+        <?= $blaettern ?>
         <table>
           <tr><th>Nummer / Datum</th><th>Kunde</th><th>Artikel</th><th class="r">Summe</th><th>Status</th></tr>
           <?php foreach ($bestellungen as $b): ?>
@@ -425,6 +474,7 @@ try {
           </tr>
           <?php endforeach; ?>
         </table>
+        <?= $blaettern ?>
         <?php
     }
 } catch (Throwable $e) {
