@@ -73,8 +73,8 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
     }
     // Nur Datenbanken von Strato (bzw. lokal zum Testen) – so kann niemand Fremdes die Seite auf eine eigene Datenbank umbiegen
     if (!preg_match('/^[a-z0-9.\-]+$/i', $w['db_host'])
-        || !($lokal || preg_match('/\.(webspace-host\.com|strato\.de|stratoserver\.net)$/i', $w['db_host']))) {
-        $fehler[] = 'Datenbank-Server: bitte den Servernamen aus dem Strato-Kundenbereich eintragen (endet auf „.webspace-host.com“).';
+        || !($lokal || preg_match('/\.(webspace-host\.com|strato\.de|stratoserver\.net|strato\.hosting|strato-hosting\.eu)$/i', $w['db_host']))) {
+        $fehler[] = 'Datenbank-Server: bitte den Servernamen genau so aus dem Strato-Kundenbereich (Datenbanken) eintragen.';
     }
     if ($w['db_port'] !== '' && !ctype_digit($w['db_port'])) {
         $fehler[] = 'Port: nur Ziffern (normalerweise leer lassen).';
