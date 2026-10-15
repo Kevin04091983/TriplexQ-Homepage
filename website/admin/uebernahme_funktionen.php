@@ -439,3 +439,107 @@ function uebernehmen(string $art, array $zeilen, array $map, bool $nurPruefen): 
     }
     return $bericht;
 }
+
+/**
+ * Bestellungen aus dem XML-Export des alten Shops (Bestellungen → markieren → Exportieren).
+ * Übernimmt die Beträge exakt (Artikel, Versand, Rabatt, MwSt., Gesamt). Kunde über die alte
+ * Kundennummer oder die E-Mail-Adresse; Gastbestellungen ohne Konto werden ohne Kunde gespeichert.
+ * Nummer im neuen Shop: "ALT-<alte Nummer>" – doppeltes Einlesen legt nichts doppelt an.
+ */
+function bestellungen_xml_uebernehmen(string $pfad, bool $nurPruefen): array
+{
+    $bericht = ['neu' => 0, 'aktualisiert' => 0, 'uebersprungen' => 0, 'ohne_konto' => 0, 'umsatz_netto' => 0.0, 'hinweise' => []];
+    $alt = libxml_use_internal_errors(true);
+    $xml = simplexml_load_file($pfad, 'SimpleXMLElement', LIBXML_NONET);
+    libxml_use_internal_errors($alt);
+    if (!$xml || !isset($xml->Order)) {
+        throw new RuntimeException('Keine Bestell-XML aus dem alten Shop (Element <Order> fehlt).');
+    }
+    $t = static fn($x) => trim((string) $x);
+    $n = static fn($x) => round((float) str_replace(',', '.', (string) $x), 2);
+    $adresse = static function ($a) use ($t): string {
+        if (!$a) { return ''; }
+        return trim(implode("\n", array_filter([
+            $t($a->Company), trim($t($a->FirstName) . ' ' . $t($a->LastName)), $t($a->Street),
+            trim($t($a->Zipcode) . ' ' . $t($a->City)), $t($a->Country) !== 'DE' ? land($t($a->Country)) : '',
+        ])));
+    };
+    $pdo = db();
+    $pdo->beginTransaction();
+    try {
+        foreach ($xml->Order as $o) {
+            $bnr = $t($o->OrderNumber);
+            if ($bnr === '') { continue; }
+            $nummer = 'ALT-' . mb_substr($bnr, 0, 27);
+            $s = $pdo->prepare('SELECT id FROM bestellungen WHERE nummer = ?');
+            $s->execute([$nummer]);
+            if ($s->fetch()) { $bericht['uebersprungen']++; continue; }
+
+            $rech = $o->Addresses->BillingAddress;
+            $lief = $o->Addresses->ShippingAddress;
+            $email = mb_strtolower($t($rech->EMail));
+            $k = kunde_finden($email, $t($o->CustomerNumber));
+            if (!$k) { $bericht['ohne_konto']++; }
+
+            $positionen = [];
+            $waren = 0.0;
+            foreach ($o->LineItems->LineItem as $li) {
+                $menge = max(1, (int) round((float) $li->Quantity));
+                $gesamt = $n($li->TotalPrice);
+                $positionen[] = [mb_substr($t($li->Id), 0, 60), mb_substr($t($li->Name), 0, 255), mb_substr($t($li->VariationString), 0, 190),
+                    $menge, $n($li->UnitPrice), $gesamt];
+                $waren += $gesamt;
+            }
+            foreach ($o->LineItems->LineItemDiscount as $d) {
+                if ($n($d->TotalPrice) != 0.0) {
+                    $positionen[] = ['RABATT', 'Rabatt', '', 1, $n($d->TotalPrice), $n($d->TotalPrice)];
+                    $waren += $n($d->TotalPrice);
+                }
+            }
+            $versand = 0.0;
+            $versandName = 'post';
+            foreach ($o->LineItems->LineItemShipping as $v) {
+                $versand += $n($v->TotalPrice);
+                $versandName = mb_substr(mb_strtolower($t($v->Id)), 0, 20) ?: 'post';
+            }
+            $zahlung = 0.0;
+            foreach ($o->LineItems->LineItemPayment as $z) {
+                if ($n($z->TotalPrice) != 0.0) {
+                    $positionen[] = ['ZAHLUNG', 'Zahlungsgebühr ' . $t($z->Name), '', 1, $n($z->TotalPrice), $n($z->TotalPrice)];
+                    $zahlung += $n($z->TotalPrice);
+                }
+            }
+            $rechAdr = $adresse($rech);
+            $liefAdr = $adresse($lief);
+            $bemerkung = 'Bestellung aus dem alten Shop (Nr. ' . $bnr . ')'
+                . ($t($rech->VATID) !== '' ? "\nUSt-IdNr.: " . $t($rech->VATID) : '')
+                . ($t($o->CustomerComment) !== '' ? "\nAnmerkung des Kunden: " . $t($o->CustomerComment) : '');
+            $datum = str_replace('T', ' ', mb_substr($t($o->CreationDate), 0, 19)) ?: date('Y-m-d H:i:s');
+            $netto = round($waren + $zahlung, 2);
+            $mwst = $n($o->TotalTax);
+            $summe = $n($o->GrandTotal);
+            if (abs($netto + $versand + $mwst - $summe) > 0.05) {
+                if (count($bericht['hinweise']) < 40) {
+                    $bericht['hinweise'][] = "Bestellung $bnr: Summe der Positionen weicht ab – Gesamtbetrag aus dem alten Shop übernommen";
+                }
+            }
+            $pdo->prepare('INSERT INTO bestellungen (nummer, kunde_id, email, anschrift, lieferadresse, bemerkung, versandart, netto, versand, mwst, gesamt, status, quelle, erstellt)
+                           VALUES (?,?,?,?,?,?,?,?,?,?,?, "abgeschlossen", "altshop", ?)')
+                ->execute([$nummer, $k['id'] ?? null, $email ?: ($k['email'] ?? ''), $rechAdr, $liefAdr !== '' && $liefAdr !== $rechAdr ? $liefAdr : null,
+                    $bemerkung, $versandName, $netto, $versand, $mwst, $summe, $datum]);
+            $bid = (int) $pdo->lastInsertId();
+            $ins = $pdo->prepare('INSERT INTO positionen (bestellung_id, sku, bezeichnung, auswahl, menge, einzelpreis, gesamtpreis) VALUES (?,?,?,?,?,?,?)');
+            foreach ($positionen as $p) {
+                $ins->execute([$bid, ...$p]);
+            }
+            $bericht['neu']++;
+            $bericht['umsatz_netto'] += $netto;
+        }
+        $nurPruefen ? $pdo->rollBack() : $pdo->commit();
+    } catch (Throwable $e) {
+        $pdo->rollBack();
+        throw $e;
+    }
+    $bericht['umsatz_netto'] = round($bericht['umsatz_netto'], 2);
+    return $bericht;
+}
