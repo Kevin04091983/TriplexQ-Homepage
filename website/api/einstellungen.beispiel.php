@@ -7,8 +7,9 @@
 // ---------- E-Mail ----------
 const EMPFAENGER_BESTELLUNG = 'order@wkz-schmidt.de';
 const EMPFAENGER_KONTAKT = 'kontakt@triplex-q.de';
-// Absender muss ein echtes Postfach der eigenen Domain sein, sonst lehnt der Mailserver ab.
-const ABSENDER = 'TRIPLEX-Q Webshop <shop@triplex-q.de>';
+// Absender-Domain muss im SELBEN Strato-Paket liegen wie die Seite, sonst verwirft Strato die Mail still.
+// Live (Webshop-Paket, triplex-q.com): shop@triplex-q.com. Antworten gehen an EMPFAENGER_KONTAKT.
+const ABSENDER = 'TRIPLEX-Q Webshop <shop@triplex-q.com>';
 
 // Nur zum Testen: true = es werden keine E-Mails verschickt (z. B. Probeübernahme mit echten Kundendaten)
 const MAIL_AUS = false;

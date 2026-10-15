@@ -75,6 +75,9 @@ function mail_senden(string $an, string $betreff, string $text, ?string $antwort
         return true;                                   // Testbetrieb: nichts verschicken
     }
     $kopf = 'From: ' . ABSENDER . "\r\n";
+    // Antworten der Kunden landen im normalen Postfach, auch wenn der technische Absender ein anderer ist
+    // (Strato verschickt vom Webspace nur mit Absendern aus demselben Paket, live: shop@triplex-q.com)
+    $antwortAn = $antwortAn ?: (defined('ANTWORT_AN') ? ANTWORT_AN : EMPFAENGER_KONTAKT);
     if ($antwortAn) {
         $kopf .= 'Reply-To: ' . $antwortAn . "\r\n";
     }
