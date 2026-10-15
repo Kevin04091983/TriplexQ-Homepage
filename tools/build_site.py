@@ -277,6 +277,7 @@ def katalog_bauen(bilder):
             "d_min": min(durchm) if durchm else None,
             "d_max": max(durchm) if durchm else None,
             "set": "Set" in name,
+            "alte_urls": [t["href"] for t in teile if t.get("href")],
         })
 
     reihenfolge = {l["id"]: i for i, l in enumerate(LINIEN)}
@@ -1419,6 +1420,11 @@ def katalog_js(produkte):
         "ErrorDocument 404 /404.html\nAddType image/webp .webp\nOptions -Indexes\n"
         "# immer verschlüsselt ausliefern (Kundenkonto!)\n"
         "RewriteEngine On\nRewriteCond %{HTTPS} !=on\nRewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]\n"
+        + ("" if TEST else "# eine Adresse für Google: triplex-q.com und die Testadresse triplex-q.de -> www.triplex-q.com\n"
+                           "RewriteCond %{HTTP_HOST} ^(www\\.)?triplex-q\\.de$ [NC,OR]\n"
+                           "RewriteCond %{HTTP_HOST} ^triplex-q\\.com$ [NC]\n"
+                           "RewriteRule ^ https://www.triplex-q.com%{REQUEST_URI} [L,R=301]\n")
+        + weiterleitungen(produkte) +
         "# Datenbankschema nicht öffentlich abrufbar\n<FilesMatch \"\\.(sql|md|txt)$\">\n  Require all denied\n</FilesMatch>\n"
         "<Files \"robots.txt\">\n  Require all granted\n</Files>\n"
         "# HTML immer frisch prüfen; CSS/JS tragen eine Versionskennung (?v=...) und dürfen lange bleiben\n"
@@ -1426,6 +1432,52 @@ def katalog_js(produkte):
         "<IfModule mod_expires.c>\n  ExpiresActive On\n  ExpiresByType image/webp \"access plus 1 year\"\n"
         "  ExpiresByType font/woff2 \"access plus 1 year\"\n  ExpiresByType text/css \"access plus 1 week\"\n"
         "  ExpiresByType application/javascript \"access plus 1 day\"\n</IfModule>\n", encoding="utf-8")
+
+
+# Adressen des alten ePages-Shops -> neue Seiten (Google-Treffer, Lesezeichen, Links in Mails)
+ALTE_SEITEN = {
+    "c/triplex-q-hpc-fraeser": "shop.html#hpc",
+    "c/triplex-q-tpc-fraeser": "shop.html#tpc",
+    "c/triplex-q-schrupp-fraeser": "shop.html#schrupp",
+    "c/triplex-q-vhm-mehrzahnfraeser-schlichtfraeser": "shop.html#mehrzahn",
+    "c/triplex-q-aluminiumfraeser-hpc-tpc": "shop.html#alu",
+    "c/triplex-q-bnc2-blue": "shop.html#vollradius",
+    "c/triplex-q-vhm-viertelkreisfraeser": "shop.html#viertelkreis",
+    "c/triplex-q-special": "shop.html",
+    "c/vhm-sonderwerkzeuge": "sonderwerkzeuge.html",
+    "c/triplex-q-vhm-hochleistungsbohrer": "shop.html#bohrer",
+    "i/referenzkunden": "referenzen.html",
+    "i/kontakt": "kontakt.html",
+    "i/anwendungsbeispiele-und-kundenvideos": "anwendungen.html",
+    "l/privacy": "datenschutz.html",
+    "l/contact": "impressum.html",
+    "l/cookiepolicy": "cookie-richtlinie.html",
+    "l/shipping": "versand.html",
+    "l/tac": "agb.html",
+    "l/withdrawal": "widerruf.html",
+    "cart": "warenkorb.html",
+    "checkout": "warenkorb.html",
+    "account": "konto.html",
+    "login": "konto.html",
+    "register": "konto.html",
+    "search": "shop.html",
+}
+
+
+def weiterleitungen(produkte):
+    """RewriteRules: alte Shop-Adressen dauerhaft (301) auf die neuen Seiten."""
+    ziele = dict(ALTE_SEITEN)
+    for p in produkte:
+        for href in p.get("alte_urls", []):
+            ziele[href.strip("/")] = f"produkte/{p['id']}.html"
+    zeilen = ["# Alte Adressen des bisherigen Shops (ePages) auf die neuen Seiten umleiten"]
+    zeilen += [f"RewriteRule ^{re.escape(alt)}/?$ /{neu} [R=301,L,NE]" for alt, neu in ziele.items()]
+    zeilen += [
+        "# alles Übrige aus dem alten Shop: Produkte und Kategorien -> Shop, Infoseiten -> Startseite",
+        "RewriteRule ^(p|c)/ /shop.html [R=301,L]",
+        "RewriteRule ^(i|l)/ / [R=301,L]",
+    ]
+    return "\n".join(zeilen) + "\n"
 
 
 def sitemap():

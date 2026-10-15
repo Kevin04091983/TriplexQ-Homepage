@@ -61,29 +61,31 @@ Man sieht den Ablauf, die Daten bleiben nur im Browser.
 
 ## Livegang bei Strato – Schritt für Schritt
 
-Alles im Strato-Kundenbereich unter **STRATO Hosting Plus**:
+**Kevin im Strato-Kundenbereich (Paket Hosting Plus)** – Passwörter bleiben bei Kevin:
+1. **Domain `triplex-q.de`**: Weiterleitung entfernen, Ziel = Webspace-Verzeichnis `/triplex-q`.
+2. **SSL** für `triplex-q.de` aktivieren (vor dem ersten Aufruf – die Seite leitet alles auf https um).
+3. **Datenbank anlegen** (Datenbanken und Webspace → Datenbankverwaltung). Passwort selbst notieren.
+4. **Postfach `shop@triplex-q.de`** anlegen (Absender der Shop-Mails).
+5. **SFTP-Benutzername** nachsehen (Datenbanken und Webspace → SFTP/SSH) und an Claude geben (kein Passwort).
+6. **Schlüssel für das Hochladen**: mit FileZilla/Cyberduck (`sftp://ssh.strato.de`, Port 22) einmal anmelden und den
+   Ordner `fuer-strato/.ssh` (liegt nur auf dem PC, wird mit `ssh-keygen` erzeugt) ins Hauptverzeichnis ziehen.
 
-1. **Testadresse:** `triplex-q.de` leitet heute auf den alten Shop weiter. Unter *Domains* die
-   Weiterleitung entfernen und die Domain auf ein neues Verzeichnis zeigen lassen, z. B. `/triplex-q`.
-2. **SSL aktivieren** für `triplex-q.de` (im Paket enthalten). Unbedingt vor dem Hochladen,
-   denn die Seite leitet alle Aufrufe auf https um.
-3. **Postfach anlegen**: `shop@triplex-q.de` – das ist der Absender der Bestellmails.
-   In `api/einstellungen.php` bei `ADMIN_EMAILS` die E-Mail-Adresse(n) eintragen, die Admin sein sollen.
-4. **Datenbank anlegen** (*Datenbanken und Webspace*), dann in phpMyAdmin die Datei
-   `website/api/schema.sql` einspielen.
-5. **Hochladen**: Inhalt von `TriplexQ-Website-TEST-zum-Hochladen.zip` per SFTP oder
-   Datei-Manager in das Verzeichnis aus Schritt 1.
-6. **`api/einstellungen.php` ausfüllen**: Datenbank-Zugang aus Schritt 4, `SEITEN_URL`, Absender.
-   (Im Git liegt nur die Vorlage `api/einstellungen.beispiel.php` – die echte Datei mit Passwörtern wird nicht versioniert.)
-7. **Verwaltungs-Passwort**: `https://triplex-q.de/admin/passwort-hash.php` aufrufen, Wunschpasswort
-   eingeben, den Hash in `einstellungen.php` bei `ADMIN_HASH` eintragen – danach
-   `admin/passwort-hash.php` vom Server **löschen**.
-8. **Testen**: Konto anlegen, Testbestellung, Verwaltung unter `https://triplex-q.de/admin/`.
-9. **Umschalten** auf die Hauptdomain: `python tools/build_site.py` (ohne `--test`) neu bauen,
-   hochladen, `triplex-q.com` im Kundenbereich vom Webshop auf das Hosting-Verzeichnis umhängen.
-10. **Alter Shop bleibt bestehen:** *Webshop Now Pro* wird nicht gekündigt (Entscheidung 30.09.2026).
-    Er läuft im Hintergrund weiter, als Sicherung mit allen alten Kunden und Bestellungen.
-    Die Kunden kommen per CSV-Export in die neue Seite (siehe unten).
+**Claude:**
+7. Benutzer in `tools/strato.json` eintragen, dann `python tools/hochladen.py --test --erstmals`
+   (baut die Testfassung, lädt alles hoch – nie `api/einstellungen.php`).
+
+**Kevin:**
+8. `https://triplex-q.de/einrichtung/` öffnen: Datenbank-Zugang, eigenes Admin-Konto (E-Mail + Passwort) eintragen.
+   Der Assistent legt die Tabellen an, schreibt `api/einstellungen.php`, schickt eine Testmail und löscht sich selbst.
+9. Testen: Anmelden, Preis ändern, Testbestellung, Kontaktformular, Verwaltung `/admin/`.
+
+**Umschalten auf www.triplex-q.com** (erst nach OK):
+10. Preise prüfen (`python tools/preise_pruefen.py`), Kundengruppen-Preise neu exportieren.
+11. `triplex-q.com` im Strato-Kundenbereich auf Hosting Plus, Verzeichnis `/triplex-q` umstellen, SSL aktivieren.
+12. `python tools/hochladen.py --live` (Livefassung: Google-sichtbar, triplex-q.de und triplex-q.com → www.triplex-q.com,
+    alle alten Shop-Adressen `/p/…`, `/c/…`, `/i/…`, `/l/…` werden per 301 auf die neuen Seiten umgeleitet).
+13. Altkunden übernehmen und einladen (siehe unten).
+14. Alter Shop *Webshop Now Pro* bleibt gebucht (Entscheidung 30.09.2026), als Sicherung im Hintergrund.
 
 ## Bestehende Kunden aus dem alten Shop übernehmen
 

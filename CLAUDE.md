@@ -13,6 +13,9 @@ Kommunikation mit Kevin auf Deutsch; nach jeder fertigen Änderung einen anklick
 - `tools/preise_pruefen.py` – Preisabgleich mit dem alten Shop (live). `--uebernehmen` schreibt die aktuellen
   Preise in `data/quelle/produkte.json` (im alten Shop ausgeblendete Abmessungen werden ausgeblendet);
   danach `build_site.py --test` und erneut prüfen. **Vor dem Livegang immer laufen lassen.**
+- `tools/hochladen.py` – baut, packt (`upload/`, nie `api/einstellungen.php`) und lädt per SFTP mit Schlüssel
+  `~/.ssh/triplexq_strato` hoch; Ziel in `tools/strato.json`. `--test`/`--live`, `--erstmals` (mit Assistent), `--nur-paket`.
+- `website/einrichtung/` – Einrichtungs-Assistent: Kevin trägt DB-Zugang + Admin-Passwort selbst ein; sperrt sich danach.
 - `tools/vorschau_server.py` – lokale Vorschau ohne Zwischenspeicher (Port 8095), ohne PHP.
 - Design: `website/assets/css/style.css`. Farben aus dem Logo: #003B9F, #E40001, Navy #06163F.
 
@@ -37,7 +40,7 @@ Kommunikation mit Kevin auf Deutsch; nach jeder fertigen Änderung einen anklick
 - Preise am 15.10.2026 an den alten Shop angeglichen (1355 Artikel identisch, keine Staffelpreise mehr).
   Kundengruppen-Preise stammen aus dem Export vom 30.09. – kurz vor dem Livegang neu exportieren.
 - DHL oder UPS? Datenschutzerklärung juristisch anpassen.
-- Einrichtungs-Assistent für Strato bauen; Livegang zuerst auf triplex-q.de.
+- Livegang: Ablauf im README („Livegang bei Strato“); zuerst Test auf triplex-q.de.
 
 ## Auf dem Mac starten
 ```

@@ -11,7 +11,7 @@ function db(): PDO
     static $pdo = null;
     if ($pdo === null) {
         $pdo = new PDO(
-            'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8mb4',
+            'mysql:host=' . DB_HOST . (defined('DB_PORT') ? ';port=' . DB_PORT : '') . ';dbname=' . DB_NAME . ';charset=utf8mb4',
             DB_USER, DB_PASS,
             [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, PDO::ATTR_EMULATE_PREPARES => false]
         );
@@ -79,7 +79,10 @@ function mail_senden(string $an, string $betreff, string $text, ?string $antwort
         $kopf .= 'Reply-To: ' . $antwortAn . "\r\n";
     }
     $kopf .= "Content-Type: text/plain; charset=UTF-8\r\nContent-Transfer-Encoding: 8bit\r\nMIME-Version: 1.0";
-    return @mail($an, '=?UTF-8?B?' . base64_encode($betreff) . '?=', $text, $kopf);
+    // Absender auch als Umschlag-Absender (-f), sonst lehnen manche Mailserver die Mail ab
+    $umschlag = preg_match('/<([^>]+)>/', ABSENDER, $m) ? $m[1] : ABSENDER;
+    $extra = filter_var($umschlag, FILTER_VALIDATE_EMAIL) ? '-f' . $umschlag : '';
+    return @mail($an, '=?UTF-8?B?' . base64_encode($betreff) . '?=', $text, $kopf, $extra);
 }
 
 /** Zu viele Fehlversuche? (Schutz gegen Passwort-Raten) */

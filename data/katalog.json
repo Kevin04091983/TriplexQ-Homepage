@@ -117,7 +117,10 @@
   "preis_bis": 133,
   "d_min": 3.0,
   "d_max": 20.0,
-  "set": false
+  "set": false,
+  "alte_urls": [
+   "/p/triplex-q-steel-blue-hpc-o-3-00-mm-20-00-mm"
+  ]
  },
  {
   "id": "hyperplus-hpc",
@@ -205,7 +208,10 @@
   "preis_bis": 156.81,
   "d_min": 6.0,
   "d_max": 20.0,
-  "set": false
+  "set": false,
+  "alte_urls": [
+   "/p/triplex-q-hyperplus-hpc-o6-00-mm-o20-00-mm"
+  ]
  },
  {
   "id": "tz-steel-blue-hpc",
@@ -293,7 +299,10 @@
   "preis_bis": 173.57,
   "d_min": 6.0,
   "d_max": 20.0,
-  "set": false
+  "set": false,
+  "alte_urls": [
+   "/p/triplex-q-tz-steel-blue-hpc-o-6-00-mm-20-00-mm"
+  ]
  },
  {
   "id": "inox-red-hpc",
@@ -383,7 +392,10 @@
   "preis_bis": 142,
   "d_min": 6.0,
   "d_max": 20.0,
-  "set": false
+  "set": false,
+  "alte_urls": [
+   "/p/triplex-q-inox-red-hpc-o-6-00-mm-20-00-mm"
+  ]
  },
  {
   "id": "steel-blue-hpc-1xd",
@@ -471,7 +483,10 @@
   "preis_bis": 87.74,
   "d_min": 6.0,
   "d_max": 20.0,
-  "set": false
+  "set": false,
+  "alte_urls": [
+   "/p/triplex-q-steel-blue-hpc-1xd-o-6-00-mm-20-00-mm"
+  ]
  },
  {
   "id": "inox-red-hpc-set-8-10-12-16mm",
@@ -505,7 +520,10 @@
   "preis_bis": 189.11,
   "d_min": 8.0,
   "d_max": 16.0,
-  "set": true
+  "set": true,
+  "alte_urls": [
+   "/p/triplex-q-inox-red-hpc-set-o8-o10-o12-o16mm"
+  ]
  },
  {
   "id": "steel-blue-hpc-set-8-10-12-16mm",
@@ -539,7 +557,10 @@
   "preis_bis": 175.11,
   "d_min": 8.0,
   "d_max": 16.0,
-  "set": true
+  "set": true,
+  "alte_urls": [
+   "/p/triplex-q-steel-blue-hpc-set-o8-o10-o12-o16mm"
+  ]
  },
  {
   "id": "steel-blue-tpc-saw-3xd",
@@ -619,7 +640,10 @@
   "preis_bis": 142.24,
   "d_min": 6.0,
   "d_max": 16.0,
-  "set": false
+  "set": false,
+  "alte_urls": [
+   "/p/triplex-q-steel-blue-tpc-saw-3xd-o-6-00-mm-16-00-mm"
+  ]
  },
  {
   "id": "sr-black-ik",
@@ -709,7 +733,10 @@
   "preis_bis": 241.62,
   "d_min": 6.0,
   "d_max": 20.0,
-  "set": false
+  "set": false,
+  "alte_urls": [
+   "/p/triplex-q-sr-black-ik-o-6-00-mm-20-00-mm"
+  ]
  },
  {
   "id": "steel-blue-sr",
@@ -799,7 +826,10 @@
   "preis_bis": 144.35,
   "d_min": 6.0,
   "d_max": 20.0,
-  "set": false
+  "set": false,
+  "alte_urls": [
+   "/p/triplex-q-steel-blue-sr-o-6-00-mm-20-00-mm"
+  ]
  },
  {
   "id": "steel-blue-sr-set-8-10-12-16mm",
@@ -831,7 +861,10 @@
   "preis_bis": 210.03,
   "d_min": 8.0,
   "d_max": 16.0,
-  "set": true
+  "set": true,
+  "alte_urls": [
+   "/p/triplex-q-steel-blue-sr-set-o8-o10-o12-o16mm"
+  ]
  },
  {
   "id": "steel-blue-mz",
@@ -921,7 +954,15 @@
   "preis_bis": 149.14,
   "d_min": 6.0,
   "d_max": 20.0,
-  "set": false
+  "set": false,
+  "alte_urls": [
+   "/p/triplex-q-steel-blue-mz-d10",
+   "/p/triplex-q-steel-blue-mz-d12",
+   "/p/triplex-q-steel-blue-mz-d16",
+   "/p/triplex-q-steel-blue-mz-d20",
+   "/p/triplex-q-steel-blue-mz-d6",
+   "/p/triplex-q-steel-blue-mz-d8"
+  ]
  },
  {
   "id": "alu-x",
@@ -1193,7 +1234,10 @@
   "preis_bis": 250.4,
   "d_min": 4.0,
   "d_max": 20.0,
-  "set": false
+  "set": false,
+  "alte_urls": [
+   "/p/triplex-q-alu-x-o-4-00-mm-20-00-mm"
+  ]
  },
  {
   "id": "alu-xl",
@@ -1425,7 +1469,10 @@
   "preis_bis": 225.9,
   "d_min": 4.0,
   "d_max": 20.0,
-  "set": false
+  "set": false,
+  "alte_urls": [
+   "/p/triplex-q-alu-xl-o-4-00-mm-20-00-mm"
+  ]
  },
  {
   "id": "alu-xl-ik",
@@ -1697,7 +1744,10 @@
   "preis_bis": 293.26,
   "d_min": 4.0,
   "d_max": 20.0,
-  "set": false
+  "set": false,
+  "alte_urls": [
+   "/p/triplex-q-alu-xl-ik-o-4-00-mm-20-00-mm"
+  ]
  },
  {
   "id": "alu-tpc-3xd",
@@ -1790,7 +1840,10 @@
   "preis_bis": 341.7,
   "d_min": 6.0,
   "d_max": 20.0,
-  "set": false
+  "set": false,
+  "alte_urls": [
+   "/p/triplex-q-alu-tpc-3xd-o-6-00-mm-20-00-mm"
+  ]
  },
  {
   "id": "alu-tpc-5xd",
@@ -1881,7 +1934,10 @@
   "preis_bis": 287.92,
   "d_min": 6.0,
   "d_max": 20.0,
-  "set": false
+  "set": false,
+  "alte_urls": [
+   "/p/triplex-q-alu-tpc-5xd-o-6-00-mm-20-00-mm"
+  ]
  },
  {
   "id": "alu-z4-spb-dlc",
@@ -1971,7 +2027,10 @@
   "preis_bis": 241.32,
   "d_min": 6.0,
   "d_max": 20.0,
-  "set": false
+  "set": false,
+  "alte_urls": [
+   "/p/triplex-q-alu-z4-spb-dlc-4-00-mm-20-00-mm"
+  ]
  },
  {
   "id": "steel-blue-bnc2",
@@ -2079,7 +2138,10 @@
   "preis_bis": 102.6,
   "d_min": 2.0,
   "d_max": 12.0,
-  "set": false
+  "set": false,
+  "alte_urls": [
+   "/p/triplex-q-steel-blue-bnc2-o-2-00-r-1-00-o-12-00-r-6-00"
+  ]
  },
  {
   "id": "vhm-viertelkreisfraeser",
@@ -2217,7 +2279,10 @@
   "preis_bis": 125.75,
   "d_min": 8.0,
   "d_max": 20.0,
-  "set": false
+  "set": false,
+  "alte_urls": [
+   "/p/triplex-q-vhm-viertelkreisfraeser"
+  ]
  },
  {
   "id": "schaftfraeser-z2",
@@ -2357,7 +2422,10 @@
   "preis_bis": 83.95,
   "d_min": 1.0,
   "d_max": 20.0,
-  "set": false
+  "set": false,
+  "alte_urls": [
+   "/p/triplex-q-schaftfraeser-z2-o-1-00-mm-20-00-mm"
+  ]
  },
  {
   "id": "schaftfraeser-z3",
@@ -2497,7 +2565,10 @@
   "preis_bis": 88.06,
   "d_min": 1.0,
   "d_max": 20.0,
-  "set": false
+  "set": false,
+  "alte_urls": [
+   "/p/triplex-q-schaftfraeser-z3-o-1-00-mm-20-00-mm"
+  ]
  },
  {
   "id": "vhm-hochleistungsbohrer-3xd",
@@ -5567,7 +5638,16 @@
   "preis_bis": 160.3,
   "d_min": 1.0,
   "d_max": 20.0,
-  "set": false
+  "set": false,
+  "alte_urls": [
+   "/p/triplex-q-vhm-hochleistungsbohrer-3xd-o-1-00-mm-3-00-mm",
+   "/p/triplex-q-vhm-hochleistungsbohrer-3xd-o-12-80-mm-18-00-mm",
+   "/p/triplex-q-vhm-hochleistungsbohrer-3xd-o-18-50-mm-20-00-mm",
+   "/p/triplex-q-vhm-hochleistungsbohrer-3xd-o-3-10-mm-5-30-mm",
+   "/p/triplex-q-vhm-hochleistungsbohrer-3xd-o-5-40-mm-7-60-mm",
+   "/p/triplex-q-vhm-hochleistungsbohrer-3xd-o-7-70-mm-9-80-mm",
+   "/p/triplex-q-vhm-hochleistungsbohrer-3xd-o-9-90-mm-12-70-mm"
+  ]
  },
  {
   "id": "vhm-hochleistungsbohrer-3xd-mit-ik",
@@ -8537,7 +8617,15 @@
   "preis_bis": 265.5,
   "d_min": 2.0,
   "d_max": 20.0,
-  "set": false
+  "set": false,
+  "alte_urls": [
+   "/p/triplex-q-vhm-hochleistungsbohrer-3xd-mit-ik-o-10-90-mm-14-70-mm",
+   "/p/triplex-q-vhm-hochleistungsbohrer-3xd-mit-ik-o-14-80-mm-20-00-mm",
+   "/p/triplex-q-vhm-hochleistungsbohrer-3xd-mit-ik-o-2-00-mm-4-00-mm",
+   "/p/triplex-q-vhm-hochleistungsbohrer-3xd-mit-ik-o-4-10-mm-6-30-mm",
+   "/p/triplex-q-vhm-hochleistungsbohrer-3xd-mit-ik-o-6-40-mm-8-60-mm",
+   "/p/triplex-q-vhm-hochleistungsbohrer-3xd-mit-ik-o-8-70-mm-10-80-mm"
+  ]
  },
  {
   "id": "vhm-hochleistungsbohrer-5xd-mit-ik",
@@ -11738,7 +11826,16 @@
   "preis_bis": 278.7,
   "d_min": 2.0,
   "d_max": 20.0,
-  "set": false
+  "set": false,
+  "alte_urls": [
+   "/p/triplex-q-vhm-hochleistungsbohrer-5xd-mit-ik-o-10-30-mm-12-70-mm",
+   "/p/triplex-q-vhm-hochleistungsbohrer-5xd-mit-ik-o-12-80-mm-17-80-mm",
+   "/p/triplex-q-vhm-hochleistungsbohrer-5xd-mit-ik-o-18-00-mm-20-00-mm",
+   "/p/triplex-q-vhm-hochleistungsbohrer-5xd-mit-ik-o-2-00-mm-3-90-mm",
+   "/p/triplex-q-vhm-hochleistungsbohrer-5xd-mit-ik-o-4-00-mm-6-00-mm",
+   "/p/triplex-q-vhm-hochleistungsbohrer-5xd-mit-ik-o-6-05-mm-8-10-mm",
+   "/p/triplex-q-vhm-hochleistungsbohrer-5xd-mit-ik-o-8-20-mm-10-20-mm"
+  ]
  },
  {
   "id": "vhm-hochleistungsbohrer-7xd-mit-ik",
@@ -14009,7 +14106,14 @@
   "preis_bis": 515,
   "d_min": 2.8,
   "d_max": 20.0,
-  "set": false
+  "set": false,
+  "alte_urls": [
+   "/p/triplex-q-vhm-hochleistungsbohrer-7xd-mit-ik-o-10-50-mm-16-50-mm",
+   "/p/triplex-q-vhm-hochleistungsbohrer-7xd-mit-ik-o-17-00-mm-20-00-mm",
+   "/p/triplex-q-vhm-hochleistungsbohrer-7xd-mit-ik-o-2-80-mm-5-20-mm",
+   "/p/triplex-q-vhm-hochleistungsbohrer-7xd-mit-ik-o-5-30-mm-7-70-mm",
+   "/p/triplex-q-vhm-hochleistungsbohrer-7xd-mit-ik-o-7-80-mm-10-30-mm"
+  ]
  },
  {
   "id": "vhm-hochleistungsbohrer-12xd-mit-ik",
@@ -14919,6 +15023,12 @@
   "preis_bis": 766.6,
   "d_min": 3.0,
   "d_max": 20.0,
-  "set": false
+  "set": false,
+  "alte_urls": [
+   "/p/triplex-q-vhm-hochleistungsbohrer-12xd-mit-ik-o-12-00-mm-20-00-mm",
+   "/p/triplex-q-vhm-hochleistungsbohrer-12xd-mit-ik-o-3-00-mm-5-40-mm",
+   "/p/triplex-q-vhm-hochleistungsbohrer-12xd-mit-ik-o-5-50-mm-7-90-mm",
+   "/p/triplex-q-vhm-hochleistungsbohrer-12xd-mit-ik-o-8-00-mm-11-50-mm"
+  ]
  }
 ]
