@@ -5,6 +5,10 @@ Options -Indexes
 RewriteEngine On
 RewriteCond %{HTTPS} !=on
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# eine Adresse für Google: triplex-q.com und die Testadresse triplex-q.de -> www.triplex-q.com
+RewriteCond %{HTTP_HOST} ^(www\.)?triplex-q\.de$ [NC,OR]
+RewriteCond %{HTTP_HOST} ^triplex-q\.com$ [NC]
+RewriteRule ^ https://www.triplex-q.com%{REQUEST_URI} [L,R=301]
 # Alte Adressen des bisherigen Shops (ePages) auf die neuen Seiten umleiten
 RewriteRule ^c/triplex\-q\-hpc\-fraeser/?$ /shop.html#hpc [R=301,L,NE]
 RewriteRule ^c/triplex\-q\-tpc\-fraeser/?$ /shop.html#tpc [R=301,L,NE]

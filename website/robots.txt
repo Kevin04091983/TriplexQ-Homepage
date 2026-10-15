@@ -1,2 +1,4 @@
 User-agent: *
-Disallow: /
+Allow: /
+Disallow: /warenkorb.html
+Sitemap: https://www.triplex-q.com/sitemap.xml

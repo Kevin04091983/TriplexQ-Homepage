@@ -1877,7 +1877,7 @@
   "varianten": [
    {
     "sku": "7506",
-    "preis": 50.95,
+    "preis": 72.1,
     "auswahl": {
      "Schneidendurchmesser": "6,00"
     },
@@ -1886,7 +1886,7 @@
    },
    {
     "sku": "7508",
-    "preis": 71.39,
+    "preis": 101,
     "auswahl": {
      "Schneidendurchmesser": "8,00"
     },
@@ -1895,7 +1895,7 @@
    },
    {
     "sku": "7510",
-    "preis": 95.71,
+    "preis": 135.4,
     "auswahl": {
      "Schneidendurchmesser": "10,00"
     },
@@ -1904,7 +1904,7 @@
    },
    {
     "sku": "7512",
-    "preis": 117.94,
+    "preis": 166.8,
     "auswahl": {
      "Schneidendurchmesser": "12,00"
     },
@@ -1913,7 +1913,7 @@
    },
    {
     "sku": "7516",
-    "preis": 185.46,
+    "preis": 262.3,
     "auswahl": {
      "Schneidendurchmesser": "16,00"
     },
@@ -1922,7 +1922,7 @@
    },
    {
     "sku": "7520",
-    "preis": 287.92,
+    "preis": 407.2,
     "auswahl": {
      "Schneidendurchmesser": "20,00"
     },
@@ -1930,8 +1930,8 @@
     "name": "TRIPLEX-Q ALU-TPC-5xD Ø 20,00 mm"
    }
   ],
-  "preis_ab": 50.95,
-  "preis_bis": 287.92,
+  "preis_ab": 72.1,
+  "preis_bis": 407.2,
   "d_min": 6.0,
   "d_max": 20.0,
   "set": false,
