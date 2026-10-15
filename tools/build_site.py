@@ -196,6 +196,8 @@ def katalog_bauen(bilder):
                 kombis = [tuple(sorted(v["auswahl"].items())) for v in teil["varianten"]]
                 aus_name = len(set(kombis)) != len(kombis)
                 for v in teil["varianten"]:
+                    if v.get("ausgeblendet"):
+                        continue  # im alten Shop ausgeblendet / nicht bestellbar
                     auswahl = {}
                     for attr, wert in v["auswahl"].items():
                         a = "Schneidendurchmesser" if attr.lower().startswith("schneidendurchmesser") else attr
