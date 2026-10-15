@@ -73,7 +73,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
     }
     // Nur Datenbanken von Strato (bzw. lokal zum Testen) – so kann niemand Fremdes die Seite auf eine eigene Datenbank umbiegen
     if (!preg_match('/^[a-z0-9.\-]+$/i', $w['db_host'])
-        || !($lokal || preg_match('/\.(webspace-host\.com|strato\.de|stratoserver\.net|strato\.hosting|strato-hosting\.eu)$/i', $w['db_host']))) {
+        || !($lokal || preg_match('/\.(webspace-host\.com|strato\.de|stratoserver\.net|strato\.hosting|strato-hosting\.eu|ud-webspace\.de)$/i', $w['db_host']))) {
         $fehler[] = 'Datenbank-Server: bitte den Servernamen genau so aus dem Strato-Kundenbereich (Datenbanken) eintragen.';
     }
     if ($w['db_port'] !== '' && !ctype_digit($w['db_port'])) {
@@ -206,7 +206,7 @@ seite('Einrichtung', <<<HTML
   <form method="post" autocomplete="off">
     <input type="hidden" name="csrf" value="{$csrf}">
     <h2>2. Datenbank</h2>
-    <label>Datenbank-Server (Host)<input name="db_host" value="{$f('db_host')}" placeholder="database-5000000000.webspace-host.com" required></label>
+    <label>Datenbank-Server (Host)<input name="db_host" value="{$f('db_host')}" placeholder="database-5000000000.ud-webspace.de" required></label>
     <div class="zwei"><label>Datenbankname<input name="db_name" value="{$f('db_name')}" placeholder="dbs12345678" required></label>
     <label>Benutzer<input name="db_user" value="{$f('db_user')}" placeholder="dbu1234567" required></label></div>
     <div class="zwei"><label>Datenbank-Passwort<input type="password" name="db_pass" autocomplete="new-password" required></label>
