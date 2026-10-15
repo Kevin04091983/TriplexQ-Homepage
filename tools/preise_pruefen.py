@@ -19,7 +19,8 @@ from pathlib import Path
 
 import requests
 
-API = "https://www.triplex-q.com/rs/shops/87065853"
+# Der alte Shop ist seit dem Livegang (15.10.2026) nur noch über shop.strato.de erreichbar
+API = "https://shop.strato.de/rs/shops/87065853"
 WURZEL = Path(__file__).resolve().parent.parent
 NEU = WURZEL / "website" / "api" / "preise.json"
 QUELLE = WURZEL / "data" / "quelle" / "produkte.json"
@@ -31,6 +32,9 @@ S.headers.update({"Accept": "application/vnd.epages.v1+json",
 
 
 def api(url):
+    # Die Schnittstelle liefert Links mit der alten Adresse (www.triplex-q.com) – auf shop.strato.de umbiegen
+    if "/rs/shops/" in url and url.startswith("http"):
+        url = API + url.split("/rs/shops/87065853", 1)[1]
     for _ in range(4):
         try:
             r = S.get(url if url.startswith("http") else API + url, timeout=40)
