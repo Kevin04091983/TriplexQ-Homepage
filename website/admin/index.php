@@ -229,6 +229,27 @@ $seite = $_GET['seite'] ?? 'bestellungen';
   .konditionen button { justify-self:end; }
   .marke { display:inline-block; font-size:.76rem; font-weight:700; padding:2px 8px; border-radius:99px; }
   .marke.rot { background:#fdeaea; color:#b50001; } .marke.gruen { background:#e7f5ec; color:#0f8a4f; }
+  /* Auswertung */
+  h2 { font-size:1.15rem; margin:0 0 12px; }
+  button.hell { background:#fff; color:var(--blau); box-shadow:inset 0 0 0 1.5px var(--linie); }
+  .kacheln { display:grid; grid-template-columns:repeat(auto-fit, minmax(170px, 1fr)); gap:14px; margin-bottom:18px; }
+  .kachel { background:#fff; border:1px solid var(--linie); border-radius:12px; padding:16px; display:grid; gap:4px; }
+  .kachel small { color:#4a5876; font-weight:600; font-size:.8rem; }
+  .kachel b { font-size:1.45rem; color:var(--navy); line-height:1.2; }
+  .trend { font-size:.82rem; font-weight:700; } .trend.hoch { color:#0f8a4f; } .trend.runter { color:#b50001; }
+  .balken-monate { display:grid; grid-template-columns:repeat(24, 1fr); gap:5px; align-items:end; height:220px; margin:8px 0 18px; }
+  .monat { height:100%; display:flex; flex-direction:column; justify-content:flex-end; align-items:center; gap:3px; min-width:0; }
+  .monat .saeule { width:100%; background:linear-gradient(var(--blau), #3d7bff); border-radius:5px 5px 2px 2px; min-height:2px; }
+  .monat:hover .saeule { background:var(--rot); }
+  .monat .wert { font-size:.66rem; color:#4a5876; white-space:nowrap; }
+  .monat small { font-size:.68rem; color:#4a5876; text-align:center; line-height:1.15; }
+  .balken { display:block; height:10px; background:#edf1f8; border-radius:99px; overflow:hidden; min-width:80px; margin-top:6px; }
+  .balken span { display:block; height:100%; background:linear-gradient(90deg, var(--blau), #3d7bff); border-radius:99px; }
+  table.kompakt th, table.kompakt td { padding:7px 10px; }
+  .schalter { padding:4px 12px; border-radius:99px; border:1px solid var(--linie); text-decoration:none; color:var(--blau); background:#fff; }
+  .schalter.an { background:var(--navy); color:#fff; border-color:var(--navy); }
+  .zwei-spalten { display:grid; grid-template-columns:1.2fr 1fr; gap:18px; align-items:start; }
+  @media (max-width:900px) { .zwei-spalten { grid-template-columns:1fr; } .balken-monate { gap:2px; } .monat .wert { display:none; } }
 </style>
 </head>
 <body>
@@ -252,6 +273,7 @@ $seite = $_GET['seite'] ?? 'bestellungen';
   <a href="?seite=bestellungen" class="<?= $seite === 'bestellungen' ? 'aktiv' : '' ?>">Bestellungen</a>
   <a href="?seite=kunden" class="<?= $seite === 'kunden' ? 'aktiv' : '' ?>">Kunden</a>
   <a href="?seite=preise" class="<?= $seite === 'preise' ? 'aktiv' : '' ?>">Preise</a>
+  <a href="?seite=auswertung" class="<?= $seite === 'auswertung' ? 'aktiv' : '' ?>">Auswertung</a>
   <a href="uebernahme.php">Übernahme alter Shop</a>
   <a href="../index.html" target="_blank">Zur Website</a>
   <span class="rechts"><a href="?abmelden=1">Abmelden</a></span>
@@ -261,7 +283,9 @@ $seite = $_GET['seite'] ?? 'bestellungen';
 <?php if ($fehler): ?><p class="fehler"><?= h($fehler) ?></p><?php endif; ?>
 <?php
 try {
-    if ($seite === 'preise') {
+    if ($seite === 'auswertung') {
+        require __DIR__ . '/auswertung_seite.php';
+    } elseif ($seite === 'preise') {
         $q = (string) ($_GET['q'] ?? '');
         $treffer = preise_gefiltert($q);
         $basis = preise_basis();
