@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS kunden (
   eingeladen      DATETIME     NULL,
   preisgruppe_id  INT UNSIGNED NULL,                    -- Kundengruppe mit eigenen Preisen (z. B. "Händler 30%")
   quelle          VARCHAR(20)  NOT NULL DEFAULT 'shop',  -- 'shop' = im neuen Shop registriert, 'altshop' = übernommen
+  partner         TINYINT(1)   NOT NULL DEFAULT 0,       -- Kooperationspartner: in der Auswertung getrennt, nicht in der Rangliste
   erstellt        DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
   letzter_login   DATETIME     NULL,
   INDEX (token)

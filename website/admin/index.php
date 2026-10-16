@@ -27,6 +27,16 @@ function preise_gefiltert(string $q): array
     }, ARRAY_FILTER_USE_BOTH);
 }
 
+/** Spalte "partner" (Kooperationspartner) bei älteren Datenbanken einmalig ergänzen */
+function partner_spalte(): void
+{
+    static $erledigt = false;
+    if (!$erledigt) {
+        db()->exec("ALTER TABLE kunden ADD COLUMN IF NOT EXISTS partner TINYINT(1) NOT NULL DEFAULT 0");
+        $erledigt = true;
+    }
+}
+
 $fehler = '';
 if (($_POST['tun'] ?? '') === 'anmelden') {
     $kennung = 'admin|' . ($_SERVER['REMOTE_ADDR'] ?? '?');
@@ -71,6 +81,8 @@ if ($angemeldet && $_SERVER['REQUEST_METHOD'] === 'POST' && hash_equals($_SESSIO
     try {
         if (($_POST['tun'] ?? '') === 'kunde') {
             $gruppe = (int) ($_POST['preisgruppe'] ?? 0);
+            partner_spalte();
+            db()->prepare('UPDATE kunden SET partner = ? WHERE id = ?')->execute([empty($_POST['partner']) ? 0 : 1, (int) $_POST['id']]);
             db()->prepare('UPDATE kunden SET rabatt_prozent = ?, gesperrt = ?, notiz = ?, preisgruppe_id = ? WHERE id = ?')
                 ->execute([max(0, min(90, (float) str_replace(',', '.', (string) $_POST['rabatt']))),
                     empty($_POST['gesperrt']) ? 0 : 1, mehrzeilig($_POST['notiz'] ?? '', 1000), $gruppe ?: null, (int) $_POST['id']]);
@@ -248,6 +260,8 @@ $seite = $_GET['seite'] ?? 'bestellungen';
   table.kompakt th, table.kompakt td { padding:7px 10px; }
   .schalter { padding:4px 12px; border-radius:99px; border:1px solid var(--linie); text-decoration:none; color:var(--blau); background:#fff; }
   .schalter.an { background:var(--navy); color:#fff; border-color:var(--navy); }
+  tr.trenner td { background:#edf1f8; font-weight:700; color:var(--navy); }
+  tr.partner td { color:#4a5876; }
   .zwei-spalten { display:grid; grid-template-columns:1.2fr 1fr; gap:18px; align-items:start; }
   @media (max-width:900px) { .zwei-spalten { grid-template-columns:1fr; } .balken-monate { gap:2px; } .monat .wert { display:none; } }
 </style>
@@ -417,6 +431,7 @@ try {
                 <label class="breit">Notiz (nur intern)
                   <input name="notiz" value="<?= h($k['notiz']) ?>" placeholder="z. B. Ansprechpartner Einkauf"></label>
                 <label class="inline"><input type="checkbox" name="gesperrt" value="1" <?= $k['gesperrt'] ? 'checked' : '' ?>> Konto sperren</label>
+                <label class="inline" title="Erscheint in der Auswertung getrennt unten, nicht in der Rangliste der Top-Kunden"><input type="checkbox" name="partner" value="1" <?= !empty($k['partner']) ? 'checked' : '' ?>> Kooperationspartner</label>
                 <button type="submit">Speichern</button>
               </form>
             </td>

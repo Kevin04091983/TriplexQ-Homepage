@@ -80,7 +80,8 @@ $jahre = $abfrage("SELECT YEAR(b.erstellt) j, SUM(b.netto) umsatz, COUNT(*) n, C
                    FROM bestellungen b WHERE b.status <> 'storniert' GROUP BY j ORDER BY j DESC")->fetchAll();
 $monatsnamen = ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'];
 
-/* ---------------- Top-Kunden */
+/* ---------------- Top-Kunden (Kooperationspartner getrennt, nicht in der Rangliste) */
+partner_spalte();
 $kundenName = static function (array $r): string {
     $name = trim((string) ($r['firma'] ?? ''));
     $person = trim(($r['vorname'] ?? '') . ' ' . ($r['nachname'] ?? ''));
@@ -91,8 +92,16 @@ $topKunden = $abfrage("SELECT COALESCE(b.kunde_id, b.email) schluessel, MAX(b.ku
                               COUNT(*) n, SUM(b.netto) umsatz, MAX(b.erstellt) letzte, MIN(b.erstellt) erste,
                               MAX(k.firma) firma, MAX(k.vorname) vorname, MAX(k.nachname) nachname, MAX(k.ort) ort
                        FROM bestellungen b LEFT JOIN kunden k ON k.id = b.kunde_id
-                       WHERE $basisBed GROUP BY schluessel ORDER BY umsatz DESC LIMIT 25", $v)->fetchAll();
+                       WHERE $basisBed AND COALESCE(k.partner, 0) = 0 GROUP BY schluessel ORDER BY umsatz DESC LIMIT 25", $v)->fetchAll();
+$partnerKunden = $abfrage("SELECT b.kunde_id schluessel, MAX(b.kunde_id) kunde_id, MAX(b.email) email, MAX(b.anschrift) anschrift,
+                              COUNT(*) n, SUM(b.netto) umsatz, MAX(b.erstellt) letzte, MIN(b.erstellt) erste,
+                              MAX(k.firma) firma, MAX(k.vorname) vorname, MAX(k.nachname) nachname, MAX(k.ort) ort
+                       FROM bestellungen b JOIN kunden k ON k.id = b.kunde_id
+                       WHERE $basisBed AND k.partner = 1 GROUP BY schluessel ORDER BY umsatz DESC", $v)->fetchAll();
 // "Kunde seit" = allererste Bestellung überhaupt (nicht nur im gewählten Zeitraum)
+foreach ($partnerKunden as $pk) {
+    $topKunden[] = $pk + ['partner' => true];
+}
 foreach ($topKunden as &$tk) {
     $tk['erste'] = $tk['kunde_id']
         ? $abfrage("SELECT MIN(erstellt) FROM bestellungen WHERE kunde_id = ? AND status <> 'storniert'", [$tk['kunde_id']])->fetchColumn()
@@ -131,7 +140,7 @@ $schlafend = $abfrage("SELECT COALESCE(b.kunde_id, b.email) schluessel, MAX(b.ku
                               COUNT(*) n, SUM(b.netto) umsatz, MAX(b.erstellt) letzte,
                               MAX(k.firma) firma, MAX(k.vorname) vorname, MAX(k.nachname) nachname, MAX(k.telefon) telefon
                        FROM bestellungen b LEFT JOIN kunden k ON k.id = b.kunde_id
-                       WHERE b.status <> 'storniert' GROUP BY schluessel
+                       WHERE b.status <> 'storniert' AND COALESCE(k.partner, 0) = 0 GROUP BY schluessel
                        HAVING MAX(b.erstellt) < (NOW() - INTERVAL 180 DAY) AND (COUNT(*) >= 2 OR SUM(b.netto) >= 500)
                        ORDER BY umsatz DESC LIMIT 15")->fetchAll();
 
@@ -192,9 +201,12 @@ $anteil = static fn($teil, $ganzes) => $ganzes > 0 ? number_format($teil / $ganz
   <h2>Top-Kunden nach Umsatz <span class="pos">(<?= h($titel) ?>)</span></h2>
   <table>
     <tr><th>#</th><th>Kunde</th><th class="r">Bestellungen</th><th class="r">Umsatz netto</th><th class="r">Anteil</th><th class="r">Ø Bestellwert</th><th>Kunde seit</th><th>Letzte Bestellung</th></tr>
-    <?php foreach ($topKunden as $i => $k): ?>
-      <tr>
-        <td><?= $i + 1 ?></td>
+    <?php $rang = 0; $trennerGezeigt = false; foreach ($topKunden as $k): ?>
+      <?php if (!empty($k['partner']) && !$trennerGezeigt): $trennerGezeigt = true; ?>
+        <tr class="trenner"><td colspan="8">Kooperationspartner <span class="pos">– nicht in der Rangliste</span></td></tr>
+      <?php endif; ?>
+      <tr class="<?= !empty($k['partner']) ? 'partner' : '' ?>">
+        <td><?= !empty($k['partner']) ? '–' : ++$rang ?></td>
         <td><strong><?= h($kundenName($k)) ?></strong><br><span class="pos"><?= $k['ort'] ? h($k['ort']) . ' · ' : '' ?>
           <a href="?seite=kunden&amp;q=<?= h(rawurlencode((string) $k['email'])) ?>">Kunde</a> ·
           <a href="?seite=bestellungen&amp;q=<?= h(rawurlencode((string) $k['email'])) ?>">Bestellungen</a></span></td>
