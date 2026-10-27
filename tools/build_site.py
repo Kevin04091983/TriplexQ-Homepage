@@ -102,8 +102,8 @@ LINIEN = [
      "Bohrer aus Ultrafeinstkorn-VHM mit TiAlN-Beschichtung – 3xD bis 12xD, mit Innenkühlung direkt an der "
      "Bohrerspitze für mehr Bohrleistung und Standzeit."},
     {"id": "entgrater", "name": "NC-Entgratwerkzeuge", "bild": "kat-entgrater", "text":
-     "VHM-Entgrater zum Fasen und Entgraten von Bohrungen, Kanten und Konturen: Vor-/Rückwärtsentgrater sowie "
-     "DEB mit 60°, 90° und 120° Spitzenwinkel – Sonderwinkel auf Anfrage."},
+     "VHM-NC-Entgrater steel blue DEB 90° zum Fasen und Entgraten von Bohrungen, Kanten und Konturen – "
+     "Ø 1 bis 20 mm, Sonderwinkel auf Anfrage."},
 ]
 
 
@@ -1569,6 +1569,10 @@ ALTE_SEITEN = {
     "login": "konto.html",
     "register": "konto.html",
     "search": "shop.html",
+    # am 27.10.2026 kurz online, dann wieder herausgenommen (vorerst nur der DEB 90°)
+    "produkte/vor-rueckwaertsentgrater.html": "produkte/steel-blue-deb-90.html",
+    "produkte/deb-60.html": "produkte/steel-blue-deb-90.html",
+    "produkte/deb-120.html": "produkte/steel-blue-deb-90.html",
 }
 
 

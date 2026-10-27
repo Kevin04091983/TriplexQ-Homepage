@@ -15032,311 +15032,14 @@
   ]
  },
  {
-  "id": "vor-rueckwaertsentgrater",
-  "name": "TRIPLEX-Q Vor-/Rückwärtsentgrater",
-  "kurz": "Vor-/Rückwärtsentgrater",
-  "linien": [
-   "entgrater"
-  ],
-  "sku": "6802-6816",
-  "beschreibung": "<p>VHM-Vor- und Rückwärtsentgrater zum Entgraten von Bohrungen von vorn und von hinten in einem Arbeitsgang – TiAlN-beschichtet, für die CNC-Bearbeitung auf Bearbeitungszentren.</p><p><strong>Werkstoff:</strong> VHM</p><p><strong>Technische Daten</strong> (Maße in mm)</p><table><tr><th>Art.-Nr.</th><th>Ø</th><th>Schaft-Ø</th><th>Schneidenl.</th><th>Gesamtl.</th><th>Z</th><th>Schaft</th><th>Beschichtung</th></tr><tr><td>6802</td><td>2</td><td>6</td><td>1,4</td><td>100</td><td>3</td><td>HA</td><td>TiAlN</td></tr><tr><td>6803</td><td>3</td><td>6</td><td>2</td><td>100</td><td>4</td><td>HA</td><td>TiAlN</td></tr><tr><td>6804</td><td>4</td><td>6</td><td>3</td><td>100</td><td>4</td><td>HA</td><td>TiAlN</td></tr><tr><td>6805</td><td>5</td><td>6</td><td>4</td><td>100</td><td>4</td><td>HA</td><td>TiAlN</td></tr><tr><td>6806</td><td>6</td><td>6</td><td>4</td><td>100</td><td>4</td><td>HA</td><td>TiAlN</td></tr><tr><td>6808</td><td>8</td><td>6</td><td>3,2</td><td>100</td><td>4</td><td>HA</td><td>TiAlN</td></tr><tr><td>6810</td><td>10</td><td>6</td><td>4,3</td><td>100</td><td>4</td><td>HA</td><td>TiAlN</td></tr><tr><td>6812</td><td>12</td><td>6</td><td>5</td><td>100</td><td>4</td><td>HA</td><td>TiAlN</td></tr><tr><td>6816</td><td>16</td><td>10</td><td>8</td><td>100</td><td>4</td><td>HA</td><td>TiAlN</td></tr></table><p>Sonderabmessungen und Sonderwinkel fertigen wir auf Anfrage.</p>",
-  "datenblaetter": [],
-  "lieferzeit": null,
-  "bild": "triplex-q-vor-rueckwaertsentgrater.webp",
-  "klein": "triplex-q-vor-rueckwaertsentgrater-klein.webp",
-  "original": "triplex-q-vor-rueckwaertsentgrater-original.webp",
-  "bildart": "foto",
-  "fest": {},
-  "attribute": {
-   "Schneidendurchmesser": [
-    "2,00",
-    "3,00",
-    "4,00",
-    "5,00",
-    "6,00",
-    "8,00",
-    "10,00",
-    "12,00",
-    "16,00"
-   ]
-  },
-  "varianten": [
-   {
-    "sku": "6802",
-    "preis": 50.0,
-    "auswahl": {
-     "Schneidendurchmesser": "2,00"
-    },
-    "lager": null,
-    "name": "TRIPLEX-Q Vor-/Rückwärtsentgrater Ø 2,00 mm"
-   },
-   {
-    "sku": "6803",
-    "preis": 50.0,
-    "auswahl": {
-     "Schneidendurchmesser": "3,00"
-    },
-    "lager": null,
-    "name": "TRIPLEX-Q Vor-/Rückwärtsentgrater Ø 3,00 mm"
-   },
-   {
-    "sku": "6804",
-    "preis": 50.0,
-    "auswahl": {
-     "Schneidendurchmesser": "4,00"
-    },
-    "lager": null,
-    "name": "TRIPLEX-Q Vor-/Rückwärtsentgrater Ø 4,00 mm"
-   },
-   {
-    "sku": "6805",
-    "preis": 50.0,
-    "auswahl": {
-     "Schneidendurchmesser": "5,00"
-    },
-    "lager": null,
-    "name": "TRIPLEX-Q Vor-/Rückwärtsentgrater Ø 5,00 mm"
-   },
-   {
-    "sku": "6806",
-    "preis": 50.0,
-    "auswahl": {
-     "Schneidendurchmesser": "6,00"
-    },
-    "lager": null,
-    "name": "TRIPLEX-Q Vor-/Rückwärtsentgrater Ø 6,00 mm"
-   },
-   {
-    "sku": "6808",
-    "preis": 50.0,
-    "auswahl": {
-     "Schneidendurchmesser": "8,00"
-    },
-    "lager": null,
-    "name": "TRIPLEX-Q Vor-/Rückwärtsentgrater Ø 8,00 mm"
-   },
-   {
-    "sku": "6810",
-    "preis": 50.0,
-    "auswahl": {
-     "Schneidendurchmesser": "10,00"
-    },
-    "lager": null,
-    "name": "TRIPLEX-Q Vor-/Rückwärtsentgrater Ø 10,00 mm"
-   },
-   {
-    "sku": "6812",
-    "preis": 50.0,
-    "auswahl": {
-     "Schneidendurchmesser": "12,00"
-    },
-    "lager": null,
-    "name": "TRIPLEX-Q Vor-/Rückwärtsentgrater Ø 12,00 mm"
-   },
-   {
-    "sku": "6816",
-    "preis": 50.0,
-    "auswahl": {
-     "Schneidendurchmesser": "16,00"
-    },
-    "lager": null,
-    "name": "TRIPLEX-Q Vor-/Rückwärtsentgrater Ø 16,00 mm"
-   }
-  ],
-  "preis_ab": 50.0,
-  "preis_bis": 50.0,
-  "d_min": 2.0,
-  "d_max": 16.0,
-  "set": false,
-  "alte_urls": []
- },
- {
-  "id": "deb-120",
-  "name": "TRIPLEX-Q DEB 120°",
-  "kurz": "DEB 120°",
-  "linien": [
-   "entgrater"
-  ],
-  "sku": "6904-6916",
-  "beschreibung": "<p>VHM-NC-Entgrater mit 120° Spitzenwinkel nach DIN 6527 zum Fasen und Entgraten – vier Schneiden, unbeschichtet.</p><p><strong>Werkstoff:</strong> VHM</p><p><strong>Technische Daten</strong> (Maße in mm)</p><table><tr><th>Art.-Nr.</th><th>Ø</th><th>Schaft-Ø</th><th>Gesamtl.</th><th>Z</th><th>Winkel</th><th>Schaft</th><th>Beschichtung</th><th>Norm</th></tr><tr><td>6904</td><td>4</td><td>4</td><td>54</td><td>4</td><td>120°</td><td>HA</td><td>unbeschichtet</td><td>DIN6527</td></tr><tr><td>6906</td><td>6</td><td>6</td><td>57</td><td>4</td><td>120°</td><td>HB</td><td>unbeschichtet</td><td>DIN6527</td></tr><tr><td>6908</td><td>8</td><td>8</td><td>63</td><td>4</td><td>120°</td><td>HB</td><td>unbeschichtet</td><td>DIN6527</td></tr><tr><td>6910</td><td>10</td><td>10</td><td>72</td><td>4</td><td>120°</td><td>HB</td><td>unbeschichtet</td><td>DIN6527</td></tr><tr><td>6912</td><td>12</td><td>12</td><td>83</td><td>4</td><td>120°</td><td>HB</td><td>unbeschichtet</td><td>DIN6527</td></tr><tr><td>6916</td><td>16</td><td>16</td><td>92</td><td>4</td><td>120°</td><td>HB</td><td>unbeschichtet</td><td>DIN6527</td></tr></table><p>Sonderabmessungen und Sonderwinkel fertigen wir auf Anfrage.</p>",
-  "datenblaetter": [],
-  "lieferzeit": null,
-  "bild": "triplex-q-deb-120.webp",
-  "klein": "triplex-q-deb-120-klein.webp",
-  "original": "triplex-q-deb-120-original.webp",
-  "bildart": "foto",
-  "fest": {},
-  "attribute": {
-   "Schneidendurchmesser": [
-    "4,00",
-    "6,00",
-    "8,00",
-    "10,00",
-    "12,00",
-    "16,00"
-   ]
-  },
-  "varianten": [
-   {
-    "sku": "6904",
-    "preis": 50.0,
-    "auswahl": {
-     "Schneidendurchmesser": "4,00"
-    },
-    "lager": null,
-    "name": "TRIPLEX-Q DEB 120° Ø 4,00 mm"
-   },
-   {
-    "sku": "6906",
-    "preis": 50.0,
-    "auswahl": {
-     "Schneidendurchmesser": "6,00"
-    },
-    "lager": null,
-    "name": "TRIPLEX-Q DEB 120° Ø 6,00 mm"
-   },
-   {
-    "sku": "6908",
-    "preis": 50.0,
-    "auswahl": {
-     "Schneidendurchmesser": "8,00"
-    },
-    "lager": null,
-    "name": "TRIPLEX-Q DEB 120° Ø 8,00 mm"
-   },
-   {
-    "sku": "6910",
-    "preis": 50.0,
-    "auswahl": {
-     "Schneidendurchmesser": "10,00"
-    },
-    "lager": null,
-    "name": "TRIPLEX-Q DEB 120° Ø 10,00 mm"
-   },
-   {
-    "sku": "6912",
-    "preis": 50.0,
-    "auswahl": {
-     "Schneidendurchmesser": "12,00"
-    },
-    "lager": null,
-    "name": "TRIPLEX-Q DEB 120° Ø 12,00 mm"
-   },
-   {
-    "sku": "6916",
-    "preis": 50.0,
-    "auswahl": {
-     "Schneidendurchmesser": "16,00"
-    },
-    "lager": null,
-    "name": "TRIPLEX-Q DEB 120° Ø 16,00 mm"
-   }
-  ],
-  "preis_ab": 50.0,
-  "preis_bis": 50.0,
-  "d_min": 4.0,
-  "d_max": 16.0,
-  "set": false,
-  "alte_urls": []
- },
- {
-  "id": "deb-60",
-  "name": "TRIPLEX-Q DEB 60°",
-  "kurz": "DEB 60°",
-  "linien": [
-   "entgrater"
-  ],
-  "sku": "7004-7016",
-  "beschreibung": "<p>VHM-NC-Entgrater mit 60° Spitzenwinkel nach DIN 6527 zum Fasen, Entgraten und Zentrieren – vier Schneiden, unbeschichtet.</p><p><strong>Werkstoff:</strong> VHM</p><p><strong>Technische Daten</strong> (Maße in mm)</p><table><tr><th>Art.-Nr.</th><th>Ø</th><th>Schaft-Ø</th><th>Gesamtl.</th><th>Z</th><th>Winkel</th><th>Schaft</th><th>Beschichtung</th><th>Norm</th></tr><tr><td>7004</td><td>4</td><td>4</td><td>54</td><td>4</td><td>60°</td><td>HA</td><td>unbeschichtet</td><td>DIN6527</td></tr><tr><td>7006</td><td>6</td><td>6</td><td>57</td><td>4</td><td>60°</td><td>HB</td><td>unbeschichtet</td><td>DIN6527</td></tr><tr><td>7008</td><td>8</td><td>8</td><td>63</td><td>4</td><td>60°</td><td>HB</td><td>unbeschichtet</td><td>DIN6527</td></tr><tr><td>7010</td><td>10</td><td>10</td><td>72</td><td>4</td><td>60°</td><td>HB</td><td>unbeschichtet</td><td>DIN6527</td></tr><tr><td>7012</td><td>12</td><td>12</td><td>83</td><td>4</td><td>60°</td><td>HB</td><td>unbeschichtet</td><td>DIN6527</td></tr><tr><td>7016</td><td>16</td><td>16</td><td>92</td><td>4</td><td>60°</td><td>HB</td><td>unbeschichtet</td><td>DIN6527</td></tr></table><p>Sonderabmessungen und Sonderwinkel fertigen wir auf Anfrage.</p>",
-  "datenblaetter": [],
-  "lieferzeit": null,
-  "bild": "triplex-q-deb-60.webp",
-  "klein": "triplex-q-deb-60-klein.webp",
-  "original": "triplex-q-deb-60-original.webp",
-  "bildart": "foto",
-  "fest": {},
-  "attribute": {
-   "Schneidendurchmesser": [
-    "4,00",
-    "6,00",
-    "8,00",
-    "10,00",
-    "12,00",
-    "16,00"
-   ]
-  },
-  "varianten": [
-   {
-    "sku": "7004",
-    "preis": 50.0,
-    "auswahl": {
-     "Schneidendurchmesser": "4,00"
-    },
-    "lager": null,
-    "name": "TRIPLEX-Q DEB 60° Ø 4,00 mm"
-   },
-   {
-    "sku": "7006",
-    "preis": 50.0,
-    "auswahl": {
-     "Schneidendurchmesser": "6,00"
-    },
-    "lager": null,
-    "name": "TRIPLEX-Q DEB 60° Ø 6,00 mm"
-   },
-   {
-    "sku": "7008",
-    "preis": 50.0,
-    "auswahl": {
-     "Schneidendurchmesser": "8,00"
-    },
-    "lager": null,
-    "name": "TRIPLEX-Q DEB 60° Ø 8,00 mm"
-   },
-   {
-    "sku": "7010",
-    "preis": 50.0,
-    "auswahl": {
-     "Schneidendurchmesser": "10,00"
-    },
-    "lager": null,
-    "name": "TRIPLEX-Q DEB 60° Ø 10,00 mm"
-   },
-   {
-    "sku": "7012",
-    "preis": 50.0,
-    "auswahl": {
-     "Schneidendurchmesser": "12,00"
-    },
-    "lager": null,
-    "name": "TRIPLEX-Q DEB 60° Ø 12,00 mm"
-   },
-   {
-    "sku": "7016",
-    "preis": 50.0,
-    "auswahl": {
-     "Schneidendurchmesser": "16,00"
-    },
-    "lager": null,
-    "name": "TRIPLEX-Q DEB 60° Ø 16,00 mm"
-   }
-  ],
-  "preis_ab": 50.0,
-  "preis_bis": 50.0,
-  "d_min": 4.0,
-  "d_max": 16.0,
-  "set": false,
-  "alte_urls": []
- },
- {
   "id": "steel-blue-deb-90",
   "name": "TRIPLEX-Q steel blue DEB 90°",
   "kurz": "steel blue DEB 90°",
   "linien": [
    "entgrater"
   ],
-  "sku": "9106-9116",
-  "beschreibung": "<p>Der TRIPLEX-Q steel blue DEB 90° ist ein hochwertiger VHM-NC-Entgrater, der speziell für das Fasen und Entgraten entwickelt wurde. Mit seinem 90-Grad-Spitzenwinkel und der nanocomposite Beschichtung nACo blue ist er vielseitig einsetzbar und bietet eine ausgezeichnete Leistung – die ideale Wahl für präzise und effiziente Entgratungsarbeiten.</p><p><strong>Werkstoff:</strong> VHM</p><p><strong>Technische Daten</strong> (Maße in mm)</p><table><tr><th>Art.-Nr.</th><th>Ø</th><th>Schaft-Ø</th><th>Gesamtl.</th><th>Z</th><th>Winkel</th><th>Schaft</th><th>Beschichtung</th></tr><tr><td>9106</td><td>6</td><td>6</td><td>57</td><td>4</td><td>90°</td><td>HB</td><td>steel blue</td></tr><tr><td>9110</td><td>10</td><td>10</td><td>72</td><td>4</td><td>90°</td><td>HB</td><td>steel blue</td></tr><tr><td>9116</td><td>16</td><td>16</td><td>92</td><td>4</td><td>90°</td><td>HB</td><td>steel blue</td></tr></table><p>Sonderabmessungen und Sonderwinkel fertigen wir auf Anfrage.</p>",
+  "sku": "9101-9120",
+  "beschreibung": "<p>Der TRIPLEX-Q steel blue DEB 90° ist ein hochwertiger VHM-NC-Entgrater, der speziell für das Fasen und Entgraten entwickelt wurde. Mit seinem 90-Grad-Spitzenwinkel und der nanocomposite Beschichtung nACo blue ist er vielseitig einsetzbar und bietet eine ausgezeichnete Leistung – die ideale Wahl für präzise und effiziente Entgratungsarbeiten.</p><p><strong>Werkstoff:</strong> VHM</p><p><strong>Technische Daten</strong> (Maße in mm)</p><table><tr><th>Art.-Nr.</th><th>Ø</th><th>Schaft-Ø</th><th>Gesamtl.</th><th>Z</th><th>Winkel</th><th>Schaft</th><th>Beschichtung</th></tr><tr><td>9101</td><td>1</td><td>–</td><td>–</td><td>–</td><td>90°</td><td>–</td><td>steel blue</td></tr><tr><td>9102</td><td>2</td><td>–</td><td>–</td><td>–</td><td>90°</td><td>–</td><td>steel blue</td></tr><tr><td>9103</td><td>3</td><td>–</td><td>–</td><td>–</td><td>90°</td><td>–</td><td>steel blue</td></tr><tr><td>9104</td><td>4</td><td>–</td><td>–</td><td>–</td><td>90°</td><td>–</td><td>steel blue</td></tr><tr><td>9106</td><td>6</td><td>6</td><td>57</td><td>4</td><td>90°</td><td>HB</td><td>steel blue</td></tr><tr><td>9108</td><td>8</td><td>–</td><td>–</td><td>–</td><td>90°</td><td>–</td><td>steel blue</td></tr><tr><td>9110</td><td>10</td><td>10</td><td>72</td><td>4</td><td>90°</td><td>HB</td><td>steel blue</td></tr><tr><td>9112</td><td>12</td><td>–</td><td>–</td><td>–</td><td>90°</td><td>–</td><td>steel blue</td></tr><tr><td>9116</td><td>16</td><td>16</td><td>92</td><td>4</td><td>90°</td><td>HB</td><td>steel blue</td></tr><tr><td>9120</td><td>20</td><td>–</td><td>–</td><td>–</td><td>90°</td><td>–</td><td>steel blue</td></tr></table><p>Sonderabmessungen und Sonderwinkel fertigen wir auf Anfrage.</p>",
   "datenblaetter": [],
   "lieferzeit": null,
   "bild": "triplex-q-steel-blue-deb-90.webp",
@@ -15346,15 +15049,58 @@
   "fest": {},
   "attribute": {
    "Schneidendurchmesser": [
+    "1,00",
+    "2,00",
+    "3,00",
+    "4,00",
     "6,00",
+    "8,00",
     "10,00",
-    "16,00"
+    "12,00",
+    "16,00",
+    "20,00"
    ]
   },
   "varianten": [
    {
+    "sku": "9101",
+    "preis": 21.5,
+    "auswahl": {
+     "Schneidendurchmesser": "1,00"
+    },
+    "lager": null,
+    "name": "TRIPLEX-Q steel blue *DEB 90° Ø 1,00 mm"
+   },
+   {
+    "sku": "9102",
+    "preis": 21.5,
+    "auswahl": {
+     "Schneidendurchmesser": "2,00"
+    },
+    "lager": null,
+    "name": "TRIPLEX-Q steel blue *DEB 90° Ø 2,00 mm"
+   },
+   {
+    "sku": "9103",
+    "preis": 21.5,
+    "auswahl": {
+     "Schneidendurchmesser": "3,00"
+    },
+    "lager": null,
+    "name": "TRIPLEX-Q steel blue *DEB 90° Ø 3,00 mm"
+   },
+   {
+    "sku": "9104",
+    "preis": 21.5,
+    "auswahl": {
+     "Schneidendurchmesser": "4,00"
+    },
+    "lager": null,
+    "name": "TRIPLEX-Q steel blue *DEB 90° Ø 4,00 mm"
+   },
+   {
     "sku": "9106",
-    "preis": 50.0,
+    "preis": 22.5,
     "auswahl": {
      "Schneidendurchmesser": "6,00"
     },
@@ -15362,8 +15108,17 @@
     "name": "TRIPLEX-Q steel blue *DEB 90° Ø 6,00 mm"
    },
    {
+    "sku": "9108",
+    "preis": 31.0,
+    "auswahl": {
+     "Schneidendurchmesser": "8,00"
+    },
+    "lager": null,
+    "name": "TRIPLEX-Q steel blue *DEB 90° Ø 8,00 mm"
+   },
+   {
     "sku": "9110",
-    "preis": 50.0,
+    "preis": 41.3,
     "auswahl": {
      "Schneidendurchmesser": "10,00"
     },
@@ -15371,19 +15126,37 @@
     "name": "TRIPLEX-Q steel blue *DEB 90° Ø 10,00 mm"
    },
    {
+    "sku": "9112",
+    "preis": 66.75,
+    "auswahl": {
+     "Schneidendurchmesser": "12,00"
+    },
+    "lager": null,
+    "name": "TRIPLEX-Q steel blue *DEB 90° Ø 12,00 mm"
+   },
+   {
     "sku": "9116",
-    "preis": 50.0,
+    "preis": 122.2,
     "auswahl": {
      "Schneidendurchmesser": "16,00"
     },
     "lager": null,
     "name": "TRIPLEX-Q steel blue *DEB 90° Ø 16,00 mm"
+   },
+   {
+    "sku": "9120",
+    "preis": 204.0,
+    "auswahl": {
+     "Schneidendurchmesser": "20,00"
+    },
+    "lager": null,
+    "name": "TRIPLEX-Q steel blue *DEB 90° Ø 20,00 mm"
    }
   ],
-  "preis_ab": 50.0,
-  "preis_bis": 50.0,
-  "d_min": 6.0,
-  "d_max": 16.0,
+  "preis_ab": 21.5,
+  "preis_bis": 204.0,
+  "d_min": 1.0,
+  "d_max": 20.0,
   "set": false,
   "alte_urls": []
  }

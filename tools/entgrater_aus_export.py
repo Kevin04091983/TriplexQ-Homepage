@@ -4,8 +4,8 @@ Im alten Shop waren die Entgrater ausgeblendet und sind deshalb über die Schnit
 Dieses Skript liest sie aus dem CSV-Export ("Produkte.csv", Einstellungen → Export und Import) und
 schreibt sie als zusätzliche Produkte nach data/quelle/zusatzprodukte.json (liest tools/build_site.py mit ein).
 
-Preise: Kevin (27.10.2026) – vorerst 50,00 € netto je Abmessung, die echten Preise tragen Kevin und
-Alexandra selbst in der Verwaltung ein (Preise → bleiben bei jedem Neubau erhalten, liegen in der Datenbank).
+Preise: Kevin (27.10.2026) – steel blue DEB 90° mit festen Netto-Preisen je Ø (PRODUKTE unten); spätere Änderungen
+in der Verwaltung (Preise) – die bleiben bei jedem Neubau erhalten, sie liegen in der Datenbank.
 
 Bilder: Für den steel blue DEB 90° gibt es ein Foto (freigestellt), für die übrigen ein Platzhalter
 "Foto folgt" – echte Fotos später einfach in tools/entgrater_aus_export.py bei FOTOS eintragen.
@@ -33,22 +33,21 @@ BILDORDNER = WURZEL / "website" / "assets" / "img" / "produkte"
 PREIS = 50.00
 
 # Hauptartikel im Export -> Name im neuen Shop, Einleitungstext, Foto (None = Platzhalter)
+# Kevin 27.10.2026: vorerst NUR der steel blue DEB 90° (der mit Foto), in Ø 1–20 mit festen Netto-Preisen.
+# Vor-/Rückwärtsentgrater, DEB 60° und DEB 120° bleiben vorerst draußen (bei Bedarf hier wieder ergänzen).
+# Hauptartikel -> (Name, Einleitung, Foto, {Ø mm: Preis netto} oder None = alle Abmessungen aus dem Export zu PREIS)
 PRODUKTE = {
-    "6802-6816": ("TRIPLEX-Q Vor-/Rückwärtsentgrater",
-                  "VHM-Vor- und Rückwärtsentgrater zum Entgraten von Bohrungen von vorn und von hinten in einem Arbeitsgang – "
-                  "TiAlN-beschichtet, für die CNC-Bearbeitung auf Bearbeitungszentren.", None),
-    "6904-6916": ("TRIPLEX-Q DEB 120°",
-                  "VHM-NC-Entgrater mit 120° Spitzenwinkel nach DIN 6527 zum Fasen und Entgraten – "
-                  "vier Schneiden, unbeschichtet.", None),
-    "7004-7016": ("TRIPLEX-Q DEB 60°",
-                  "VHM-NC-Entgrater mit 60° Spitzenwinkel nach DIN 6527 zum Fasen, Entgraten und Zentrieren – "
-                  "vier Schneiden, unbeschichtet.", None),
-    "9106-9116": ("TRIPLEX-Q steel blue *DEB 90°",
+    "9101-9120": ("TRIPLEX-Q steel blue *DEB 90°",
                   "Der TRIPLEX-Q steel blue DEB 90° ist ein hochwertiger VHM-NC-Entgrater, der speziell für das Fasen und "
                   "Entgraten entwickelt wurde. Mit seinem 90-Grad-Spitzenwinkel und der nanocomposite Beschichtung nACo blue "
                   "ist er vielseitig einsetzbar und bietet eine ausgezeichnete Leistung – die ideale Wahl für präzise und "
-                  "effiziente Entgratungsarbeiten.", WURZEL / "website" / "assets" / "img" / "fotos" / "nc-entgrater.webp"),
+                  "effiziente Entgratungsarbeiten.", WURZEL / "website" / "assets" / "img" / "fotos" / "nc-entgrater.webp",
+                  {1: 21.50, 2: 21.50, 3: 21.50, 4: 21.50, 6: 22.50, 8: 31.00, 10: 41.30, 12: 66.75, 16: 122.20, 20: 204.00}),
 }
+# Artikelnummer je Ø nach dem Schema der Linie (9106 = Ø 6, 9116 = Ø 16)
+ARTIKEL = {"9101-9120": lambda d: f"91{d:02d}"}
+# bekannte Daten der Linie für Größen, die im alten Shop nicht angelegt waren
+LINIE_TECHNIK = {"9101-9120": {"Spitzenwinkel": "90°", "Beschichtung": "steel blue", "Werkstoff": "VHM"}}
 
 # technische Daten aus der Artikelbeschreibung des alten Shops (Reihenfolge = Spalten der Tabelle)
 TECHNIK = ["Schneidendurchmesser", "Schaftdurchmesser", "Schneidenlänge", "Gesamtlänge", "Anzahl Schneiden",
@@ -124,10 +123,23 @@ def main():
     kopf = {n.split("[")[-1].rstrip("]"): i for i, n in enumerate(zeilen[0])}
     nach_alias = {z[kopf["UnityAlias"]]: z for z in zeilen[1:]}
     produkte, bilder_index = [], {}
-    for haupt, (name, einleitung, foto) in PRODUKTE.items():
+    for haupt, (name, einleitung, foto, groessen) in PRODUKTE.items():
         von, bis = haupt.split("-")
         varianten = []
-        for alias, z in nach_alias.items():
+        if groessen:
+            for d, preis in groessen.items():
+                alias = ARTIKEL[haupt](d)
+                technik = dict(LINIE_TECHNIK.get(haupt, {}))
+                if alias in nach_alias:
+                    technik.update(technik_aus(nach_alias[alias][kopf["Description/de"]]))
+                technik["Schneidendurchmesser"] = str(d)
+                durchmesser = mm(str(d))
+                varianten.append({
+                    "productId": f"ZUSATZ-{alias}", "sku": alias, "name": f"{name} Ø {durchmesser} mm",
+                    "preis_netto": preis, "lagerbestand": None, "verfuegbar": None, "lieferzeit": None,
+                    "auswahl": {"Schneidendurchmesser": durchmesser}, "technik": technik,
+                })
+        for alias, z in ([] if groessen else nach_alias.items()):
             if not re.fullmatch(r"\d{4}", alias) or not (von <= alias <= bis):
                 continue
             technik = technik_aus(z[kopf["Description/de"]])
@@ -150,7 +162,8 @@ def main():
         produkt_id = f"ZUSATZ-{haupt}"
         produkte.append({
             "productId": produkt_id, "name": name, "sku": haupt, "typ": "master", "lieferzeit": None,
-            "verfuegbar": None, "lagerbestand": None, "preis_netto": None, "preis_ab": PREIS, "preis_bis": PREIS,
+            "verfuegbar": None, "lagerbestand": None, "preis_netto": None,
+            "preis_ab": min(v["preis_netto"] for v in varianten), "preis_bis": max(v["preis_netto"] for v in varianten),
             "staffelpreise": None, "bilder_api": [], "beschreibung_html": beschreibung, "datenblatt": None,
             "zusatz": True, "varianten": [{k: w for k, w in v.items() if k != "technik"} for v in varianten],
         })
