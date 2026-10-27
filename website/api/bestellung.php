@@ -106,8 +106,12 @@ try {
     }
 }
 
-$ok = mail_senden(EMPFAENGER_BESTELLUNG, "Bestellung $nummer – " . (text($k['firma'] ?? '', 120) ?: text($k['nachname'], 80)),
-    $text . ($gespeichert ? '' : "\nHINWEIS: Diese Bestellung konnte nicht in der Datenbank gespeichert werden.\n"), $email);
+// jede Empfänger-Adresse bekommt eine eigene Mail (order@ und wareneingang@) – zuverlässiger als eine Mail an mehrere
+$ok = false;
+foreach (array_filter(array_map('trim', explode(',', EMPFAENGER_BESTELLUNG))) as $empfaenger) {
+    $ok = mail_senden($empfaenger, "Bestellung $nummer – " . (text($k['firma'] ?? '', 120) ?: text($k['nachname'], 80)),
+        $text . ($gespeichert ? '' : "\nHINWEIS: Diese Bestellung konnte nicht in der Datenbank gespeichert werden.\n"), $email) || $ok;
+}
 
 mail_senden($email, "Ihre Bestellung $nummer bei TRIPLEX-Q",
     'Guten Tag ' . text($k['vorname'], 80) . ' ' . text($k['nachname'], 80) . ",\n\n"
