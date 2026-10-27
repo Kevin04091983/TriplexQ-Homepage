@@ -33,6 +33,7 @@ FIRMA = {
     "tel_link": "+493682483662",
     "mobil": "+49 160 8592745",
     "mobil_link": "+491608592745",
+    "versand": 9.50,                        # Versandpauschale Deutschland netto (Kevin 27.10.2026)
     "whatsapp": "+49 160 8592745",          # wie im alten Shop (Kopfleiste + Chat "Vertriebsteam")
     "whatsapp_link": "491608592745",
     "mail": "kontakt@triplex-q.de",
@@ -100,14 +101,16 @@ LINIEN = [
     {"id": "bohrer", "name": "VHM-Hochleistungsbohrer", "bild": "kat-bohrer", "text":
      "Bohrer aus Ultrafeinstkorn-VHM mit TiAlN-Beschichtung – 3xD bis 12xD, mit Innenkühlung direkt an der "
      "Bohrerspitze für mehr Bohrleistung und Standzeit."},
-    {"id": "entgrater", "name": "NC-Entgratwerkzeuge", "bild": "kat-entgrater", "anfrage": True, "text":
-     "Hochpräzise Werkzeuge zum Entgraten von Bohrungen, Kanten und Konturen in der CNC-Bearbeitung – "
-     "in verschiedenen Ausführungen auf Anfrage."},
+    {"id": "entgrater", "name": "NC-Entgratwerkzeuge", "bild": "kat-entgrater", "text":
+     "VHM-Entgrater zum Fasen und Entgraten von Bohrungen, Kanten und Konturen: Vor-/Rückwärtsentgrater sowie "
+     "DEB mit 60°, 90° und 120° Spitzenwinkel – Sonderwinkel auf Anfrage."},
 ]
 
 
 def linien_fuer(name):
     n = name.lower()
+    if "entgrater" in n or re.search(r"\bdeb\b", n):
+        return ["entgrater"]
     if "hochleistungsbohrer" in n:
         return ["bohrer"]
     if "alu-tpc" in n:
@@ -179,6 +182,8 @@ def durchmesser_label(variante, attr, wert, aus_name):
 
 def katalog_bauen(bilder):
     roh = lies("produkte.json")
+    if (QUELLE / "zusatzprodukte.json").exists():
+        roh += lies("zusatzprodukte.json")   # im alten Shop ausgeblendete Artikel (Entgrater, tools/entgrater_aus_export.py)
     gruppen = {}
     for p in roh:
         schluessel = familie(p["name"]) or p["productId"]
@@ -190,7 +195,7 @@ def katalog_bauen(bilder):
     produkte = []
     for schluessel, teile in gruppen.items():
         erster = teile[0]
-        name = schluessel if not re.fullmatch(r"[0-9A-F-]{36}", schluessel) else grundname(erster["name"])
+        name = schluessel if familie(erster["name"]) else grundname(erster["name"])
         name = re.sub(r"TRIPLEX-Q\s+", "TRIPLEX-Q ", name)
         varianten, attribute = [], {}
         for teil in teile:
@@ -677,6 +682,38 @@ def videokarte(v, b=""):
 </article>"""
 
 
+# Kooperation S-TEC (Kevin 27.10.2026) – Logo folgt: Datei website/assets/img/partner/s-tec.webp ablegen
+PARTNER = {
+    "name": "S-TEC",
+    "gebiet": "Schwarzwald, Rheinebene und Schweiz",
+    "ansprechpartner": "Maxim Semenov",
+    "link": "kontakt.html?betreff=" + "Kundenservice S-TEC (Schwarzwald, Rheinebene, Schweiz) – Maxim Semenov".replace(" ", "%20") + "#kontakt",
+}
+
+
+def partner_logo(klasse=""):
+    if (WEB / "assets" / "img" / "partner" / "s-tec.webp").exists():
+        return f'<img class="partner-logo {klasse}" src="assets/img/partner/s-tec.webp" alt="S-TEC" loading="lazy">'
+    return f'<span class="partner-logo partner-logo-text {klasse}" aria-label="S-TEC">S-TEC</span>'
+
+
+def partner_band():
+    return f"""
+<section class="partner-band" id="s-tec" aria-labelledby="s-tec-titel">
+  <div class="wrap partner-in">
+    <div class="partner-marke">{partner_logo()}<span class="partner-plus">+</span>
+      <img src="assets/img/logo/triplex-q-logo.png" alt="TRIPLEX-Q" width="150" height="123" loading="lazy"></div>
+    <div class="partner-text">
+      <p class="eyebrow dunkel">Neu · in Kooperation mit {PARTNER['name']}</p>
+      <h2 id="s-tec-titel">Eigener Kundenservice für {PARTNER['gebiet']}</h2>
+      <p>Gemeinsam mit der Firma {PARTNER['name']} betreuen wir unsere Kunden im Schwarzwald, in der Rheinebene und in der
+      Schweiz künftig mit einem eigenen Kundenservice vor Ort. Ihr Ansprechpartner: <strong>{PARTNER['ansprechpartner']}</strong>.</p>
+      <a class="btn btn-rot" href="{PARTNER['link']}">Kontakt zu {PARTNER['ansprechpartner']} {icon("arrow")}</a>
+    </div>
+  </div>
+</section>"""
+
+
 def startseite(produkte):
     anzahl_var = sum(len(p["varianten"]) for p in produkte)
     linien_html = ""
@@ -722,6 +759,7 @@ def startseite(produkte):
   <div class="hero-swoosh" aria-hidden="true"></div>
   <div class="wrap hero-in">
     <div class="hero-text">
+      <a class="partner-knopf" href="#s-tec"><span class="neu">Neu</span> Kundenservice Schwarzwald · Rheinebene · Schweiz – mit S-TEC {icon("arrow")}</a>
       <p class="eyebrow"><span class="punkt"></span> Home of TRIPLEX-Q · Zella-Mehlis</p>
       <h1>High Performance <em>Cutting.</em></h1>
       <p class="hero-lead">VHM-Präzisionswerkzeuge für die Hochleistungszerspanung: HPC- und TPC-Fräser, Aluminiumfräser
@@ -745,32 +783,17 @@ def startseite(produkte):
     </div>
   </div>
   <div class="laufband" aria-hidden="true"><div class="laufband-in">
-    {"".join(f"<span>{t}</span>" for t in ["steel blue HPC", "inox red HPC", "HyperPlus HPC", "ALU-X DLC", "TPC-SAW-3xD", "SR Black IK", "BNC2 Vollradius", "VHM-Bohrer 12xD", "Sonderwerkzeuge", "Nachschleifservice", "Beschichtungsservice"] * 2)}
+    {"".join(f"<span>{t}</span>" for t in ["steel blue HPC", "inox red HPC", "HyperPlus HPC", "ALU-X DLC", "TPC-SAW-3xD", "SR Black IK", "BNC2 Vollradius", "VHM-Bohrer 12xD", "NC-Entgrater", "Sonderwerkzeuge", "Nachschleifservice", "Beschichtungsservice"] * 2)}
   </div></div>
 </section>
 
-<section class="preishinweis" aria-labelledby="preishinweis-titel">
-  <div class="wrap">
-    <div class="preishinweis-karte">
-      <div class="preishinweis-kopf">
-        <span class="preishinweis-symbol">{icon("warnung")}</span>
-        <h2 id="preishinweis-titel">Wichtiger Hinweis <span>zu unseren Preisen</span></h2>
-      </div>
-      <div class="preishinweis-text">
-        <p>Aufgrund aktueller Rohstoff- und Materialpreisentwicklungen befinden sich unsere Preisangaben derzeit in Überarbeitung.</p>
-        <p><strong>Die auf dieser Website angezeigten Preise sind daher aktuell nicht verbindlich.</strong></p>
-        <p>Bei einer Bestellung kann der tatsächliche Preis abweichen. Selbstverständlich informieren wir Sie vor der Auftragsbestätigung über den gültigen Preis.</p>
-        <p class="preishinweis-dank">{icon("hand")} Vielen Dank für Ihr Verständnis.</p>
-      </div>
-    </div>
-  </div>
-</section>
+{partner_band()}
 
 <section class="vorteile">
   <div class="wrap vorteile-grid">
     <div class="vorteil" data-reveal>{icon("layers")}<h3>Vollhartmetall &amp; Hightech-Beschichtung</h3><p>nACo blue, TiXCo, TiAlN und DLC – abgestimmt auf Stahl, Edelstahl, Aluminium und harte Werkstoffe.</p></div>
     <div class="vorteil" data-reveal>{icon("clock")}<h3>Schnell verfügbar</h3><p>Standardwerkzeuge ab Lager, Lieferzeit meist 1–3 Werktage – versicherter Versand.</p></div>
-    <div class="vorteil" data-reveal>{icon("invoice")}<h3>Einfach auf Rechnung</h3><p>Bestellen ohne Kundenkonto. Zahlung bequem per Rechnung, Versandpauschale 7,90 € in Deutschland.</p></div>
+    <div class="vorteil" data-reveal>{icon("invoice")}<h3>Einfach auf Rechnung</h3><p>Bestellen ohne Kundenkonto. Zahlung bequem per Rechnung, Versandpauschale {euro(FIRMA['versand'])} in Deutschland.</p></div>
     <div class="vorteil" data-reveal>{icon("tool")}<h3>Sonderwerkzeuge &amp; Service</h3><p>Konstruktion und Fertigung nach Zeichnung – dazu Nachschleif- und Beschichtungsservice.</p></div>
   </div>
 </section>
@@ -947,8 +970,8 @@ def shopseite(produkte):
     </div>
     <aside class="entgrater-hinweis karte">
       <img src="assets/img/fotos/kat-entgrater.webp" alt="" loading="lazy">
-      <div><h3>NC-Entgratwerkzeuge &amp; Sonderabmessungen</h3>
-      <p>Nicht im Shop gelistet? Entgratwerkzeuge, Semi-Standard und Sonderwerkzeuge liefern wir auf Anfrage.</p></div>
+      <div><h3>Sonderabmessungen &amp; Sonderwinkel</h3>
+      <p>Nicht im Shop gelistet? Entgrater mit Sonderwinkel, Semi-Standard und Sonderwerkzeuge liefern wir auf Anfrage.</p></div>
       <a class="btn btn-blau" href="kontakt.html?betreff=Werkzeuganfrage">Anfragen {icon("arrow")}</a>
     </aside>
   </div>
@@ -1194,6 +1217,7 @@ def kontaktseite():
   <div class="wrap service-grid">
     <div class="service karte">{icon("pin")}<h3>Selbstabholung</h3><p>Bestellungen können zu unseren Geschäftszeiten in {FIRMA['strasse']}, {FIRMA['ort']} abgeholt werden. Sie erhalten eine Nachricht, sobald die Ware bereitliegt.</p></div>
     <div class="service karte">{icon("mail")}<h3>Bestellungen</h3><p>Fragen zu einer laufenden Bestellung: <a href="mailto:{FIRMA['order']}">{FIRMA['order']}</a></p></div>
+    <div class="service karte service-partner" id="s-tec">{partner_logo("klein")}<h3>Schwarzwald · Rheinebene · Schweiz</h3><p>Kundenservice in Kooperation mit <strong>S-TEC</strong>. Ihr Ansprechpartner: <strong>{PARTNER['ansprechpartner']}</strong>.</p><a class="btn btn-blau" href="{PARTNER['link']}">Anfrage an {PARTNER['ansprechpartner']} {icon("arrow")}</a></div>
     <div class="service karte">{icon("tool")}<h3>Sonderwerkzeuge</h3><p>Zeichnungen und Anfragen an <a href="mailto:{FIRMA['mail']}">{FIRMA['mail']}</a></p></div>
   </div>
 </section>"""
@@ -1374,7 +1398,7 @@ def warenkorbseite():
         <label class="feld"><span>Ihre Bestellnummer / Bemerkung</span><textarea name="bemerkung" rows="3"></textarea></label>
         <fieldset class="versandwahl">
           <legend>Versand</legend>
-          <label class="radio"><input type="radio" name="versand" value="dhl" checked><span><strong>Versand</strong><small>versichertes Paket, Deutschland 7,90 € – Ausland auf Anfrage</small></span></label>
+          <label class="radio"><input type="radio" name="versand" value="dhl" checked><span><strong>Versand</strong><small>versichertes Paket, Deutschland {euro(FIRMA['versand'])} – Ausland auf Anfrage</small></span></label>
           <label class="radio"><input type="radio" name="versand" value="abholung"><span><strong>Selbstabholung</strong><small>{FIRMA['strasse']}, {FIRMA['ort']} – kostenlos</small></span></label>
         </fieldset>
         <fieldset class="versandwahl">
@@ -1389,16 +1413,11 @@ def warenkorbseite():
       <h2 class="karte-titel">Übersicht</h2>
       <dl>
         <div><dt>Zwischensumme netto</dt><dd data-zwischensumme>0,00 €</dd></div>
-        <div><dt>Versand netto</dt><dd data-versandkosten>7,90 €</dd></div>
+        <div><dt>Versand netto</dt><dd data-versandkosten>{euro(FIRMA['versand'])}</dd></div>
         <div><dt>zzgl. 19 % MwSt.</dt><dd data-mwst>0,00 €</dd></div>
         <div class="gesamt"><dt>Gesamtbetrag</dt><dd data-gesamt>0,00 €</dd></div>
       </dl>
       <p class="klein-text" data-ausland-hinweis hidden>Versand ins Ausland auf Anfrage – wir nennen Ihnen die Versandkosten mit der Bestellbestätigung.</p>
-      <div class="preishinweis-kurz" role="note">
-        {icon("warnung")}
-        <p><strong>Wichtiger Hinweis zu unseren Preisen:</strong> Die angezeigten Preise sind aktuell nicht verbindlich.
-        Der tatsächliche Preis kann abweichen – wir informieren Sie vor der Auftragsbestätigung über den gültigen Preis.</p>
-      </div>
       <button class="btn btn-rot breit" type="button" data-bestellen>Zahlungspflichtig bestellen {icon("arrow")}</button>
       <p class="formular-status" data-status></p>
       <ul class="produkt-usps">
@@ -1435,6 +1454,9 @@ def rechtsseiten():
         text = re.sub(r"<h1[^>]*>.*?</h1>", "", text, flags=re.S)
         text = re.sub(r"^\s*<h2>\s*" + re.escape(titel.split(" ")[0]) + r"[^<]*</h2>", "", text)
         text = text.replace("<h2>", "<h2 class=\"recht-h\">")
+        if schluessel == "shipping":
+            # Versandpauschale aktualisiert (Kevin 27.10.2026), sonst Originaltext
+            text = text.replace("7,90 EUR", euro(FIRMA["versand"]).replace(" €", " EUR"))
         if schluessel == "contact":
             # Original-Text; nur die im Original fehlenden Zeilenumbrüche in der Anschrift ergänzt
             text = text.replace("</strong>Inh. Alexandra SimonAckerstraße 12D-98544 Zella-Mehlis",
@@ -1497,7 +1519,7 @@ def katalog_js(produkte):
     js = ("/* automatisch erzeugt von tools/build_site.py – nicht von Hand bearbeiten */\n"
           f"window.TQ_KATALOG = {json.dumps({'linien': linien, 'produkte': liste}, ensure_ascii=False, separators=(',', ':'))};\n"
           f"window.TQ_PREISE = {json.dumps(preise, ensure_ascii=False, separators=(',', ':'))};\n"
-          f"window.TQ_SHOP = {json.dumps({'versand': 7.90, 'mwst': 0.19, 'order': FIRMA['order'], 'stand': dt.date.today().isoformat()})};\n")
+          f"window.TQ_SHOP = {json.dumps({'versand': FIRMA['versand'], 'mwst': 0.19, 'order': FIRMA['order'], 'stand': dt.date.today().isoformat()})};\n")
     (WEB / "assets" / "js" / "katalog.js").write_text(js, encoding="utf-8")
     (WEB / "api").mkdir(exist_ok=True)
     (WEB / "api" / "preise.json").write_text(
@@ -1579,6 +1601,8 @@ def sitemap():
 
 def main():
     bilder = json.loads((WURZEL / "data" / "bilder_index.json").read_text(encoding="utf-8"))
+    if (WURZEL / "data" / "bilder_zusatz.json").exists():
+        bilder.update(json.loads((WURZEL / "data" / "bilder_zusatz.json").read_text(encoding="utf-8")))
     produkte = katalog_bauen(bilder)
     (WURZEL / "data" / "katalog.json").write_text(json.dumps(produkte, ensure_ascii=False, indent=1), encoding="utf-8")
     LINIEN_ZAHLEN.extend((l, sum(1 for p in produkte if l["id"] in p["linien"])) for l in LINIEN)

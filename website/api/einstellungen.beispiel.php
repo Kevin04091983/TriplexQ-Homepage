@@ -5,7 +5,8 @@
    Diese Datei nach dem Hochladen mit den echten Zugangsdaten füllen. */
 
 // ---------- E-Mail ----------
-const EMPFAENGER_BESTELLUNG = 'order@wkz-schmidt.de';
+// mehrere Empfänger mit Komma trennen; der erste ist Antwort-Adresse in der Bestellbestätigung
+const EMPFAENGER_BESTELLUNG = 'order@wkz-schmidt.de, wareneingang@wkz-schmidt.de';
 const EMPFAENGER_KONTAKT = 'kontakt@triplex-q.de';
 // Absender-Domain muss im SELBEN Strato-Paket liegen wie die Seite, sonst verwirft Strato die Mail still.
 // Live (Webshop-Paket, triplex-q.com): shop@triplex-q.com. Antworten gehen an EMPFAENGER_KONTAKT.
@@ -15,7 +16,7 @@ const ABSENDER = 'TRIPLEX-Q Webshop <shop@triplex-q.com>';
 const MAIL_AUS = false;
 
 // ---------- Shop ----------
-const VERSAND_NETTO = 7.90;
+const VERSAND_NETTO = 9.50;
 const MWST = 0.19;
 const SEITEN_URL = 'https://triplex-q.de';   // ohne Schrägstrich am Ende
 

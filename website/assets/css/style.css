@@ -906,3 +906,33 @@ p { margin: 0 0 1em; }
 .reel-zu { position: absolute; top: -14px; right: -14px; width: 42px; height: 42px; border: 0; border-radius: 50%; background: #fff; color: var(--navy);
   cursor: pointer; display: grid; place-items: center; box-shadow: var(--schatten-l); z-index: 1; }
 .reel-zu .ic { width: 20px; height: 20px; }
+
+/* ------------------------------------------------ Kooperation S-TEC (Schwarzwald, Rheinebene, Schweiz) */
+.partner-knopf { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 18px; padding: 7px 14px 7px 7px; border-radius: 999px;
+  background: rgb(255 255 255 / .1); box-shadow: inset 0 0 0 1px rgb(255 255 255 / .22); color: #fff; text-decoration: none;
+  font-size: .88rem; font-weight: 600; transition: background .2s; max-width: 100%; }
+.partner-knopf:hover { background: rgb(255 255 255 / .18); color: #fff; }
+.partner-knopf .neu { background: var(--rot); color: #fff; border-radius: 999px; padding: 3px 10px; font-size: .74rem; letter-spacing: .06em; text-transform: uppercase; flex: none; }
+.partner-knopf .ic { width: 16px; height: 16px; flex: none; }
+.partner-band { background: var(--grau-1); padding: clamp(28px, 4vw, 48px) 0; scroll-margin-top: calc(var(--kopf-h) + 10px); }
+.partner-in { display: grid; grid-template-columns: minmax(240px, 340px) 1fr; gap: clamp(24px, 4vw, 56px); align-items: center;
+  background: #fff; border: 1px solid var(--grau-2); border-radius: var(--r-l); box-shadow: var(--schatten); padding: clamp(22px, 3.5vw, 40px); }
+.partner-marke { display: flex; align-items: center; justify-content: center; gap: 18px; }
+.partner-marke img { width: 120px; height: auto; }
+.partner-plus { font: 800 2rem/1 var(--display, inherit); color: var(--grau-2); }
+.partner-logo { max-width: 150px; max-height: 90px; object-fit: contain; }
+.partner-logo-text { display: inline-grid; place-items: center; min-width: 120px; height: 74px; padding: 0 18px; border-radius: 16px;
+  background: var(--navy); color: #fff; font: 800 italic 1.9rem/1 var(--display, inherit); letter-spacing: .04em; }
+.partner-logo.klein { max-width: 110px; max-height: 56px; margin-bottom: 14px; }
+.partner-logo-text.klein { min-width: 86px; height: 50px; font-size: 1.3rem; border-radius: 12px; }
+.partner-text h2 { margin-bottom: .4em; }
+.partner-text p:not(.eyebrow) { color: var(--text-2); max-width: 60ch; }
+.service-grid { grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)) !important; }
+.service-partner { border: 2px solid var(--blau); scroll-margin-top: calc(var(--kopf-h) + 10px); }
+.service-partner .btn { margin-top: 10px; }
+@media (max-width: 860px) { .partner-in { grid-template-columns: 1fr; } .partner-marke { justify-content: flex-start; } }
+
+/* technische Daten in der Produktbeschreibung (z. B. Entgrater) */
+.produkt-beschreibung table { width: 100%; border-collapse: collapse; font-size: .9rem; margin: 10px 0 18px; display: block; overflow-x: auto; }
+.produkt-beschreibung table th { background: var(--navy); color: #fff; font-weight: 600; text-align: left; padding: 8px 10px; white-space: nowrap; }
+.produkt-beschreibung table td { padding: 7px 10px; border-bottom: 1px solid var(--grau-2); white-space: nowrap; }

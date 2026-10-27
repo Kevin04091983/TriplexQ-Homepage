@@ -3,7 +3,7 @@
   "use strict";
   if (!window.TQ) return;
   const { Warenkorb, euro, basis, sende, pruefen, Konto, Preise } = window.TQ;
-  const SHOP = window.TQ_SHOP || { versand: 7.9, mwst: 0.19, order: "order@wkz-schmidt.de" };
+  const SHOP = window.TQ_SHOP || { versand: 9.5, mwst: 0.19, order: "order@wkz-schmidt.de" };
   const PREISE = window.TQ_PREISE || {};
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
@@ -32,7 +32,7 @@
 
   const abholung = () => form.querySelector('input[name="versand"]:checked').value === "abholung";
   const ausland = () => !!form.land && form.land.value !== "Deutschland";
-  /* Deutschland 7,90 €; Ausland wie im alten Shop "auf Anfrage" (wird mit der Bestätigung genannt) */
+  /* Deutschland 9,50 € (aus TQ_SHOP); Ausland wie im alten Shop "auf Anfrage" (wird mit der Bestätigung genannt) */
   function versandKosten() {
     return abholung() || ausland() ? 0 : SHOP.versand;
   }

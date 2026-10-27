@@ -114,7 +114,7 @@ mail_senden($email, "Ihre Bestellung $nummer bei TRIPLEX-Q",
     . "vielen Dank für Ihre Bestellung. Wir haben sie erhalten und bearbeiten sie umgehend.\n"
     . "Die Rechnung erhalten Sie mit der Lieferung.\n\n" . $text
     . "\nMit freundlichen Grüßen\nPräzisionswerkzeuge Schmidt e.K. – Home of TRIPLEX-Q\n"
-    . "Ackerstraße 12, 98544 Zella-Mehlis\nTel. +49 (0) 3682 / 483662\n", EMPFAENGER_BESTELLUNG);
+    . "Ackerstraße 12, 98544 Zella-Mehlis\nTel. +49 (0) 3682 / 483662\n", trim((string) strtok(EMPFAENGER_BESTELLUNG, ',')));
 
 json_aus(['ok' => $ok || $gespeichert, 'nummer' => $nummer, 'gespeichert' => $gespeichert,
     'meldung' => ($ok || $gespeichert) ? '' : 'Bestellung konnte nicht zugestellt werden.'], ($ok || $gespeichert) ? 200 : 500);

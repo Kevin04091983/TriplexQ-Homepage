@@ -112,6 +112,12 @@ def uebernehmen(alt):
 
 def main():
     neu = json.loads(NEU.read_text(encoding="utf-8"))
+    # Zusatzprodukte (z. B. Entgrater) sind im alten Shop ausgeblendet – deren Preise pflegt TRIPLEX-Q selbst
+    zusatz = WURZEL / "data" / "quelle" / "zusatzprodukte.json"
+    if zusatz.exists():
+        for z in json.loads(zusatz.read_text(encoding="utf-8")):
+            for v in z.get("varianten", []):
+                neu.pop(str(v["sku"]), None)
     produkte = seiten("/products")
     alt = []
     for p in produkte:

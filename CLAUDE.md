@@ -17,6 +17,10 @@ Kommunikation mit Kevin auf Deutsch; nach jeder fertigen Änderung einen anklick
   `~/.ssh/triplexq_strato` hoch; Ziel in `tools/strato.json`. `--test`/`--live`, `--erstmals` (mit Assistent), `--nur-paket`.
 - `website/einrichtung/` – Einrichtungs-Assistent: Kevin trägt DB-Zugang + Admin-Passwort selbst ein; sperrt sich danach.
 - `tools/instagram_reels.py` – Instagram-Reels (@triplex_q_tools) für die Startseite: Vorschaubilder auf den eigenen Server, Liste REELS im Skript ergänzen.
+- `tools/entgrater_aus_export.py` – NC-Entgrater (im alten Shop ausgeblendet) aus dem Produkt-Export → `data/quelle/zusatzprodukte.json`
+  + Bilder (`data/bilder_zusatz.json`); Preis vorerst 50 €, echte Preise pflegt TRIPLEX-Q in der Verwaltung. Fotos fehlen noch (DEB 60/120, Vor-/Rückwärts).
+- S-TEC-Kooperation (Schwarzwald, Rheinebene, Schweiz, Ansprechpartner Maxim Semenov): `PARTNER` in build_site.py; Logo als
+  `website/assets/img/partner/s-tec.webp` ablegen → erscheint automatisch.
 - `tools/vorschau_server.py` – lokale Vorschau ohne Zwischenspeicher (Port 8095), ohne PHP.
 - Design: `website/assets/css/style.css`. Farben aus dem Logo: #003B9F, #E40001, Navy #06163F.
 

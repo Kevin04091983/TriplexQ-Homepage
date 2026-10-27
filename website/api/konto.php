@@ -86,7 +86,7 @@ switch ($aktion) {
             . "Sie können sich ab sofort anmelden und bestellen.\n\n"
             . "Mit freundlichen Grüßen\nPräzisionswerkzeuge Schmidt e.K. – Home of TRIPLEX-Q\n"
             . "Ackerstraße 12, 98544 Zella-Mehlis, Tel. +49 (0) 3682 / 483662\n");
-        mail_senden(EMPFAENGER_BESTELLUNG, 'Neues Kundenkonto: ' . $email,
+        mail_senden(trim((string) strtok(EMPFAENGER_BESTELLUNG, ',')), 'Neues Kundenkonto: ' . $email,
             "Neue Registrierung im Webshop\n\nE-Mail: $email\nFirma: " . text($d['firma'] ?? '', 120)
             . "\nName: " . text($d['vorname'], 80) . ' ' . text($d['nachname'], 80) . "\n");
         $k = angemeldeter_kunde();
