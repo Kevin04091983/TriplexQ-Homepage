@@ -35,6 +35,8 @@
     $("[data-unbestaetigt]").hidden = k.email_bestaetigt !== false || Konto.vorschau;
     const adminBox = $("[data-admin-box]");
     if (adminBox) adminBox.hidden = !k.admin;
+    const codeBox = $("[data-admin-code]");
+    if (codeBox) codeBox.hidden = !k.admin_code_noetig;
     const rabatt = Number(k.rabatt) || 0;
     $("[data-rabatt-box]").hidden = rabatt <= 0;
     if (rabatt > 0) $("[data-rabatt]").textContent = rabatt.toLocaleString("de-DE", { maximumFractionDigits: 2 }) + " % Rabatt";

@@ -25,7 +25,17 @@ Kommunikation mit Kevin auf Deutsch; nach jeder fertigen Änderung einen anklick
   geschützte Dateien (von außen), Datei-Integrität gegen `admin/integritaet.json` (schreibt `hochladen.py` bei jedem Upload –
   deshalb Dateien auf dem Server NIE von Hand ändern, sonst meldet der Wächter „verändert“), Admin-Zugänge, Anmelde-Protokoll
   (`sicherheit_protokoll`, 180 Tage, IP gekürzt), PHP, SPF/DMARC, Datenbank. `.htaccess` (build_site.py) setzt die Sicherheits-Header.
-- `tools/vorschau_server.py` – lokale Vorschau ohne Zwischenspeicher (Port 8095), ohne PHP.
+  Prüfungen liegen in `admin/sicherheit_funktionen.php` (`waechter_pruefen()`), die Seite zeigt nur an.
+- Sicherheits-Werkzeuge (Wächter-Seite unten): Datensicherung (`admin/sicherungen/`, gzip-SQL, gesperrt per .htaccess, 30 Tage),
+  Alarm-Mails (`alarm_senden()` in db.php, gedrosselt; bei ≥5 Admin-Fehlversuchen, Sperre, neuem Admin-Gerät), zweite Sperre
+  (Browser-Passwort, schreibt admin/.htaccess + .htpasswd), Zwei-Faktor (TOTP, eingebaut aber AUS – Kevin schaltet selbst ein),
+  Passwort-Leck-Prüfung (HIBP k-Anonymität, bei Ausfall durchlassen). `admin/cron_taeglich.php` = nächtlicher Lauf (Sicherung +
+  Wächter + Alarm), nur Kommandozeile – Strato-Cron-Job muss Kevin im Kundenbereich anlegen.
+- Strenge CSP für die öffentliche Seite (`CSP_SEITE` in build_site.py, kein Inline-JS erlaubt – JSON-Datenblöcke sind ok);
+  /admin/ ist per `<If>` ausgenommen und setzt in admin/index.php eigene Kopfzeilen. Neue externe Einbettungen → `frame-src` ergänzen.
+- Lokale Tests: `.lokal/` (PHP 8.5, MariaDB 3307, Mail-Falle 2525). Der Wächter ruft sich selbst ab → zweiter Testserver auf 8097
+  (`SEITEN_URL` in der Test-einstellungen.php), weil `php -S` nur eine Anfrage gleichzeitig kann.
+- `tools/vorschau_server.py` – lokale Vorschau ohne Zwischenspeicher (Port 8095), ohne PHP; mit Umgebungsvariable `TQ_CSP` sendet sie eine CSP.
 - Design: `website/assets/css/style.css`. Farben aus dem Logo: #003B9F, #E40001, Navy #06163F.
 
 ## Server (Ziel: Strato „Hosting Plus“, PHP 8.4, MySQL)

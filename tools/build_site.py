@@ -1321,6 +1321,12 @@ def kontoseite():
         <a class="btn btn-blau" href="admin/?seite=preise">Preise verwalten {icon("arrow")}</a>
         <a class="btn btn-linie" href="admin/">Bestellungen &amp; Kunden</a>
       </div>
+      <div class="admin-box karte" data-admin-code hidden>
+        <span class="admin-marke">Admin</span>
+        <div><strong>Zwei-Faktor-Anmeldung ist eingeschaltet.</strong>
+          <small>Für die Admin-Rechte (Preise, Verwaltung) bitte in der Verwaltung anmelden – mit Passwort und Code aus der App.</small></div>
+        <a class="btn btn-blau" href="admin/">Mit Code anmelden {icon("arrow")}</a>
+      </div>
       <p class="hinweis-box" data-unbestaetigt hidden>{icon("mail")} Bitte bestätigen Sie noch Ihre E-Mail-Adresse. Den Link haben wir Ihnen nach der Registrierung geschickt.</p>
 
       <div class="konto-reiter" role="tablist">
@@ -1538,15 +1544,18 @@ def katalog_js(produkte):
                            "RewriteRule ^ https://www.triplex-q.com%{REQUEST_URI} [L,R=301]\n")
         + weiterleitungen(produkte) +
         "# Nicht öffentlich: Datenbankschema, Notizen, Sicherungs-/Protokolldateien, Prüfliste des Wächters\n"
-        "<FilesMatch \"(\\.(sql|md|txt|bak|old|orig|log|ini|sh|py|env|dist|swp)|^integritaet\\.json)$\">\n  Require all denied\n</FilesMatch>\n"
+        "<FilesMatch \"(\\.(sql|md|txt|bak|old|orig|log|ini|sh|py|env|dist|swp|gz)|^integritaet\\.json)$\">\n  Require all denied\n</FilesMatch>\n"
         "<Files \"robots.txt\">\n  Require all granted\n</Files>\n"
         "<IfModule mod_headers.c>\n"
         "  # Sicherheits-Header (geprüft im Wächter der Verwaltung)\n"
         "  Header always set X-Content-Type-Options \"nosniff\"\n"
-        "  Header always set X-Frame-Options \"SAMEORIGIN\"\n"
         "  Header always set Referrer-Policy \"strict-origin-when-cross-origin\"\n"
         "  Header always set Permissions-Policy \"camera=(), microphone=(), geolocation=(), payment=(), usb=()\"\n"
-        "  Header always set Content-Security-Policy \"frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'\"\n"
+        "  # öffentliche Seite: strenge Regel; /admin/ setzt eigene Kopfzeilen (admin/index.php)\n"
+        "  <If \"%{REQUEST_URI} !~ m#^/admin/#\">\n"
+        "    Header always set X-Frame-Options \"SAMEORIGIN\"\n"
+        f"    Header always set Content-Security-Policy \"{CSP_SEITE}\"\n"
+        "  </If>\n"
         + ("" if TEST else "  Header always set Strict-Transport-Security \"max-age=31536000\"\n")
         + "  Header unset X-Powered-By\n"
         "  # HTML immer frisch prüfen; CSS/JS tragen eine Versionskennung (?v=...) und dürfen lange bleiben\n"
@@ -1588,6 +1597,12 @@ ALTE_SEITEN = {
     "produkte/deb-60.html": "produkte/steel-blue-deb-90.html",
     "produkte/deb-120.html": "produkte/steel-blue-deb-90.html",
 }
+
+
+# Content-Security-Policy der öffentlichen Seite (die Verwaltung setzt in admin/index.php ihre eigene)
+CSP_SEITE = ("default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; "
+             "connect-src 'self'; frame-src https://www.youtube-nocookie.com https://www.instagram.com; media-src 'self'; "
+             "object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests")
 
 
 def weiterleitungen(produkte):

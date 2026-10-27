@@ -98,7 +98,7 @@ RewriteRule ^p/triplex\-q\-vhm\-hochleistungsbohrer\-12xd\-mit\-ik\-o\-8\-00\-mm
 RewriteRule ^(p|c)/ /shop.html [R=301,L]
 RewriteRule ^(i|l)/ / [R=301,L]
 # Nicht öffentlich: Datenbankschema, Notizen, Sicherungs-/Protokolldateien, Prüfliste des Wächters
-<FilesMatch "(\.(sql|md|txt|bak|old|orig|log|ini|sh|py|env|dist|swp)|^integritaet\.json)$">
+<FilesMatch "(\.(sql|md|txt|bak|old|orig|log|ini|sh|py|env|dist|swp|gz)|^integritaet\.json)$">
   Require all denied
 </FilesMatch>
 <Files "robots.txt">
@@ -107,10 +107,13 @@ RewriteRule ^(i|l)/ / [R=301,L]
 <IfModule mod_headers.c>
   # Sicherheits-Header (geprüft im Wächter der Verwaltung)
   Header always set X-Content-Type-Options "nosniff"
-  Header always set X-Frame-Options "SAMEORIGIN"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
-  Header always set Content-Security-Policy "frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'"
+  # öffentliche Seite: strenge Regel; /admin/ setzt eigene Kopfzeilen (admin/index.php)
+  <If "%{REQUEST_URI} !~ m#^/admin/#">
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-src https://www.youtube-nocookie.com https://www.instagram.com; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests"
+  </If>
   Header always set Strict-Transport-Security "max-age=31536000"
   Header unset X-Powered-By
   # HTML immer frisch prüfen; CSS/JS tragen eine Versionskennung (?v=...) und dürfen lange bleiben

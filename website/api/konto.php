@@ -55,8 +55,8 @@ switch ($aktion) {
         if (!$email) {
             json_aus(['ok' => false, 'meldung' => 'Bitte eine gültige E-Mail-Adresse angeben.', 'feld' => 'email'], 422);
         }
-        if (mb_strlen((string) $d['passwort']) < 8) {
-            json_aus(['ok' => false, 'meldung' => 'Das Passwort braucht mindestens 8 Zeichen.', 'feld' => 'passwort'], 422);
+        if ($schwach = passwort_schwach((string) $d['passwort'])) {
+            json_aus(['ok' => false, 'meldung' => $schwach, 'feld' => 'passwort'], 422);
         }
         $vorhanden = db()->prepare('SELECT * FROM kunden WHERE email = ?');
         $vorhanden->execute([$email]);
@@ -125,6 +125,7 @@ switch ($aktion) {
         admin_sitzung($k);
         if (!empty($_SESSION['admin'])) {
             sicherheit_merken('admin_ok', (string) $k['email'], 'Kontoseite');
+            admin_geraet_pruefen((string) $k['email']);
         }
         json_aus(['ok' => true, 'kunde' => kunde_oeffentlich($k), 'csrf' => $_SESSION['csrf'],
             'csrf_admin' => !empty($_SESSION['admin']) ? $_SESSION['csrf_admin'] : null]);
@@ -154,8 +155,8 @@ switch ($aktion) {
         if (!password_verify((string) ($d['alt'] ?? ''), $k['passwort_hash'])) {
             json_aus(['ok' => false, 'meldung' => 'Das bisherige Passwort stimmt nicht.', 'feld' => 'alt'], 403);
         }
-        if (mb_strlen((string) ($d['neu'] ?? '')) < 8) {
-            json_aus(['ok' => false, 'meldung' => 'Das neue Passwort braucht mindestens 8 Zeichen.', 'feld' => 'neu'], 422);
+        if ($schwach = passwort_schwach((string) ($d['neu'] ?? ''))) {
+            json_aus(['ok' => false, 'meldung' => $schwach, 'feld' => 'neu'], 422);
         }
         db()->prepare('UPDATE kunden SET passwort_hash = ? WHERE id = ?')
             ->execute([password_hash((string) $d['neu'], PASSWORD_DEFAULT), $k['id']]);
@@ -175,8 +176,8 @@ switch ($aktion) {
 
     case 'passwort-neu':
         $token = text($d['token'] ?? '', 64);
-        if (mb_strlen((string) ($d['passwort'] ?? '')) < 8) {
-            json_aus(['ok' => false, 'meldung' => 'Das Passwort braucht mindestens 8 Zeichen.'], 422);
+        if ($schwach = passwort_schwach((string) ($d['passwort'] ?? ''))) {
+            json_aus(['ok' => false, 'meldung' => $schwach], 422);
         }
         $s = db()->prepare('SELECT id FROM kunden WHERE token = ? AND token_zweck = "passwort" AND token_bis > NOW()');
         $s->execute([$token]);

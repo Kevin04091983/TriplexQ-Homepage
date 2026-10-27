@@ -6,6 +6,7 @@ Der eingebaute Server von Python erlaubt dem Browser, Seiten zwischenzuspeichern
 Aufruf:  python tools/vorschau_server.py [Port]
 """
 import functools
+import os
 import http.server
 import sys
 from pathlib import Path
@@ -17,6 +18,8 @@ class OhneZwischenspeicher(http.server.SimpleHTTPRequestHandler):
     def end_headers(self):
         self.send_header("Cache-Control", "no-cache, no-store, must-revalidate")
         self.send_header("Expires", "0")
+        if os.environ.get("TQ_CSP"):          # zum Testen der Content-Security-Policy wie auf dem Server
+            self.send_header("Content-Security-Policy", os.environ["TQ_CSP"])
         super().end_headers()
 
     def log_message(self, format, *args):

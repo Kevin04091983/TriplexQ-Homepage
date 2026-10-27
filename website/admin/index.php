@@ -5,11 +5,15 @@
  */
 declare(strict_types=1);
 require_once __DIR__ . '/../api/db.php';
+require_once __DIR__ . '/sicherheit_funktionen.php';
 sitzung_start();
 // Verwaltung: nie zwischenspeichern, nie bei Google, nie in fremde Seiten einbetten
 header('Cache-Control: no-store');
 header('X-Robots-Tag: noindex, nofollow');
 header('X-Frame-Options: DENY');
+// eigene, auf die Verwaltung zugeschnittene Content-Security-Policy (die Website-Regel gilt hier nicht)
+header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; "
+    . "connect-src 'self'; frame-ancestors 'none'; form-action 'self'; base-uri 'self'; object-src 'none'");
 
 function h(?string $s): string { return htmlspecialchars((string) $s, ENT_QUOTES, 'UTF-8'); }
 
@@ -42,7 +46,23 @@ function partner_spalte(): void
 }
 
 $fehler = '';
+/** Admin-Rechte vergeben (nach Passwort bzw. Passwort + Code) */
+$freigeben = static function (?array $k, string $wer, string $wo): never {
+    session_regenerate_id(true);
+    if ($k) {
+        admin_sitzung($k);
+    } else {
+        $_SESSION['admin'] = true;
+    }
+    $_SESSION['csrf_admin'] = bin2hex(random_bytes(16));
+    unset($_SESSION['admin_2fa_wartet']);
+    sicherheit_merken('admin_ok', $wer, $wo);
+    admin_geraet_pruefen($wer);
+    header('Location: ?');
+    exit;
+};
 if (($_POST['tun'] ?? '') === 'anmelden') {
+    totp_spalten();
     $kennung = 'admin|' . ($_SERVER['REMOTE_ADDR'] ?? '?');
     if (gesperrt_wegen_versuchen($kennung)) {
         sicherheit_merken('gesperrt', trim((string) ($_POST['benutzer'] ?? '')), 'Verwaltung');
@@ -55,25 +75,53 @@ if (($_POST['tun'] ?? '') === 'anmelden') {
         })($eingabe))
         && ist_admin_kunde($k) && password_verify((string) ($_POST['passwort'] ?? ''), (string) $k['passwort_hash'])) {
         // Anmeldung mit dem Admin-Kundenkonto (E-Mail + Passwort wie auf der Kontoseite)
-        session_regenerate_id(true);
-        admin_sitzung($k);
-        $_SESSION['csrf_admin'] = bin2hex(random_bytes(16));
-        sicherheit_merken('admin_ok', (string) $k['email'], 'Verwaltung');
-        header('Location: ?');
-        exit;
+        if (admin_2fa_aktiv($k)) {
+            session_regenerate_id(true);
+            $_SESSION['admin_2fa_wartet'] = ['email' => $k['email'], 'notfall' => false, 'bis' => time() + 300];
+            header('Location: ?');
+            exit;
+        }
+        $freigeben($k, (string) $k['email'], 'Verwaltung');
     } elseif (hash_equals(ADMIN_BENUTZER, (string) ($_POST['benutzer'] ?? '')) && password_verify((string) ($_POST['passwort'] ?? ''), ADMIN_HASH)) {
-        session_regenerate_id(true);
-        $_SESSION['admin'] = true;
-        $_SESSION['csrf_admin'] = bin2hex(random_bytes(16));
-        sicherheit_merken('admin_ok', ADMIN_BENUTZER, 'Verwaltung (Notfall-Zugang)');
-        header('Location: ?');
-        exit;
+        // Notfall-Zugang: ist bei einem Admin die Zwei-Faktor-Anmeldung an, braucht auch er dessen Code
+        if ($zweiK = irgendein_admin_2fa()) {
+            session_regenerate_id(true);
+            $_SESSION['admin_2fa_wartet'] = ['email' => $zweiK['email'], 'notfall' => true, 'bis' => time() + 300];
+            header('Location: ?');
+            exit;
+        }
+        $freigeben(null, ADMIN_BENUTZER, 'Verwaltung (Notfall-Zugang)');
     } else {
         versuch_merken($kennung);
         sicherheit_merken('admin_fehler', mb_substr(trim((string) ($_POST['benutzer'] ?? '')), 0, 80), 'Verwaltung');
         usleep(400000);
         $fehler = 'E-Mail/Benutzername oder Passwort stimmt nicht.';
     }
+} elseif (($_POST['tun'] ?? '') === 'code' && !empty($_SESSION['admin_2fa_wartet'])) {
+    totp_spalten();
+    $w = $_SESSION['admin_2fa_wartet'];
+    $kennung = 'admin2fa|' . ($_SERVER['REMOTE_ADDR'] ?? '?');
+    $s = db()->prepare('SELECT * FROM kunden WHERE email = ?');
+    $s->execute([$w['email']]);
+    $k = $s->fetch() ?: null;
+    if ($w['bis'] < time()) {
+        unset($_SESSION['admin_2fa_wartet']);
+        $fehler = 'Die Zeit für die Code-Eingabe ist abgelaufen – bitte erneut anmelden.';
+    } elseif (gesperrt_wegen_versuchen($kennung)) {
+        sicherheit_merken('gesperrt', (string) $w['email'], 'Verwaltung (Code)');
+        $fehler = 'Zu viele falsche Codes. Bitte in 15 Minuten erneut versuchen.';
+    } elseif ($k && admin_2fa_aktiv($k) && totp_pruefen((string) $k['totp_geheimnis'], (string) ($_POST['code'] ?? ''))) {
+        $_SESSION['admin_2fa_ok'] = true;
+        $freigeben($w['notfall'] ? null : $k, $w['notfall'] ? ADMIN_BENUTZER : (string) $k['email'],
+            $w['notfall'] ? 'Verwaltung (Notfall-Zugang, mit Code)' : 'Verwaltung (mit Code)');
+    } else {
+        versuch_merken($kennung);
+        sicherheit_merken('admin_fehler', (string) $w['email'], 'Verwaltung – falscher Code');
+        usleep(400000);
+        $fehler = 'Der Code stimmt nicht. Bitte den aktuellen 6-stelligen Code aus der App eingeben.';
+    }
+} elseif (($_POST['tun'] ?? '') === 'code_abbrechen') {
+    unset($_SESSION['admin_2fa_wartet']);
 }
 if (isset($_GET['abmelden'])) {
     $_SESSION = [];
@@ -82,12 +130,92 @@ if (isset($_GET['abmelden'])) {
     exit;
 }
 $angemeldet = !empty($_SESSION['admin']);
+$codeSchritt = !$angemeldet && !empty($_SESSION['admin_2fa_wartet']);
+
+if ($angemeldet && isset($_GET['sicherung'])) {
+    $pfad = sicherung_pfad((string) $_GET['sicherung']);
+    if (!$pfad) {
+        http_response_code(404);
+        exit('Sicherung nicht gefunden.');
+    }
+    sicherheit_merken('sicherung', (string) ($_SESSION['admin_name'] ?? ADMIN_BENUTZER), 'heruntergeladen: ' . basename($pfad));
+    header('Content-Type: application/gzip');
+    header('Content-Disposition: attachment; filename="' . basename($pfad) . '"');
+    header('Content-Length: ' . filesize($pfad));
+    readfile($pfad);
+    exit;
+}
 
 /* ---------------------------------------------------------------- Änderungen */
 $hinweis = '';
 if ($angemeldet && $_SERVER['REQUEST_METHOD'] === 'POST' && hash_equals($_SESSION['csrf_admin'] ?? '', (string) ($_POST['csrf'] ?? ''))) {
     try {
-        if (($_POST['tun'] ?? '') === 'kunde') {
+        $wer = (string) ($_SESSION['admin_name'] ?? ADMIN_BENUTZER);
+        $tun = (string) ($_POST['tun'] ?? '');
+        $adminMail = mb_strtolower((string) ($_POST['email'] ?? ''));
+        $istAdminMail = in_array($adminMail, array_map('strtolower', ADMIN_EMAILS), true);
+        if ($tun === 'sicherung_jetzt') {
+            $name = sicherung_erstellen();
+            sicherheit_merken('sicherung', $wer, 'von Hand erstellt: ' . $name);
+            $hinweis = 'Sicherung erstellt: ' . $name;
+        } elseif ($tun === 'alarm_test') {
+            alarm_senden('test:' . time(), 'Test-Alarm', "Das ist ein Test des Alarm-Systems, ausgelöst von $wer in der Verwaltung.\nWenn diese Mail ankommt, funktionieren die Alarm-Mails.", 1);
+            $hinweis = 'Test-Alarm an ' . implode(', ', alarm_empfaenger()) . ' verschickt.';
+        } elseif ($tun === 'sperre_an') {
+            if ((string) ($_POST['passwort'] ?? '') !== (string) ($_POST['passwort2'] ?? '')) {
+                throw new InvalidArgumentException('Die beiden Passwörter stimmen nicht überein.');
+            }
+            zweite_sperre_setzen(trim((string) ($_POST['benutzer'] ?? '')), (string) ($_POST['passwort'] ?? ''));
+            sicherheit_merken('sperre_an', $wer, 'Zweite Sperre eingeschaltet');
+            alarm_senden('sperre_an:' . time(), 'Zweite Sperre vor der Verwaltung eingeschaltet', "$wer hat die zweite Sperre eingeschaltet. Ab jetzt fragt der Browser vor der Verwaltung ein zusätzliches Passwort ab.", 1);
+            $hinweis = 'Zweite Sperre ist eingeschaltet. Beim nächsten Aufruf fragt der Browser das zusätzliche Passwort ab.';
+        } elseif ($tun === 'sperre_aus') {
+            zweite_sperre_aus();
+            sicherheit_merken('sperre_aus', $wer, 'Zweite Sperre ausgeschaltet');
+            $hinweis = 'Zweite Sperre ist ausgeschaltet.';
+        } elseif (in_array($tun, ['2fa_start', '2fa_speichern', '2fa_an', '2fa_aus', '2fa_loeschen'], true)) {
+            if (!$istAdminMail) {
+                throw new InvalidArgumentException('Unbekanntes Admin-Konto.');
+            }
+            totp_spalten();
+            $s = db()->prepare('SELECT * FROM kunden WHERE email = ?');
+            $s->execute([$adminMail]);
+            $k = $s->fetch() ?: null;
+            if (!$k) {
+                throw new InvalidArgumentException('Das Admin-Konto gibt es noch nicht.');
+            }
+            if ($tun === '2fa_start') {
+                $_SESSION['2fa_neu'][$adminMail] = base32_kodieren(random_bytes(20));
+                $hinweis = 'Bitte den QR-Code mit der App scannen und zur Bestätigung den angezeigten Code eingeben.';
+            } elseif ($tun === '2fa_speichern') {
+                $geheim = (string) ($_SESSION['2fa_neu'][$adminMail] ?? '');
+                if ($geheim === '' || !totp_pruefen($geheim, (string) ($_POST['code'] ?? ''))) {
+                    throw new InvalidArgumentException('Der Code passt nicht – bitte den aktuellen Code aus der App eingeben (Uhrzeit am Handy prüfen).');
+                }
+                db()->prepare('UPDATE kunden SET totp_geheimnis = ?, totp_aktiv = 0 WHERE id = ?')->execute([$geheim, $k['id']]);
+                unset($_SESSION['2fa_neu'][$adminMail]);
+                sicherheit_merken('2fa', $adminMail, 'eingerichtet (noch aus)');
+                $hinweis = "Zwei-Faktor-Anmeldung für $adminMail ist eingerichtet – noch AUSGESCHALTET. Einschalten, wann ihr wollt.";
+            } elseif ($tun === '2fa_an') {
+                if (empty($k['totp_geheimnis']) || !totp_pruefen((string) $k['totp_geheimnis'], (string) ($_POST['code'] ?? ''))) {
+                    throw new InvalidArgumentException('Zum Einschalten bitte den aktuellen Code aus der App eingeben.');
+                }
+                db()->prepare('UPDATE kunden SET totp_aktiv = 1 WHERE id = ?')->execute([$k['id']]);
+                $_SESSION['admin_2fa_ok'] = true;
+                sicherheit_merken('2fa', $adminMail, 'eingeschaltet');
+                alarm_senden('2fa_an:' . time(), 'Zwei-Faktor-Anmeldung eingeschaltet', "Für $adminMail ist die Zwei-Faktor-Anmeldung jetzt eingeschaltet (durch $wer).", 1);
+                $hinweis = "Zwei-Faktor-Anmeldung für $adminMail ist EINGESCHALTET. Ab der nächsten Anmeldung wird der Code abgefragt.";
+            } elseif ($tun === '2fa_aus') {
+                db()->prepare('UPDATE kunden SET totp_aktiv = 0 WHERE id = ?')->execute([$k['id']]);
+                sicherheit_merken('2fa', $adminMail, 'ausgeschaltet');
+                alarm_senden('2fa_aus:' . time(), 'Zwei-Faktor-Anmeldung ausgeschaltet', "Für $adminMail wurde die Zwei-Faktor-Anmeldung ausgeschaltet (durch $wer).", 1);
+                $hinweis = "Zwei-Faktor-Anmeldung für $adminMail ist ausgeschaltet.";
+            } else {
+                db()->prepare('UPDATE kunden SET totp_geheimnis = NULL, totp_aktiv = 0 WHERE id = ?')->execute([$k['id']]);
+                sicherheit_merken('2fa', $adminMail, 'entfernt');
+                $hinweis = "Zwei-Faktor-Einrichtung für $adminMail gelöscht.";
+            }
+        } elseif (($_POST['tun'] ?? '') === 'kunde') {
             $gruppe = (int) ($_POST['preisgruppe'] ?? 0);
             partner_spalte();
             db()->prepare('UPDATE kunden SET partner = ? WHERE id = ?')->execute([empty($_POST['partner']) ? 0 : 1, (int) $_POST['id']]);
@@ -291,6 +419,11 @@ $seite = $_GET['seite'] ?? 'bestellungen';
   .w-tipp { color:var(--blau); font-size:.86rem; }
   .w-zeile code, .waechter-gruppen code { font-size:.78rem; background:#f4f7fc; padding:1px 5px; border-radius:4px; word-break:break-all; }
   tr.w-rot td { color:#b50001; }
+  .abschnitt-titel { font-size:1.3rem; margin:26px 0 12px; }
+  .sperre-form { display:grid; gap:8px; max-width:340px; } .sperre-form label { display:grid; gap:3px; font-size:.85rem; font-weight:600; }
+  .zf-konto { padding:12px 0; border-top:1px solid var(--linie); } .zf-konto .werkzeug { margin-top:8px; }
+  .zf-qr { width:200px; height:200px; background:#fff; border:1px solid var(--linie); border-radius:10px; padding:6px; }
+  .zf-qr svg { width:100%; height:100%; display:block; }
   .marke.gelb { background:#fff4d6; color:#8a6100; }
   tr.trenner td { background:#edf1f8; font-weight:700; color:var(--navy); }
   tr.partner td { color:#4a5876; }
@@ -299,7 +432,23 @@ $seite = $_GET['seite'] ?? 'bestellungen';
 </style>
 </head>
 <body>
-<?php if (!$angemeldet): ?>
+<?php if (!$angemeldet && $codeSchritt): ?>
+<main class="anmelden">
+  <div class="karte">
+    <h1>Code eingeben</h1>
+    <?php if ($fehler): ?><p class="fehler"><?= h($fehler) ?></p><?php endif; ?>
+    <p class="pos">Passwort stimmt. Bitte jetzt den 6-stelligen Code aus der Authenticator-App eingeben
+      (Konto <?= h((string) $_SESSION['admin_2fa_wartet']['email']) ?>).</p>
+    <form method="post">
+      <input type="hidden" name="tun" value="code">
+      <label>Code<input name="code" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9 ]{6,7}" maxlength="7" required autofocus></label>
+      <button type="submit">Bestätigen</button>
+    </form>
+    <form method="post" style="margin-top:10px"><input type="hidden" name="tun" value="code_abbrechen"><button type="submit" class="hell">Abbrechen</button></form>
+  </div>
+  <p class="zurueck"><a href="../index.html">← Zur Startseite triplex-q.com</a> · <a href="../shop.html">Zum Shop</a></p>
+</main>
+<?php elseif (!$angemeldet): ?>
 <main class="anmelden">
   <div class="karte">
     <h1>TRIPLEX-Q Verwaltung</h1>
