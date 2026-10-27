@@ -1534,10 +1534,20 @@ def katalog_js(produkte):
                            "RewriteCond %{HTTP_HOST} ^triplex-q\\.com$ [NC]\n"
                            "RewriteRule ^ https://www.triplex-q.com%{REQUEST_URI} [L,R=301]\n")
         + weiterleitungen(produkte) +
-        "# Datenbankschema nicht öffentlich abrufbar\n<FilesMatch \"\\.(sql|md|txt)$\">\n  Require all denied\n</FilesMatch>\n"
+        "# Nicht öffentlich: Datenbankschema, Notizen, Sicherungs-/Protokolldateien, Prüfliste des Wächters\n"
+        "<FilesMatch \"(\\.(sql|md|txt|bak|old|orig|log|ini|sh|py|env|dist|swp)|^integritaet\\.json)$\">\n  Require all denied\n</FilesMatch>\n"
         "<Files \"robots.txt\">\n  Require all granted\n</Files>\n"
-        "# HTML immer frisch prüfen; CSS/JS tragen eine Versionskennung (?v=...) und dürfen lange bleiben\n"
-        "<IfModule mod_headers.c>\n  <FilesMatch \"\\.html$\">\n    Header set Cache-Control \"no-cache\"\n  </FilesMatch>\n</IfModule>\n"
+        "<IfModule mod_headers.c>\n"
+        "  # Sicherheits-Header (geprüft im Wächter der Verwaltung)\n"
+        "  Header always set X-Content-Type-Options \"nosniff\"\n"
+        "  Header always set X-Frame-Options \"SAMEORIGIN\"\n"
+        "  Header always set Referrer-Policy \"strict-origin-when-cross-origin\"\n"
+        "  Header always set Permissions-Policy \"camera=(), microphone=(), geolocation=(), payment=(), usb=()\"\n"
+        "  Header always set Content-Security-Policy \"frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'\"\n"
+        + ("" if TEST else "  Header always set Strict-Transport-Security \"max-age=31536000\"\n")
+        + "  Header unset X-Powered-By\n"
+        "  # HTML immer frisch prüfen; CSS/JS tragen eine Versionskennung (?v=...) und dürfen lange bleiben\n"
+        "  <FilesMatch \"\\.html$\">\n    Header set Cache-Control \"no-cache\"\n  </FilesMatch>\n</IfModule>\n"
         "<IfModule mod_expires.c>\n  ExpiresActive On\n  ExpiresByType image/webp \"access plus 1 year\"\n"
         "  ExpiresByType font/woff2 \"access plus 1 year\"\n  ExpiresByType text/css \"access plus 1 week\"\n"
         "  ExpiresByType application/javascript \"access plus 1 day\"\n</IfModule>\n", encoding="utf-8")

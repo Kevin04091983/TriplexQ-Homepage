@@ -21,6 +21,10 @@ Kommunikation mit Kevin auf Deutsch; nach jeder fertigen Änderung einen anklick
   + Bilder (`data/bilder_zusatz.json`); Preis vorerst 50 €, echte Preise pflegt TRIPLEX-Q in der Verwaltung. Fotos fehlen noch (DEB 60/120, Vor-/Rückwärts).
 - S-TEC-Kooperation (Schwarzwald, Rheinebene, Schweiz, Ansprechpartner Maxim Semenov): `PARTNER` in build_site.py; Logo als
   `website/assets/img/partner/s-tec.webp` ablegen → erscheint automatisch.
+- Wächter (Verwaltung → 🛡 Wächter, `website/admin/waechter_seite.php`): prüft live HTTPS/Zertifikat, Sicherheits-Header,
+  geschützte Dateien (von außen), Datei-Integrität gegen `admin/integritaet.json` (schreibt `hochladen.py` bei jedem Upload –
+  deshalb Dateien auf dem Server NIE von Hand ändern, sonst meldet der Wächter „verändert“), Admin-Zugänge, Anmelde-Protokoll
+  (`sicherheit_protokoll`, 180 Tage, IP gekürzt), PHP, SPF/DMARC, Datenbank. `.htaccess` (build_site.py) setzt die Sicherheits-Header.
 - `tools/vorschau_server.py` – lokale Vorschau ohne Zwischenspeicher (Port 8095), ohne PHP.
 - Design: `website/assets/css/style.css`. Farben aus dem Logo: #003B9F, #E40001, Navy #06163F.
 

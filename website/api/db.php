@@ -100,6 +100,44 @@ function gesperrt_wegen_versuchen(string $kennung): bool
     }
 }
 
+/** IP-Adresse gekürzt (Datenschutz): 203.0.113.0 bzw. 2001:db8:85a3:: */
+function ip_kurz(?string $ip = null): string
+{
+    $ip = $ip ?? ($_SERVER['REMOTE_ADDR'] ?? '');
+    if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
+        return preg_replace('/\.\d+$/', '.0', $ip);
+    }
+    if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
+        return implode(':', array_slice(explode(':', $ip), 0, 3)) . '::';
+    }
+    return '?';
+}
+
+/**
+ * Sicherheitsprotokoll für den Wächter (180 Tage): admin_ok, admin_fehler, kunde_fehler, gesperrt.
+ * Schlägt nie fehl – Protokollieren darf eine Anmeldung nicht verhindern.
+ */
+function sicherheit_merken(string $art, string $wer = '', string $info = ''): void
+{
+    static $tabelle = false;
+    try {
+        if (!$tabelle) {
+            db()->exec("CREATE TABLE IF NOT EXISTS sicherheit_protokoll (
+                id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY, zeit DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                art VARCHAR(30) NOT NULL, wer VARCHAR(190) NOT NULL DEFAULT '', ip VARCHAR(64) NOT NULL DEFAULT '',
+                info VARCHAR(255) NOT NULL DEFAULT '', INDEX (art, zeit), INDEX (zeit)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
+            $tabelle = true;
+        }
+        db()->prepare('INSERT INTO sicherheit_protokoll (art, wer, ip, info) VALUES (?, ?, ?, ?)')
+            ->execute([mb_substr($art, 0, 30), mb_substr($wer, 0, 190), ip_kurz(), mb_substr($info, 0, 255)]);
+        if (random_int(1, 50) === 1) {
+            db()->exec('DELETE FROM sicherheit_protokoll WHERE zeit < (NOW() - INTERVAL 180 DAY)');
+        }
+    } catch (Throwable $e) {
+    }
+}
+
 function versuch_merken(string $kennung): void
 {
     try {

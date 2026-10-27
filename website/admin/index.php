@@ -6,6 +6,10 @@
 declare(strict_types=1);
 require_once __DIR__ . '/../api/db.php';
 sitzung_start();
+// Verwaltung: nie zwischenspeichern, nie bei Google, nie in fremde Seiten einbetten
+header('Cache-Control: no-store');
+header('X-Robots-Tag: noindex, nofollow');
+header('X-Frame-Options: DENY');
 
 function h(?string $s): string { return htmlspecialchars((string) $s, ENT_QUOTES, 'UTF-8'); }
 
@@ -41,6 +45,7 @@ $fehler = '';
 if (($_POST['tun'] ?? '') === 'anmelden') {
     $kennung = 'admin|' . ($_SERVER['REMOTE_ADDR'] ?? '?');
     if (gesperrt_wegen_versuchen($kennung)) {
+        sicherheit_merken('gesperrt', trim((string) ($_POST['benutzer'] ?? '')), 'Verwaltung');
         $fehler = 'Zu viele Fehlversuche. Bitte in 15 Minuten erneut versuchen.';
     } elseif (str_contains($eingabe = trim((string) ($_POST['benutzer'] ?? '')), '@')
         && ($k = (static function (string $mail): ?array {
@@ -53,16 +58,19 @@ if (($_POST['tun'] ?? '') === 'anmelden') {
         session_regenerate_id(true);
         admin_sitzung($k);
         $_SESSION['csrf_admin'] = bin2hex(random_bytes(16));
+        sicherheit_merken('admin_ok', (string) $k['email'], 'Verwaltung');
         header('Location: ?');
         exit;
     } elseif (hash_equals(ADMIN_BENUTZER, (string) ($_POST['benutzer'] ?? '')) && password_verify((string) ($_POST['passwort'] ?? ''), ADMIN_HASH)) {
         session_regenerate_id(true);
         $_SESSION['admin'] = true;
         $_SESSION['csrf_admin'] = bin2hex(random_bytes(16));
+        sicherheit_merken('admin_ok', ADMIN_BENUTZER, 'Verwaltung (Notfall-Zugang)');
         header('Location: ?');
         exit;
     } else {
         versuch_merken($kennung);
+        sicherheit_merken('admin_fehler', mb_substr(trim((string) ($_POST['benutzer'] ?? '')), 0, 80), 'Verwaltung');
         usleep(400000);
         $fehler = 'E-Mail/Benutzername oder Passwort stimmt nicht.';
     }
@@ -260,6 +268,29 @@ $seite = $_GET['seite'] ?? 'bestellungen';
   table.kompakt th, table.kompakt td { padding:7px 10px; }
   .schalter { padding:4px 12px; border-radius:99px; border:1px solid var(--linie); text-decoration:none; color:var(--blau); background:#fff; }
   .schalter.an { background:var(--navy); color:#fff; border-color:var(--navy); }
+  /* Wächter */
+  .waechter-kopf { display:flex; gap:26px; align-items:center; border-left:6px solid #0f8a4f; }
+  .waechter-kopf.achtung { border-left-color:#d99a00; } .waechter-kopf.kritisch { border-left-color:var(--rot); }
+  .waechter-kopf h2 { margin:0 0 4px; font-size:1.35rem; } .waechter-kopf p { margin:4px 0; }
+  .waechter-ring { --p:0; flex:none; width:112px; height:112px; border-radius:50%; display:grid; place-content:center; text-align:center;
+    background:radial-gradient(closest-side, #fff 78%, transparent 79%), conic-gradient(#0f8a4f calc(var(--p) * 1%), #edf1f8 0); }
+  .waechter-kopf.achtung .waechter-ring { background:radial-gradient(closest-side, #fff 78%, transparent 79%), conic-gradient(#d99a00 calc(var(--p) * 1%), #edf1f8 0); }
+  .waechter-kopf.kritisch .waechter-ring { background:radial-gradient(closest-side, #fff 78%, transparent 79%), conic-gradient(var(--rot) calc(var(--p) * 1%), #edf1f8 0); }
+  .waechter-ring b { font-size:2rem; line-height:1; color:var(--navy); } .waechter-ring small { color:#4a5876; font-size:.75rem; }
+  .waechter-zahlen span { margin-right:12px; font-weight:600; }
+  .w-gut { color:#0f8a4f; } .w-achtung { color:#a87400; } .w-kritisch { color:#b50001; }
+  .knopf-link { display:inline-block; margin-top:6px; padding:7px 16px; border-radius:99px; background:var(--blau); color:#fff; text-decoration:none; font-weight:600; }
+  .waechter-gruppen { display:grid; grid-template-columns:repeat(auto-fit, minmax(340px, 1fr)); gap:0 18px; }
+  .w-zeile { display:flex; gap:12px; padding:9px 0; border-bottom:1px solid var(--linie); }
+  .w-zeile:last-child { border-bottom:0; }
+  .w-punkt { flex:none; width:24px; height:24px; border-radius:50%; display:grid; place-items:center; color:#fff; font-size:.8rem; font-weight:800; margin-top:2px; }
+  .w-zeile.gut .w-punkt { background:#0f8a4f; } .w-zeile.achtung .w-punkt { background:#d99a00; }
+  .w-zeile.kritisch .w-punkt { background:var(--rot); } .w-zeile.info .w-punkt { background:#8a97b1; }
+  .w-zeile.kritisch strong { color:#b50001; }
+  .w-tipp { color:var(--blau); font-size:.86rem; }
+  .w-zeile code, .waechter-gruppen code { font-size:.78rem; background:#f4f7fc; padding:1px 5px; border-radius:4px; word-break:break-all; }
+  tr.w-rot td { color:#b50001; }
+  .marke.gelb { background:#fff4d6; color:#8a6100; }
   tr.trenner td { background:#edf1f8; font-weight:700; color:var(--navy); }
   tr.partner td { color:#4a5876; }
   .zwei-spalten { display:grid; grid-template-columns:1.2fr 1fr; gap:18px; align-items:start; }
@@ -288,6 +319,7 @@ $seite = $_GET['seite'] ?? 'bestellungen';
   <a href="?seite=kunden" class="<?= $seite === 'kunden' ? 'aktiv' : '' ?>">Kunden</a>
   <a href="?seite=preise" class="<?= $seite === 'preise' ? 'aktiv' : '' ?>">Preise</a>
   <a href="?seite=auswertung" class="<?= $seite === 'auswertung' ? 'aktiv' : '' ?>">Auswertung</a>
+  <a href="?seite=waechter" class="<?= $seite === 'waechter' ? 'aktiv' : '' ?>">🛡 Wächter</a>
   <a href="uebernahme.php">Übernahme alter Shop</a>
   <a href="../index.html" target="_blank">Zur Website</a>
   <span class="rechts"><a href="?abmelden=1">Abmelden</a></span>
@@ -297,7 +329,9 @@ $seite = $_GET['seite'] ?? 'bestellungen';
 <?php if ($fehler): ?><p class="fehler"><?= h($fehler) ?></p><?php endif; ?>
 <?php
 try {
-    if ($seite === 'auswertung') {
+    if ($seite === 'waechter') {
+        require __DIR__ . '/waechter_seite.php';
+    } elseif ($seite === 'auswertung') {
         require __DIR__ . '/auswertung_seite.php';
     } elseif ($seite === 'preise') {
         $q = (string) ($_GET['q'] ?? '');

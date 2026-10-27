@@ -14,6 +14,8 @@ Zielordner stehen in tools/strato.json (keine Geheimnisse). Nie hochgeladen wird
 die echte Datei mit den Zugangsdaten entsteht auf dem Server durch den Einrichtungs-Assistenten.
 Dateien auf dem Server werden nur ergänzt oder ersetzt, nie gelöscht.
 """
+import datetime as dt
+import hashlib
 import json
 import shutil
 import subprocess
@@ -43,6 +45,19 @@ def paket(erstmals):
         ziel = UPLOAD / rel
         ziel.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(datei, ziel)
+    # Prüfliste für den Wächter: Fingerabdruck (SHA-256) jeder hochgeladenen Datei
+    pruef = {}
+    for datei in sorted(UPLOAD.rglob("*")):
+        if datei.is_file():
+            pruef[datei.relative_to(UPLOAD).as_posix()] = hashlib.sha256(datei.read_bytes()).hexdigest()
+    try:
+        stand = subprocess.run(["git", "-C", str(WURZEL), "rev-parse", "--short", "HEAD"], capture_output=True, text=True).stdout.strip()
+    except OSError:
+        stand = ""
+    (UPLOAD / "admin").mkdir(parents=True, exist_ok=True)
+    (UPLOAD / "admin" / "integritaet.json").write_text(json.dumps({
+        "erstellt": dt.datetime.now().isoformat(timespec="seconds"), "fassung": "TEST" if "--test" in sys.argv else "LIVE",
+        "git": stand, "dateien": pruef}, indent=0), encoding="utf-8")
     zip_name = WURZEL / ("TriplexQ-Website-" + ("TEST" if "--test" in sys.argv else "LIVE") + "-zum-Hochladen")
     shutil.make_archive(str(zip_name), "zip", UPLOAD)
     anzahl = sum(1 for d in UPLOAD.rglob("*") if d.is_file())

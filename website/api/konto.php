@@ -96,6 +96,7 @@ switch ($aktion) {
         $email = filter_var(text($d['email'] ?? ''), FILTER_VALIDATE_EMAIL);
         $kennung = ($_SERVER['REMOTE_ADDR'] ?? '?') . '|' . ($email ?: '?');
         if (gesperrt_wegen_versuchen($kennung)) {
+            sicherheit_merken('gesperrt', (string) ($email ?: '?'), 'Kontoseite');
             json_aus(['ok' => false, 'meldung' => 'Zu viele Fehlversuche. Bitte in 15 Minuten erneut versuchen.'], 429);
         }
         $s = db()->prepare('SELECT * FROM kunden WHERE email = ?');
@@ -111,6 +112,7 @@ switch ($aktion) {
         }
         if (!$k || !password_verify((string) ($d['passwort'] ?? ''), $k['passwort_hash'])) {
             versuch_merken($kennung);
+            sicherheit_merken(ist_admin_kunde($k ?: null) ? 'admin_fehler' : 'kunde_fehler', (string) ($email ?: '?'), 'Kontoseite');
             usleep(400000);
             json_aus(['ok' => false, 'meldung' => 'E-Mail-Adresse oder Passwort stimmt nicht.'], 401);
         }
@@ -121,6 +123,9 @@ switch ($aktion) {
         $_SESSION['kunde_id'] = (int) $k['id'];
         db()->prepare('UPDATE kunden SET letzter_login = NOW() WHERE id = ?')->execute([$k['id']]);
         admin_sitzung($k);
+        if (!empty($_SESSION['admin'])) {
+            sicherheit_merken('admin_ok', (string) $k['email'], 'Kontoseite');
+        }
         json_aus(['ok' => true, 'kunde' => kunde_oeffentlich($k), 'csrf' => $_SESSION['csrf'],
             'csrf_admin' => !empty($_SESSION['admin']) ? $_SESSION['csrf_admin'] : null]);
 

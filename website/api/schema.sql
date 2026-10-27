@@ -118,3 +118,14 @@ CREATE TABLE IF NOT EXISTS preisgruppen_preise (
   PRIMARY KEY (gruppe_id, sku),
   CONSTRAINT fk_gruppenpreis_gruppe FOREIGN KEY (gruppe_id) REFERENCES preisgruppen(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Sicherheitsprotokoll für den Wächter (Anmeldungen, Fehlversuche, Sperren; 180 Tage; IP gekürzt)
+CREATE TABLE IF NOT EXISTS sicherheit_protokoll (
+  id    INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  zeit  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  art   VARCHAR(30) NOT NULL,
+  wer   VARCHAR(190) NOT NULL DEFAULT '',
+  ip    VARCHAR(64) NOT NULL DEFAULT '',
+  info  VARCHAR(255) NOT NULL DEFAULT '',
+  INDEX (art, zeit), INDEX (zeit)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

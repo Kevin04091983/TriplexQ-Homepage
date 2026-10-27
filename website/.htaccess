@@ -97,15 +97,23 @@ RewriteRule ^p/triplex\-q\-vhm\-hochleistungsbohrer\-12xd\-mit\-ik\-o\-8\-00\-mm
 # alles Übrige aus dem alten Shop: Produkte und Kategorien -> Shop, Infoseiten -> Startseite
 RewriteRule ^(p|c)/ /shop.html [R=301,L]
 RewriteRule ^(i|l)/ / [R=301,L]
-# Datenbankschema nicht öffentlich abrufbar
-<FilesMatch "\.(sql|md|txt)$">
+# Nicht öffentlich: Datenbankschema, Notizen, Sicherungs-/Protokolldateien, Prüfliste des Wächters
+<FilesMatch "(\.(sql|md|txt|bak|old|orig|log|ini|sh|py|env|dist|swp)|^integritaet\.json)$">
   Require all denied
 </FilesMatch>
 <Files "robots.txt">
   Require all granted
 </Files>
-# HTML immer frisch prüfen; CSS/JS tragen eine Versionskennung (?v=...) und dürfen lange bleiben
 <IfModule mod_headers.c>
+  # Sicherheits-Header (geprüft im Wächter der Verwaltung)
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+  Header always set Content-Security-Policy "frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'"
+  Header always set Strict-Transport-Security "max-age=31536000"
+  Header unset X-Powered-By
+  # HTML immer frisch prüfen; CSS/JS tragen eine Versionskennung (?v=...) und dürfen lange bleiben
   <FilesMatch "\.html$">
     Header set Cache-Control "no-cache"
   </FilesMatch>
