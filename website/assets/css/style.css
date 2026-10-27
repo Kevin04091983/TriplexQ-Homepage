@@ -936,3 +936,15 @@ p { margin: 0 0 1em; }
 .produkt-beschreibung table { width: 100%; border-collapse: collapse; font-size: .9rem; margin: 10px 0 18px; display: block; overflow-x: auto; }
 .produkt-beschreibung table th { background: var(--navy); color: #fff; font-weight: 600; text-align: left; padding: 8px 10px; white-space: nowrap; }
 .produkt-beschreibung table td { padding: 7px 10px; border-bottom: 1px solid var(--grau-2); white-space: nowrap; }
+
+/* echtes S-TEC-Logo (quer, ca. 2,6 : 1) */
+@media (min-width: 861px) { .partner-in { grid-template-columns: minmax(280px, 440px) 1fr; } }
+.service-partner .btn { width: 100%; white-space: normal; padding: 10px 18px; min-height: 48px; line-height: 1.25; text-align: center; }
+.partner-marke .partner-logo { width: 220px; max-width: 100%; max-height: none; height: auto; }
+.partner-marke img:not(.partner-logo) { width: 110px; }
+.service-partner .partner-logo.klein { width: 190px; max-width: 100%; max-height: none; height: auto; }
+@media (max-width: 520px) {
+  .partner-marke { gap: 12px; }
+  .partner-marke .partner-logo { width: 170px; }
+  .partner-marke img:not(.partner-logo) { width: 88px; }
+}

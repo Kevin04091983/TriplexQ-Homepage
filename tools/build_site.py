@@ -693,7 +693,8 @@ PARTNER = {
 
 def partner_logo(klasse=""):
     if (WEB / "assets" / "img" / "partner" / "s-tec.webp").exists():
-        return f'<img class="partner-logo {klasse}" src="assets/img/partner/s-tec.webp" alt="S-TEC" loading="lazy">'
+        return (f'<img class="partner-logo {klasse}" src="assets/img/partner/s-tec.webp" width="900" height="342" '
+                f'alt="S-TEC Präzisionswerkzeuge &amp; Service" loading="lazy">')
     return f'<span class="partner-logo partner-logo-text {klasse}" aria-label="S-TEC">S-TEC</span>'
 
 
