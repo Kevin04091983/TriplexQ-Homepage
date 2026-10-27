@@ -397,6 +397,10 @@
 
   const params = new URLSearchParams(location.search);
   $$("[data-betreff]").forEach((f) => { if (params.get("betreff")) f.value = params.get("betreff"); });
+  // Anfragen an den Kooperationspartner S-TEC (Empfänger steht nur auf dem Server)
+  const anPartner = params.get("an") === "s-tec";
+  $$("[data-an]").forEach((f) => { f.value = f.defaultValue = anPartner ? "s-tec" : ""; });
+  $$("[data-an-hinweis]").forEach((h) => { h.hidden = !anPartner; });
   if (params.get("betreff") && $("#kontakt") && !location.hash) {
     setTimeout(() => $("#kontakt").scrollIntoView({ behavior: "smooth" }), 300);
   }
@@ -410,7 +414,8 @@
       const d = Object.fromEntries(new FormData(form));
       if (d.website) return;
       const text = `Name: ${d.name}\nFirma: ${d.firma || "-"}\nE-Mail: ${d.email}\nTelefon: ${d.telefon || "-"}\n\n${d.nachricht}`;
-      const weg = await sende("kontakt.php", d, "Anfrage über triplex-q.com: " + (d.betreff || "Kontakt"), text, "kontakt@triplex-q.de");
+      const weg = await sende("kontakt.php", d, "Anfrage über triplex-q.com: " + (d.betreff || "Kontakt"), text,
+        d.an === "s-tec" ? "m.semenov@s-tec-werkzeuge.de,kontakt@triplex-q.de" : "kontakt@triplex-q.de");
       status.classList.add("ok");
       status.textContent = weg === "server"
         ? "Vielen Dank! Ihre Nachricht ist bei uns eingegangen – wir melden uns in Kürze."

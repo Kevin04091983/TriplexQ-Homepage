@@ -687,7 +687,8 @@ PARTNER = {
     "name": "S-TEC",
     "gebiet": "Schwarzwald, Rheinebene und Schweiz",
     "ansprechpartner": "Maxim Semenov",
-    "link": "kontakt.html?betreff=" + "Kundenservice S-TEC (Schwarzwald, Rheinebene, Schweiz) – Maxim Semenov".replace(" ", "%20") + "#kontakt",
+    "link": "kontakt.html?an=s-tec&betreff=" + "Kundenservice S-TEC (Schwarzwald, Rheinebene, Schweiz) – Maxim Semenov".replace(" ", "%20") + "#kontakt",
+    "email": "m.semenov@s-tec-werkzeuge.de",   # nur für den Notfall-Weg (mailto); der Server nimmt die Adresse aus kontakt.php
 }
 
 
@@ -927,6 +928,8 @@ def kontakt_block(b="", betreff=""):
         <label class="feld"><span>E-Mail *</span><input name="email" type="email" autocomplete="email" required></label>
         <label class="feld"><span>Telefon</span><input name="telefon" type="tel" autocomplete="tel"></label>
       </div>
+      <p class="hinweis-box" data-an-hinweis hidden>{icon("mail")} <span>Ihre Anfrage geht direkt an <strong>{PARTNER['ansprechpartner']}</strong> ({PARTNER['name']}, Kundenservice {PARTNER['gebiet']}).</span></p>
+      <input type="hidden" name="an" value="" data-an>
       <label class="feld"><span>Betreff</span><input name="betreff" value="{e(betreff)}" data-betreff></label>
       <label class="feld"><span>Nachricht *</span><textarea name="nachricht" rows="5" maxlength="2000" required></textarea></label>
       <label class="feld-hp" aria-hidden="true">Bitte leer lassen<input name="website" tabindex="-1" autocomplete="off"></label>

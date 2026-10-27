@@ -17,3 +17,6 @@ website/api/einstellungen.php
 # Upload-Ordner (wird aus website/ erzeugt) und Schlüsseldatei für Strato
 upload/
 fuer-strato/
+
+# lokale Testumgebung (PHP + MariaDB, nur am PC)
+.lokal/

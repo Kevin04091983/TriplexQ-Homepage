@@ -233,6 +233,7 @@ $seite = $_GET['seite'] ?? 'bestellungen';
   .anmelden { max-width:380px; margin:12vh auto; }
   .anmelden label { display:block; margin-bottom:12px; }
   .anmelden input { width:100%; }
+  .zurueck { text-align:center; margin-top:16px; font-size:.95rem; } .zurueck a { color:var(--blau); font-weight:600; }
   .pos { color:#4a5876; font-size:.88rem; }
   .r { text-align:right; white-space:nowrap; }
   .werkzeug { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
@@ -311,6 +312,7 @@ $seite = $_GET['seite'] ?? 'bestellungen';
       <button type="submit">Anmelden</button>
     </form>
   </div>
+  <p class="zurueck"><a href="../index.html">← Zur Startseite triplex-q.com</a> · <a href="../shop.html">Zum Shop</a></p>
 </main>
 <?php else: ?>
 <header>
