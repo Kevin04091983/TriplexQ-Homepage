@@ -22,16 +22,44 @@ foreach ($pruefungen as $p) { $gruppen[$p['gruppe']][] = $p; }
 $symbol = ['gut' => '✔', 'achtung' => '!', 'kritisch' => '✖', 'info' => 'i'];
 $artName = ['admin_ok' => 'Admin angemeldet', 'admin_fehler' => 'Admin-Anmeldung fehlgeschlagen', 'gesperrt' => 'Gesperrt (zu viele Versuche)'];
 
+/** Stand einer Gruppe von Prüfungen (Titel beginnt mit $anfang): alle gut → true, sonst false, keine gefunden → null */
+$alleGut = static function (string $anfang) use ($pruefungen): ?bool {
+    $treffer = array_filter($pruefungen, static fn($p) => str_starts_with(strip_tags(html_entity_decode($p['titel'])), $anfang));
+    return $treffer ? !array_filter($treffer, static fn($p) => $p['stand'] !== 'gut') : null;
+};
+/** Domain Guard: Sperre der Registrierungsstelle für triplex-q.com (RDAP), z. B. "client transfer prohibited" */
+$domainGuard = (static function (): ?bool {
+    if (!function_exists('curl_init')) {
+        return null;
+    }
+    $c = curl_init('https://rdap.verisign.com/com/v1/domain/triplex-q.com');
+    curl_setopt_array($c, [CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 4, CURLOPT_CONNECTTIMEOUT => 3]);
+    $d = json_decode((string) curl_exec($c), true);
+    if (!is_array($d) || !isset($d['status'])) {
+        return null;
+    }
+    return (bool) array_filter((array) $d['status'], static fn($st) => str_contains((string) $st, 'prohibited'));
+})();
+$laufOk = $alleGut('Täglicher automatischer Lauf');
+$spfOk = $alleGut('SPF für');
+$zweiFaktorAn = (bool) irgendein_admin_2fa();
+// [Baustein, Stand-Text, Farbe gruen|gelb|rot, Erklärung]
 $vorschlaege = [
-    ['Alarm-Mails', 'eingebaut', 'Neues Gerät, Fehlversuch-Serien, Sperren, roter Wächter, Änderungen an Sperre/Zwei-Faktor.'],
-    ['Täglicher Wächter-Lauf', 'eingebaut', 'Skript admin/cron_taeglich.php – muss einmal im Strato-Kundenbereich als Cron-Job eingetragen werden.'],
-    ['Eigene Datensicherung', 'eingebaut', 'Jede Nacht automatisch (30 Tage), jederzeit „Jetzt sichern“ und Download.'],
-    ['Zweite Sperre vor der Verwaltung', 'eingebaut', 'Optional – unten ein- und ausschaltbar.'],
-    ['Passwort-Prüfung (Datenlecks)', 'eingebaut', 'Kunden- und Admin-Passwörter aus bekannten Datenlecks werden abgelehnt (anonymes Verfahren).'],
-    ['Strengere Content-Security-Policy', 'eingebaut', 'Skripte nur von der eigenen Seite, Videos nur von YouTube (nocookie) und Instagram.'],
-    ['Zwei-Faktor-Anmeldung', 'vorbereitet', 'Werkzeug ist fertig – einrichten und einschalten, wann ihr wollt.'],
-    ['SPF-Eintrag setzen', 'bei Strato', 'Ein DNS-Eintrag je Domain (v=spf1 redirect=smtp.rzone.de).'],
-    ['Strato Domain Guard', 'bei Strato', 'Sperrt die Domain gegen unerlaubte Übertragung – im Strato-Kundenbereich unter Domains (ggf. kostenpflichtig).'],
+    ['Alarm-Mails', 'eingebaut', 'gruen', 'Neues Gerät, Fehlversuch-Serien, Sperren, roter Wächter, Änderungen an Sperre/Zwei-Faktor.'],
+    ['Täglicher Wächter-Lauf', $laufOk ? 'läuft' : 'Cron-Job fehlt', $laufOk ? 'gruen' : 'rot',
+        $laufOk ? 'Läuft jede Nacht (admin/cron_taeglich.php): Sicherung + Prüfung + Alarm.' : 'Skript admin/cron_taeglich.php im Strato-Kundenbereich als täglichen Cron-Job eintragen.'],
+    ['Eigene Datensicherung', 'eingebaut', 'gruen', 'Jede Nacht automatisch (30 Tage), jederzeit „Jetzt sichern“ und Download.'],
+    ['Zweite Sperre vor der Verwaltung', zweite_sperre_aktiv() ? 'eingeschaltet' : 'eingebaut', 'gruen', zweite_sperre_aktiv() ? 'Der Browser fragt vor der Verwaltung ein zusätzliches Passwort ab.' : 'Optional – unten ein- und ausschaltbar (derzeit aus).'],
+    ['Passwort-Prüfung (Datenlecks)', 'eingebaut', 'gruen', 'Kunden- und Admin-Passwörter aus bekannten Datenlecks werden abgelehnt (anonymes Verfahren).'],
+    ['Strengere Content-Security-Policy', 'eingebaut', 'gruen', 'Skripte nur von der eigenen Seite, Videos nur von YouTube (nocookie) und Instagram.'],
+    ['Zwei-Faktor-Anmeldung', $zweiFaktorAn ? 'eingeschaltet' : 'vorbereitet', $zweiFaktorAn ? 'gruen' : 'gelb',
+        $zweiFaktorAn ? 'Bei der Anmeldung wird zusätzlich der Code aus der App abgefragt.' : 'Werkzeug ist fertig – einrichten und einschalten, wann ihr wollt.'],
+    ['SPF-Eintrag', $spfOk ? 'erledigt' : 'bei Strato', $spfOk ? 'gruen' : 'rot',
+        $spfOk ? 'triplex-q.com und triplex-q.de: v=spf1 redirect=smtp.rzone.de – nur Strato darf in eurem Namen Mails senden.' : 'Ein DNS-Eintrag je Domain (v=spf1 redirect=smtp.rzone.de).'],
+    ['Strato Domain Guard', $domainGuard ? 'aktiv' : 'bei Strato', $domainGuard ? 'gruen' : 'gelb',
+        $domainGuard ? 'triplex-q.com ist bei der Registrierungsstelle gegen Übertragung gesperrt.'
+            : 'Empfohlen: sperrt die Domain gegen unerlaubte Übertragung – Strato → Domains → Domain → Reiter „Domain Guard“'
+              . ($domainGuard === null ? ' (Stand konnte nicht abgefragt werden).' : '.')],
 ];
 $csrf = h((string) ($_SESSION['csrf_admin'] ?? ''));
 $sicherungen = sicherungen();
@@ -194,11 +222,11 @@ $cronPfad = '/triplex-q/admin/cron_taeglich.php';
 
 <div class="karte">
   <h2>Sicherheits-Bausteine</h2>
-  <p class="pos">Was eingebaut ist und was noch bei Strato zu tun ist.</p>
+  <p class="pos">Was eingebaut ist und was noch bei Strato zu tun ist – der Stand wird bei jedem Aufruf neu geprüft.</p>
   <table class="kompakt">
     <tr><th>Baustein</th><th>Stand</th><th>Was es macht</th></tr>
-    <?php foreach ($vorschlaege as [$titel, $nutzen, $text]): ?>
-      <tr><td><strong><?= h($titel) ?></strong></td><td><span class="marke <?= $nutzen === 'eingebaut' ? 'gruen' : ($nutzen === 'vorbereitet' ? 'gelb' : 'rot') ?>"><?= h($nutzen) ?></span></td><td><?= h($text) ?></td></tr>
+    <?php foreach ($vorschlaege as [$titel, $nutzen, $farbe, $text]): ?>
+      <tr><td><strong><?= h($titel) ?></strong></td><td><span class="marke <?= $farbe ?>"><?= h($nutzen) ?></span></td><td><?= h($text) ?></td></tr>
     <?php endforeach; ?>
   </table>
 </div>
