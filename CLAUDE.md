@@ -19,7 +19,7 @@ Kommunikation mit Kevin auf Deutsch; nach jeder fertigen Änderung einen anklick
 - `tools/instagram_reels.py` – Instagram-Reels (@triplex_q_tools) für die Startseite: Vorschaubilder auf den eigenen Server, Liste REELS im Skript ergänzen.
 - `tools/entgrater_aus_export.py` – NC-Entgrater (im alten Shop ausgeblendet) aus dem Produkt-Export → `data/quelle/zusatzprodukte.json`
   + Bilder (`data/bilder_zusatz.json`); Preis vorerst 50 €, echte Preise pflegt TRIPLEX-Q in der Verwaltung. Fotos fehlen noch (DEB 60/120, Vor-/Rückwärts).
-- S-TEC-Kooperation (Schwarzwald, Rheinebene, Schweiz, Ansprechpartner Maxim Semenov): `PARTNER` in build_site.py; Logo als
+- S-TEC-Kooperation (Schwarzwald, Rheinebene, Schweiz, Ansprechpartner Maxim Semenov; Anfragen-Texte nennen die Firma „S-TEC Werkzeuge“ = PARTNER["firma"]): `PARTNER` in build_site.py; Logo als
   `website/assets/img/partner/s-tec.webp` ablegen → erscheint automatisch.
 - Wächter (Verwaltung → 🛡 Wächter, `website/admin/waechter_seite.php`): prüft live HTTPS/Zertifikat, Sicherheits-Header,
   geschützte Dateien (von außen), Datei-Integrität gegen `admin/integritaet.json` (schreibt `hochladen.py` bei jedem Upload –

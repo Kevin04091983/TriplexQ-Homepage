@@ -686,8 +686,9 @@ def videokarte(v, b=""):
 PARTNER = {
     "name": "S-TEC",
     "gebiet": "Schwarzwald, Rheinebene und Schweiz",
+    "firma": "S-TEC Werkzeuge",   # Anfragen laufen über die Firma, nicht über die Person (Alex 28.10.2026)
     "ansprechpartner": "Maxim Semenov",
-    "link": "kontakt.html?an=s-tec&betreff=" + "Kundenservice S-TEC (Schwarzwald, Rheinebene, Schweiz) – Maxim Semenov".replace(" ", "%20") + "#kontakt",
+    "link": "kontakt.html?an=s-tec&betreff=" + "Kundenservice S-TEC Werkzeuge (Schwarzwald, Rheinebene, Schweiz)".replace(" ", "%20") + "#kontakt",
     "email": "m.semenov@s-tec-werkzeuge.de",   # nur für den Notfall-Weg (mailto); der Server nimmt die Adresse aus kontakt.php
 }
 
@@ -710,7 +711,7 @@ def partner_band():
       <h2 id="s-tec-titel">Eigener Kundenservice für {PARTNER['gebiet']}</h2>
       <p>Gemeinsam mit der Firma {PARTNER['name']} betreuen wir unsere Kunden im Schwarzwald, in der Rheinebene und in der
       Schweiz künftig mit einem eigenen Kundenservice vor Ort. Ihr Ansprechpartner: <strong>{PARTNER['ansprechpartner']}</strong>.</p>
-      <a class="btn btn-rot" href="{PARTNER['link']}">Kontakt zu {PARTNER['ansprechpartner']} {icon("arrow")}</a>
+      <a class="btn btn-rot" href="{PARTNER['link']}">Anfrage an {PARTNER['firma']} {icon("arrow")}</a>
     </div>
   </div>
 </section>"""
@@ -928,7 +929,7 @@ def kontakt_block(b="", betreff=""):
         <label class="feld"><span>E-Mail *</span><input name="email" type="email" autocomplete="email" required></label>
         <label class="feld"><span>Telefon</span><input name="telefon" type="tel" autocomplete="tel"></label>
       </div>
-      <p class="hinweis-box" data-an-hinweis hidden>{icon("mail")} <span>Ihre Anfrage geht direkt an <strong>{PARTNER['ansprechpartner']}</strong> ({PARTNER['name']}, Kundenservice {PARTNER['gebiet']}).</span></p>
+      <p class="hinweis-box" data-an-hinweis hidden>{icon("mail")} <span>Ihre Anfrage geht direkt an <strong>{PARTNER['firma']}</strong> (Kundenservice {PARTNER['gebiet']}).</span></p>
       <input type="hidden" name="an" value="" data-an>
       <label class="feld"><span>Betreff</span><input name="betreff" value="{e(betreff)}" data-betreff></label>
       <label class="feld"><span>Nachricht *</span><textarea name="nachricht" rows="5" maxlength="2000" required></textarea></label>
@@ -1221,7 +1222,7 @@ def kontaktseite():
   <div class="wrap service-grid">
     <div class="service karte">{icon("pin")}<h3>Selbstabholung</h3><p>Bestellungen können zu unseren Geschäftszeiten in {FIRMA['strasse']}, {FIRMA['ort']} abgeholt werden. Sie erhalten eine Nachricht, sobald die Ware bereitliegt.</p></div>
     <div class="service karte">{icon("mail")}<h3>Bestellungen</h3><p>Fragen zu einer laufenden Bestellung: <a href="mailto:{FIRMA['order']}">{FIRMA['order']}</a></p></div>
-    <div class="service karte service-partner" id="s-tec">{partner_logo("klein")}<h3>Schwarzwald · Rheinebene · Schweiz</h3><p>Kundenservice in Kooperation mit <strong>S-TEC</strong>. Ihr Ansprechpartner: <strong>{PARTNER['ansprechpartner']}</strong>.</p><a class="btn btn-blau" href="{PARTNER['link']}">Anfrage an {PARTNER['ansprechpartner']} {icon("arrow")}</a></div>
+    <div class="service karte service-partner" id="s-tec">{partner_logo("klein")}<h3>Schwarzwald · Rheinebene · Schweiz</h3><p>Kundenservice in Kooperation mit <strong>S-TEC</strong>. Ihr Ansprechpartner: <strong>{PARTNER['ansprechpartner']}</strong>.</p><a class="btn btn-blau" href="{PARTNER['link']}">Anfrage an {PARTNER['firma']} {icon("arrow")}</a></div>
     <div class="service karte">{icon("tool")}<h3>Sonderwerkzeuge</h3><p>Zeichnungen und Anfragen an <a href="mailto:{FIRMA['mail']}">{FIRMA['mail']}</a></p></div>
   </div>
 </section>"""
