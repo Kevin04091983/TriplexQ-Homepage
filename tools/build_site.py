@@ -704,14 +704,16 @@ def partner_band():
     return f"""
 <section class="partner-band" id="s-tec" aria-labelledby="s-tec-titel">
   <div class="wrap partner-in">
-    <div class="partner-marke">{partner_logo()}<span class="partner-plus">+</span>
-      <img src="assets/img/logo/triplex-q-logo.png" alt="TRIPLEX-Q" width="150" height="123" loading="lazy"></div>
+    <div class="partner-links">
+      <div class="partner-marke">{partner_logo()}<span class="partner-plus">+</span>
+        <img src="assets/img/logo/triplex-q-logo.png" alt="TRIPLEX-Q" width="150" height="123" loading="lazy"></div>
+      <a class="btn btn-blau" href="{PARTNER['link']}">Anfrage an {PARTNER['firma']} {icon("arrow")}</a>
+    </div>
     <div class="partner-text">
       <p class="eyebrow dunkel">Neu · in Kooperation mit {PARTNER['name']}</p>
       <h2 id="s-tec-titel">Eigener Kundenservice für {PARTNER['gebiet']}</h2>
       <p>Gemeinsam mit der Firma {PARTNER['name']} betreuen wir unsere Kunden im Schwarzwald, in der Rheinebene und in der
       Schweiz künftig mit einem eigenen Kundenservice vor Ort. Ihr Ansprechpartner: <strong>{PARTNER['ansprechpartner']}</strong>.</p>
-      <a class="btn btn-rot" href="{PARTNER['link']}">Anfrage an {PARTNER['firma']} {icon("arrow")}</a>
     </div>
   </div>
 </section>"""

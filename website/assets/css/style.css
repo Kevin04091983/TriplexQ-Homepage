@@ -925,12 +925,13 @@ p { margin: 0 0 1em; }
   background: var(--navy); color: #fff; font: 800 italic 1.9rem/1 var(--display, inherit); letter-spacing: .04em; }
 .partner-logo.klein { max-width: 110px; max-height: 56px; margin-bottom: 14px; }
 .partner-logo-text.klein { min-width: 86px; height: 50px; font-size: 1.3rem; border-radius: 12px; }
+.partner-links { display: flex; flex-direction: column; align-items: center; gap: 22px; }
 .partner-text h2 { margin-bottom: .4em; }
 .partner-text p:not(.eyebrow) { color: var(--text-2); max-width: 60ch; }
 .service-grid { grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)) !important; }
 .service-partner { border: 2px solid var(--blau); scroll-margin-top: calc(var(--kopf-h) + 10px); }
 .service-partner .btn { margin-top: 10px; }
-@media (max-width: 860px) { .partner-in { grid-template-columns: 1fr; } .partner-marke { justify-content: flex-start; } }
+@media (max-width: 860px) { .partner-in { grid-template-columns: 1fr; } .partner-marke { justify-content: flex-start; } .partner-links { align-items: flex-start; } }
 
 /* technische Daten in der Produktbeschreibung (z. B. Entgrater) */
 .produkt-beschreibung table { width: 100%; border-collapse: collapse; font-size: .9rem; margin: 10px 0 18px; display: block; overflow-x: auto; }
